@@ -1,5 +1,5 @@
 <?php
-
+// use App\TPODB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/dashboard','PagesController@getDashboard');   
+
+Route::get('/common', function () {
+    return view( 'layouts.commonLayout');
+});
+
+
+// Route::group(['prefix' => 'students'], function () {
+//     Route::get('/export','PagesController@exportStudentsData');
+// });
+
+
+Route::get('/export','TPODBController@index');
+Route::get('/export/fetch_data','TPODBController@fetch_data');
