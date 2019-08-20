@@ -30,3 +30,15 @@ Route::get('/common', function () {
 
 Route::get('/export','TPODBController@index');
 Route::get('/export/fetch_data','TPODBController@fetch_data');
+
+Route::get('/login',function(){
+    return view('pages.login');
+});
+
+Route::get('/reset',function(){
+    return view('pages.Student.reset');
+});
+
+Route::get('/signUp',function(){
+    return view('pages.Student.signUp');
+});

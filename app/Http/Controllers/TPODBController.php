@@ -15,6 +15,7 @@ class TpoDBController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
         $table_rows = DB::table('temp')->paginate(10);
         return view('Pages.TPO.exportStudentsData')->with('table_rows',$table_rows);
@@ -27,7 +28,7 @@ class TpoDBController extends Controller
     
     public function fetch_data(Request $request){
         if($request->ajax()){
-            $table_rows = DB::table('temp')->paginate(5);
+            $table_rows = DB::table('temp')->paginate(10);
             return view('studentsDataTable',compact('table_rows'))->render();
         }
     }
