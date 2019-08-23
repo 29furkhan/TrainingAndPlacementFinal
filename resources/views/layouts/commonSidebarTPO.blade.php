@@ -37,7 +37,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a style="padding-left:20px;"  onclick="" href="/dashboard">
+            <a style="padding-left:20px;"  onclick="" href="/">
                 <i style="font-size:20px;" class="fa fa-tachometer"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Dashboard</span>

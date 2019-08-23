@@ -12,9 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.TPO.dashboardTPO');
 });
 
+Route::get('/student', function () {
+    return view('pages.Student.dashboardStudent');
+});
+
+Route::get('/profile', function () {
+    return view('pages.Student.profile');
+});
 
 Route::get('/dashboard','PagesController@getDashboard');   
 

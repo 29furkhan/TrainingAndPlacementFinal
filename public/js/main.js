@@ -38,3 +38,20 @@ function searchContent(isearchinput,iexporttable)
     }
   
 }
+
+function loginCredits(){
+  var i=10;
+  var j=20;
+  // console.log('I am Executed');
+  $.ajax({
+    type: 'get',
+    data:{i,j},
+    url: '/php/hello.php',
+    success: function(data,status) {
+        console.log(data);
+    },
+    error: function(){
+      console.log('Error');
+    }
+});
+}
