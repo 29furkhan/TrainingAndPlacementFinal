@@ -11,16 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@getDashboard' );
 
 
 Route::get('/dashboard','PagesController@getDashboard');   
+Route::POST('/php/insert/login','ProcessController@insertLoginDetails');
 
-Route::get('/common', function () {
-    return view( 'layouts.commonLayout');
-});
 
 
 // Route::group(['prefix' => 'students'], function () {
@@ -28,8 +24,6 @@ Route::get('/common', function () {
 // });
 
 
-Route::get('/export','TPODBController@index');
-Route::get('/export/fetch_data','TPODBController@fetch_data');
 
 Route::get('/login',function(){
     return view('pages.login');
@@ -42,3 +36,5 @@ Route::get('/reset',function(){
 Route::get('/signUp',function(){
     return view('pages.Student.signUp');
 });
+
+Route::POST('gotoconnect', 'connect@checkData');

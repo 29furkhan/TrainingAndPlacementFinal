@@ -3,7 +3,7 @@ $colors = array('white','#f2f2f2');
 $color=$colors[1];
 $i=0;
 ?>
-{{$table_rows->links()}}
+
 
 <table id="exportstudentstable"> 
                     <tr style="text-transform:uppercase;background:rgb(100,179,231);color:white;">
@@ -13,7 +13,6 @@ $i=0;
                         <th scope="col">Email</th>
                         <th scope="col">Roll_No</th>
                         <th scope="col">Class</th>
-                        <th scope="col">Passing Year</th>
                         <th scope="col">SSC Marks</th>
                         <th scope="col">HSC Marks</th>
                         <th scope="col">Polytechnic Marks</th>
@@ -36,7 +35,6 @@ $i=0;
                         <td scope="col">{{$table_row->Email}}</td>
                         <td scope="col">{{$table_row->Roll_No}}</td>
                         <td scope="col">{{$table_row->Class}}</td>
-                        <td scope="col">{{$table_row->PassingYear}}</td>
                         <td scope="col">{{$table_row->SSC}}</td>
                         <td scope="col">{{$table_row->HSC}}</td>
                         <td scope="col">{{$table_row->Polytechnic}}</td>
@@ -46,7 +44,7 @@ $i=0;
                         <td scope="col">{{$table_row->FE_PERCENT}}</td>
                         <td scope="col">{{$table_row->SE_PERCENT}}</td>
                         <td scope="col">{{$table_row->TE_PERCENT}}</td>
-                        <td scope="col">{{$table_row->overall_academic_gap}}</td>
+                        <td scope="col">{{$table_row->Overall_Academic_Gap}}</td>
                     <tr>
                     <?php $i = !$i; $color=$colors[$i];?>
                     @endforeach

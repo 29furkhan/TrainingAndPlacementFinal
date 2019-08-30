@@ -41,40 +41,109 @@
   
   <!-- Main.js -->
   <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
-  
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   
 </head>
+
+<!-- Script To Submit Form -->
+<script>
+var email;
+var username;
+var password;
+var repassword;
+
+function getAllValues(){
+  email=document.getElementById('email').value;
+  username=document.getElementById('username').value;
+  password=document.getElementById('password').value;
+  repassword=document.getElementById('password_again').value;
+}
+
+function allset(){
+  if(password==repassword && password.length>=8){
+    return 1;
+  }
+  return 0;
+}
+
+function redirectToLogin(){
+  location.replace("/login");
+}
+
+
+  $(document).ready(function(){
+      $("#signupform").submit(function(){
+        // e.preventDefault();
+        getAllValues();
+        if(allset()){
+          console.log('inside ajax');
+          $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:'POST',
+            url : 'php/insert/login',
+            data: {
+              email : email,
+              username  : username,
+              password  : password  
+            },
+            success:function(data){
+              console.log(data);
+              redirectToLogin();
+            },
+            error:function(data){
+              console.log(data);
+            }
+          });
+        } //End if
+        else{
+          if(password!=repassword){
+            document.getElementById('msg').style.display="block";
+            document.getElementById('msg').innerHTML="*Password And Re-Typed password doesn't match";
+          }
+          else if (password.length<8){
+            document.getElementById('msg').style.display="block";
+            document.getElementById('msg').innerHTML="*Password Must Be Atleast 8 Digit Long!!";
+          }
+            
+        }
+    });        
+  }); 
+</script>
 
 <body class="login-img3-body">
 
   <div class="container">
 
-    <form class="login-form" method="POST" action="php/connect.php" style="margin-top: 5%">
+    <form id="signupform" class="login-form" method="POST" action="" style="margin-top: 5%">
+    {{csrf_field()}}
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
+
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="text" class="form-control" name="first_name" placeholder="Enter First Name" autofocus>
+          <span class="input-group-addon"><i class="icon_mail"></i></span>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required autofocus>
         </div>
 
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" autofocus>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required autofocus>
         </div>
         
           <div class="input-group">
-            <span class="input-group-addon"><i class="icon_mail"></i></span>
-            <input type="email" class="form-control" name="email" placeholder="Enter Email">
+            <span class="input-group-addon"><i class="icon_key"></i></span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" minlenght="8" required>
           </div>
+
           <div class="input-group">
-            <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <span class="input-group-addon"><i class="icon_key"></i></span>
+            <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" minlenght="8" required/>
           </div>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-            <input type="password" class="form-control" name="repassword" placeholder="Re-Type Password">
-          </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="hello();">Sign Up</button>
+
+          <label id="msg" style="display:none;color:red;padding-bottom:15px;font-weight:500;" class=""></label>
+
+        <input id="submit" class="btn btn-primary btn-lg btn-block" type="submit" value="Sign Up"/>
       </div>
     </form>
   </div>

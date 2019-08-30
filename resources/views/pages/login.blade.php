@@ -40,16 +40,17 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
-  
+  <script type="text/javascript" src="{{URL::asset('/js/main.js')}}"></script>
   
 </head>
 
+
+<!--  Main Content Starts -->
 <body class="login-img3-body">
 
   <div class="container">
 
-    <form class="login-form" method="POST" action="php/hello.php" style="margin-top: 6%">
+    <form class="login-form" method="POST" action="" style="margin-top: 6%">
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
@@ -64,7 +65,7 @@
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right"> <a href="#" onclick="document.location.href='reset'"> Forgot Password?</a></span>
             </label>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+        <button class="btn btn-primary btn-lg btn-block"  onclick="loginCredits()" type="button">Login</button>
         <button class="btn btn-info btn-lg btn-block" type="button" onclick="document.location.href='signUp'">Sign Up</button>
       </div>
     </form>

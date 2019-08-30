@@ -1,6 +1,6 @@
-@extends('layouts.commonLayout')
-@include('layouts.commonSidebarTPO')
-@include('layouts.commonFooterTPO')
+@extends('layouts.TPO.commonLayout')
+@include('layouts.TPO.commonSidebarTPO')
+
 @section('commonHeaderTPO')
 
 <script>
