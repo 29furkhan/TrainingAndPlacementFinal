@@ -261,9 +261,13 @@ body {
   font-family: Lato;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #2b2b2b;
   background-color: #ffffff;
 }
+
+.bodycolor{
+  color:red;
+}
+
 input,
 button,
 select,

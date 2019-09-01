@@ -62,23 +62,3 @@ function resetCriteria(){
   document.getElementById('gapcr').value="No Gap ";
 }
 
-function loginCredits(){
-  var name='Furkhan';
-  var age=20;
-  // console.log('I am Executed');
-  $.ajax({
-    type: 'post',
-    data:
-    {
-      'Name':name,
-      'Age':age
-    },
-    url: '/php/hello.php',
-    success: function(data,status) {
-        console.log(data);
-    },
-    error: function(){
-      console.log('Error');
-    }
-});
-}

@@ -48,11 +48,45 @@
 <!--  Main Content Starts -->
 <body class="login-img3-body">
 
+<script>
+function redirectToDashboard(){
+  location.replace("/dashboard");
+}
+
+function generateAlert(){
+document.getElementById('alert').style.display="block";
+}
+
+  $(document).ready(function(){
+    $('#loginform').on('submit',function(event){
+      event.preventDefault();
+      $.ajax({
+        url:'/php/insert/logincheck',
+        method:'GET',
+        data:$(this).serialize(),
+        dataType:'json',
+        success:function(data){
+          if(data.setter=='1'){
+            redirectToDashboard();
+          }
+          else if(data.setter=='0'){
+            generateAlert();
+          }
+        },    
+      });
+    });
+  });
+</script>
+
   <div class="container">
 
-    <form class="login-form" method="POST" action="" style="margin-top: 6%">
+    <form class="login-form" id="loginform" style="margin-top: 6%">
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div id="alert" style="display:none;" class="alert alert-danger" role="alert">
+            Invalid Email or Password!!!
+        </div>
+      
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
           <input type="text" class="form-control" name="email" placeholder="Email" autofocus>
@@ -65,7 +99,7 @@
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right"> <a href="#" onclick="document.location.href='reset'"> Forgot Password?</a></span>
             </label>
-        <button class="btn btn-primary btn-lg btn-block"  onclick="loginCredits()" type="button">Login</button>
+        <button id="loginbutton" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
         <button class="btn btn-info btn-lg btn-block" type="button" onclick="document.location.href='signUp'">Sign Up</button>
       </div>
     </form>

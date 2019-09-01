@@ -15,19 +15,13 @@ Route::get('/', 'PagesController@getDashboard' );
 
 
 Route::get('/dashboard','PagesController@getDashboard');   
-Route::POST('/php/insert/login','ProcessController@insertLoginDetails');
 
+Route::get('/php/insert/login','ProcessController@insertLoginDetails');
+Route::get('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
 
+Route::get('/main','ProcessController@index');   
+  
 
-// Route::group(['prefix' => 'students'], function () {
-//     Route::get('/export','PagesController@exportStudentsData');
-// });
-
-
-
-Route::get('/login',function(){
-    return view('pages.login');
-});
 
 Route::get('/reset',function(){
     return view('pages.Student.reset');
