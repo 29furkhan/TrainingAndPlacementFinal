@@ -3,106 +3,53 @@ input:focus, textarea {
   outline: none !important;
 }
 /* Ends */
-/* Modal CSS */
 
-.modal.left .modal-dialog,
-.modal.right .modal-dialog {
-  position: fixed;
-  margin: auto;
-  width: 320px;
-  height: 100%;
-  -webkit-transform: translate3d(0%, 0, 0);
-      -ms-transform: translate3d(0%, 0, 0);
-       -o-transform: translate3d(0%, 0, 0);
-          transform: translate3d(0%, 0, 0);
+/* custom form control */
+.form-control:focus{
+  background:white;
 }
+/* ENds */
 
-.modal.left .modal-content,
-.modal.right .modal-content {
-  height: 100%;
-  overflow-y: auto;
-}
+/* Parsley.css */
+input.parsley-success,
+ select.parsley-success,
+ textarea.parsley-success,input.parsley-success:focus {
+   color: #468847;
+   background-color: #DFF0D8;
+   border: 1px solid #D6E9C6;
+ }
 
-.modal.left .modal-body,
-.modal.right .modal-body {
-  padding: 15px 15px 80px;
-}
+ input.parsley-error,
+ select.parsley-error,
+ textarea.parsley-error,input.parsley-error:focus {
+   color: #B94A48;
+   background-color: #F2DEDE;
+   border: 1px solid #EED3D7;
+ }
 
-/*Left*/
-.modal.left.fade .modal-dialog{
-  left: -320px;
-  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-     -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-       -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-          transition: opacity 0.3s linear, left 0.3s ease-out;
-}
+ .parsley-errors-list {
+   margin: 2px 0 3px;
+   padding: 0;
+   list-style-type: none;
+   font-size: 0.9em;
+   line-height: 0.9em;
+   opacity: 0;
 
-.modal.left.fade.in .modal-dialog{
-  left: 0;
-}
-      
-/*Right*/
-.modal.right.fade .modal-dialog {
-  right: -320px;
-  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-     -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-       -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-          transition: opacity 0.3s linear, right 0.3s ease-out;
-}
+   transition: all .3s ease-in;
+   -o-transition: all .3s ease-in;
+   -moz-transition: all .3s ease-in;
+   -webkit-transition: all .3s ease-in;
+ }
 
-.modal.right.fade.in .modal-dialog {
-  right: 0;
-}
+ .parsley-errors-list.filled {
+   opacity: 1;
+ }
+ 
+ .parsley-type, .parsley-required, .parsley-equalto{
+  color:#ff0000;
+ }
+/* Parsley ENds */
 
-/* ----- MODAL STYLE ----- */
-.modal-content {
-  border-radius: 0;
-  border: none;
-}
-
-.modal-header {
-  border-bottom-color: #EEEEEE;
-  background-color: #FAFAFA;
-}
-
-/* ----- v CAN BE DELETED v ----- */
-body {
-background-color: #78909C;
-}
-
-.demo {
-padding-top: 60px;
-padding-bottom: 110px;
-}
-
-.btn-demo {
-margin: 15px;
-padding: 10px 15px;
-border-radius: 0;
-font-size: 16px;
-background-color: #FFFFFF;
-}
-
-.btn-demo:focus {
-outline: 0;
-}
-
-.demo-footer {
-position: fixed;
-bottom: 0;
-width: 100%;
-padding: 15px;
-background-color: #212121;
-text-align: center;
-}
-
-.demo-footer > a {
-text-decoration: none;
-font-weight: bold;
-font-size: 16px;
-color: #fff;
-}
-/* Modal CSS ENDS */
 /* Tags CSS */
 table {
   border-collapse: collapse;

@@ -38,3 +38,27 @@ function searchContent(isearchinput,iexporttable)
     }
   
 }
+
+function readCriteria(){
+  var criteria = [];
+  criteria[0] = document.getElementById('ssccr').value;
+  criteria[1] = document.getElementById('hsccr').value;
+  criteria[2] = document.getElementById('polycr').value;
+  criteria[3] = document.getElementById('cgpacr').value;
+  criteria[4] = document.getElementById('percentcr').value;
+  criteria[5] = document.getElementById('gapcr').value;
+
+  for(var i =0;i<criteria.length;i++){
+    console.log(criteria[i]);
+  }
+}
+
+function resetCriteria(){
+  document.getElementById('ssccr').value="60+ (Including 60%) ";
+  document.getElementById('hsccr').value="60+ (Including 60%) ";
+  document.getElementById('polycr').value="60+ (Including 60%) ";
+  document.getElementById('cgpacr').value="6+ (Including 6.0 CGPA) ";
+  document.getElementById('percentcr').value="60+ (Including 60%) ";
+  document.getElementById('gapcr').value="No Gap ";
+}
+

@@ -64,7 +64,7 @@
             <a style="padding-left:20px;" class="" href="index.html">
                 <i style="font-size:20px;" class="fa fa-file-video-o"></i>
                 &nbsp&nbsp          
-                <span style="font-size:20px;">Councelling</span>
+                <span style="font-size:20px;">Counselling</span>
                       </a>
           </li>
 

@@ -1,4 +1,4 @@
-@extends('layouts.commonHeaderTPO')
+@extends('layouts.TPO.commonHeaderTPO')
 @section('mainContentTPO')
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">

@@ -40,7 +40,10 @@
   <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
   </head>
 
-<body style = "background:#F0F0F0;overflow:scroll;overflow-x:hidden;">
+  <!-- Modal CSS -->
+  <link href="css/modal.css" rel=" stylesheet">
+
+<body style = "background:#F0F0F0;overflow:auto;overflow-x:hidden;">
   <!-- container section start -->
   <section id="container" class="">
   
@@ -60,43 +63,13 @@
     <!-- sidebar menu end-->
 
     <!-- Main-Content -->
-    <section id="main-content" style="margin-bottom:4%;margin-left:255px;">
+    <section id="main-content" style="margin-bottom:4%;margin-left:255px;margin-right:10px;">
         <section class="wrapper">
             <!--overview start-->
             @yield('mainContentTPO')
         </section>
     </section>
     <!-- Main-Content Ends -->
-
-    <!-- Footer Starts -->
-    <!-- Footer -->
-<!-- <footer id="commonfooter" class="footer" style="margin-left:240px;height:9%;">
-    <div style="display:flex;justify-content:center;">
-        @yield('commonFooterTPO')
-    </div>
-</footer> -->
-<!-- Footer Ends-->
-
-<!-- Modal For Filters-->
-
-<div style="height:100%;" class="modal right fade" id="studentfilters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel2">Filter Students</h4>
-				</div>
-
-				<div class="modal-body">
-					
-				</div>
-
-			</div><!-- modal-content -->
-		</div><!-- modal-dialog -->
-	</div><!-- modal -->
-  <!-- Modal Ends -->
-
 
 </section>    
 </body>

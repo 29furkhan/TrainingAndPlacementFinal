@@ -11,22 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PagesController@getDashboard' );
 
 
 Route::get('/dashboard','PagesController@getDashboard');   
 
-Route::get('/common', function () {
-    return view( 'layouts.commonLayout');
+Route::get('/php/insert/login','ProcessController@insertLoginDetails');
+Route::get('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
+
+Route::get('/main','ProcessController@index');   
+  
+
+
+Route::get('/reset',function(){
+    return view('pages.Student.reset');
 });
 
+Route::get('/signUp',function(){
+    return view('pages.Student.signUp');
+});
 
-// Route::group(['prefix' => 'students'], function () {
-//     Route::get('/export','PagesController@exportStudentsData');
-// });
-
-
-Route::get('/export','TPODBController@index');
-Route::get('/export/fetch_data','TPODBController@fetch_data');
+Route::POST('gotoconnect', 'connect@checkData');

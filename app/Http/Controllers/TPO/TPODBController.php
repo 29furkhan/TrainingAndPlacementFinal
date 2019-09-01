@@ -1,35 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\TPO;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\TPODB;
 use DB;
 
-class TpoDBController extends Controller
+class TPODBController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function exportData(){
+        $results = DB::select('select * from users where id = ?', [1]);
+    }
     public function index()
     {
-        $table_rows = DB::table('temp')->paginate(10);
-        return view('Pages.TPO.exportStudentsData')->with('table_rows',$table_rows);
-    }
-
-    public function getDropdowns(){
-        $branch = DB :: table('branch')->get();
-        return view('Pages.TPO.exportStudentsData')->with('branch',$branch);
-    }
-    
-    public function fetch_data(Request $request){
-        if($request->ajax()){
-            $table_rows = DB::table('temp')->paginate(5);
-            return view('studentsDataTable',compact('table_rows'))->render();
-        }
+        
     }
 
     /**
