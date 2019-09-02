@@ -49,14 +49,93 @@
   
 </head>
 
+<script>
+var setEmail = -1;
+</script>
+
+<!-- Email Availability -->
+<script>
+
+function validateEmail(email) {
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
+  return re.test(email);
+}
+
+function enableErrorEmail(email){
+  document.getElementById('emailgroup').style.paddingBottom = '0px';
+  document.getElementById('error_email').style.display="block";
+  document.getElementById('email').style.color="#B94A48";
+  document.getElementById('email').style.background="#F2DEDE";
+  document.getElementById('email').style.border="1px solid #EED3D7";
+}
+
+function disableErrorEmail(email){
+  console.log('disable');
+  document.getElementById('emailgroup').style.paddingBottom = '15px';
+  if(validateEmail(email)){
+
+    document.getElementById('error_email').style.display="none";
+    document.getElementById('email').style.color="#468847";
+    document.getElementById('email').style.background="#DFF0D8";
+    document.getElementById('email').style.border="1px solid #D6E9C6";
+  }
+  else{
+    document.getElementById('error_email').style.display="none";
+    document.getElementById('email').style.color="#B94A48";
+    document.getElementById('email').style.background="#F2DEDE";
+    document.getElementById('email').style.border="1px solid #EED3D7";
+  }
+  document.getElementById('error_email').style.display="none";
+    
+  
+}
+
+$(document).ready(function(){
+  $('#email').keyup(function(){
+    var email_error = '';
+    var email = $('#email').val();
+    var _token = $('input[name="_token"]').val();
+
+    $.ajax({
+      url:"/php/insert/checkavailability/email",
+      method:"POST",
+      data:{email:email,_token:_token},
+      success:function(result){
+        if (result=='Duplicate'){
+          enableErrorEmail(email);
+          $('#submit').attr('disabled','disabled');
+          // $('#submit').attr('disbaled','disabled');
+        }
+        else{
+          disableErrorEmail(email);
+          $('#submit').attr('disabled',false);
+        }
+      }
+    });
+  });
+});
+
+</script>
+
 <!-- Script To Submit Form -->
 <script>
+
+function resetEmail(){
+  document.getElementById('email').style.background="#FFFFFF";
+  document.getElementById('email').style.border="none";
+}
+
 function redirectToLogin(){
   location.replace("/main");
 }
 
 $(document).ready(function(){
     $('#signupform').parsley();
+    
+    if($('#email').parsley().isValid()){
+        // console.log('FUkya');
+        setEmail = 1234;
+    }
 
     $('#signupform').on('submit',function(event){
       event.preventDefault();
@@ -76,6 +155,7 @@ $(document).ready(function(){
             $('#submit').attr('disabled',false);
             $('#submit').val('Submit');
             alert(data.success);
+            resetEmail();
             redirectToLogin();
           }
         });
@@ -85,26 +165,22 @@ $(document).ready(function(){
 
 </script>
 
+
 <body class="login-img3-body bodycolor">
 
   <div class="container"> 
 
-    <form  id="signupform" class="login-form" style="margin-top: 5%">
+    <form  id="signupform" class="login-form" style="margin-top: 3%">
     @csrf
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
 
-        <div class="input-group">
+        <div id="emailgroup" class="input-group">
           <!-- <span class="input-group-addon"><i class="icon_mail"></i></span> -->
           <span style="color:black;font-size:16px;">Email:</span>
-          <input  type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
+          <input  autocomplete="off" type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
         </div>
-        
-        <div class="input-group">
-          <!-- <span class="input-group-addon"><i class="icon_profile"></i></span> -->
-          <span style="color:black;font-size:16px;">Username:</span>
-          <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required data-parsley-length="[8,20]" data-parsley-type="alphanum" data-parsley-trigger="keyup" data-parsley-type-message="Username should not contain Space or Special Characters"/>
-        </div>
+        <label id='error_email' name = 'error_email' style="font-size:12px;display:none;color:red;font-weight:500;"> Email Not Available, Try Something Else </label>
         
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
