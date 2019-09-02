@@ -19,8 +19,7 @@ class ProcessController extends Controller
        if(request()->ajax()){
            $data = array(
                'Email' => $request->get('email'),
-               'Username' => $request->get('username'),
-               'Password' => $request->get('password')
+                'Password' => $request->get('password')
 
            );
 
@@ -54,4 +53,24 @@ class ProcessController extends Controller
             return response()->json(['success' => 'Illigal Data','setter' => '0']);
         }
     } 
+
+    public function checkAvailabilityEmail(Request $request){
+        if(request()->ajax()){
+            $email = array(
+                'Email' => $request->get('email')
+            );
+
+            $data = DB::table('login_details')->where('email',$email)->count();
+            if ($data > 0){
+                echo 'Duplicate';
+            }
+            else{
+                echo 'Unique';
+            }
+
+        }
+
+    }
+
+
 }

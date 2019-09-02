@@ -18,6 +18,7 @@ Route::get('/dashboard','PagesController@getDashboard');
 
 Route::get('/php/insert/login','ProcessController@insertLoginDetails');
 Route::get('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
+Route::POST('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
 
 Route::get('/main','ProcessController@index');   
   

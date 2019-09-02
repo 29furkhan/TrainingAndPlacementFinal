@@ -43,8 +43,6 @@ class CreateMainDBSTable extends Migration
             // $table->bigIncrements('id');
             $table->string('Email',255);
             $table->primary('Email');
-            $table->string('Username',40);
-            $table->unique('Username')->default('Anonymous');
             $table->string('password',50)->default('root');
             $table->string('user_type',20)->default('student');
             $table->timestamps();
