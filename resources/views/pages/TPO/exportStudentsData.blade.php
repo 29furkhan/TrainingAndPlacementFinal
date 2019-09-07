@@ -15,13 +15,57 @@ use Illuminate\Support\Facades\Input;
 
 <script>
     var hoverflag=0;
+    var getYear,getBranch;
 
     function showCards(id)
     {
-        globaltablesetter=1;
-        document.getElementById('searchdiv').style.display="block";
-        document.getElementById('maincards').style.display="flex";
-        document.getElementById('filters').style.display="block";
+        var getYear = document.getElementById('passyear').value;
+        var getBranch = document.getElementById('branch').value;
+
+        $.ajax({
+            url:'/php/sendyearandbranch',
+            method:'GET',
+            dataType:'json',
+            data:{year:getYear,branch:getBranch},
+            success:function(data){
+                if(data.bit=='1'){
+                    console.log('Inside 1');
+                    globaltablesetter=1;
+                    document.getElementById('DataFound').style.display="block";
+                    if(getYear==getBranch){
+                        document.getElementById('DataFoundMsg').innerHTML="Data of all branches of all years";  
+                    }
+                    else if(getYear=='all' && getBranch!='all'){
+                        document.getElementById('DataFoundMsg').innerHTML="Data of " +getBranch +' of all Years';
+                    }
+                    else if(getBranch=='all' && getYear!='all'){
+                        document.getElementById('DataFoundMsg').innerHTML="Data of all branches of year" +getYear;
+                    }
+                    else{
+                        document.getElementById('DataFoundMsg').innerHTML="Data of " +getBranch+' '+getYear+' Batch';
+                    }
+                    document.getElementById('searchdiv').style.display="block";
+                    document.getElementById('maincards').style.display="flex";
+                    document.getElementById('downloadbutton').style.display='block';
+                    document.getElementById('filters').style.display="block";
+                    document.getElementById('NoDataFound').style.display='none';
+                   
+                }
+                else{
+                    document.getElementById('NoDataFound').style.display='block';
+                    document.getElementById('NoDataFoundMsg').innerHTML = 'Sorry!!! No Data Found For ' +getBranch+' '+getYear +' Batch';
+                    globaltablesetter=0;
+                    document.getElementById('searchdiv').style.display="none";
+                    document.getElementById('maincards').style.display="none";
+                    document.getElementById('downloadbutton').style.display='none';
+                    document.getElementById('filters').style.display="none";
+                    document.getElementById('DataFound').style.display="none";
+                    
+                }
+            }
+        });
+
+        
     }
 
     function expand(id)
@@ -198,13 +242,16 @@ use Illuminate\Support\Facades\Input;
 </div>
 
 <!-- Drop Downs -->
+<form id="exportform" method="POST">
+@csrf
 <div class="" style="display:flex;flex-wrap:wrap;">
     <!-- DropDown For Passing YEar -->
     <div>
         <div style="display:flex;flex-direction:column;justify-content:space-between;">
             <b style="font-weight:550;font-size:16px;">Passout Year</b>
             <select onMouseOver="hoverData(id);" onMouseOut="this.style.background='white'" id='passyear' onmousedown="expand(id);" onblur="shrink(id)" onchange="shrink(id)" style="cursor:pointer;margin-right:30px;height:40px;box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;margin-top:5px;width:97px;font-weight:100;font-size:15px;border-radius:4px;background-color:#FFFFFF;">
-                <option selected><?php echo $year+1;?></option>
+                <option value='all' selected>All Years</option>
+                <option value='<?php echo $year+1;?>'><?php echo $year+1;?></option>
                 <?php
                    for($i=date('Y');$i>2014;$i--){
                     echo "<option>".$i."</option>";
@@ -219,11 +266,14 @@ use Illuminate\Support\Facades\Input;
         <div style="display:flex;flex-direction:column;justify-content:space-between;">
             <b style="font-weight:550;font-size:16px;">Branch</b>
             <select onMouseOver="hoverData(id);" onMouseOut="this.style.background='white'" id='branch' onmousedown="expand(id);" onblur="shrink(id)" onchange="shrink(id)" style="cursor:pointer;margin-right:30px;height:40px;box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;margin-top:5px;width:277px;font-weight:100;font-size:15px;border-radius:4px;background-color:#FFFFFF;">
-            <option selected>Computer Science And Engineering</option>
-            <option>Mechanical Engineering</option>
-            <option>Civil Engineering</option>
-            <option>Electronics And Telecommunications</option>
-            <option>Information Technology</option>
+            <option value='all' selected>All Branches</option>
+            @foreach($branch as $br)
+            <option value="{{$br->branch}}">{{$br->branch}}</option>
+            @endforeach
+            <!-- <option value="MECH" >Mechanical Engineering</option>
+            <option value="CIVIL" >Civil Engineering</option>
+            <option value="ETC">Electronics And Telecommunications</option>
+            <option value="IT" >Information Technology</option> -->
 
             </select>
         </div>
@@ -245,6 +295,7 @@ use Illuminate\Support\Facades\Input;
         </div>
     </div>
     <!-- Filter Ends --> 
+</form>
 
 <!-- Modal For Filters-->
 	<div class="modal right fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -363,11 +414,20 @@ use Illuminate\Support\Facades\Input;
 
 <br>
 <!-- New Row 2 -->
+<div class='alert alert-danger' id='NoDataFound' style="display:none;">
+    <h4 id='NoDataFoundMsg' style="color:rgb(100,179,231);">No Data Found</h4>
+</div>
+
+<div id='DataFound' style="display:none;">
+    <h4 id='DataFoundMsg' style="color:rgb(100,179,231);">Data For Branch And Passout Year</h3>
+</div>
+
+
 <div id="maincards" class="maincards" style="margin-right:10px;display:none;flex-wrap:wrap;">
     <div class="card" style="border-radius:8px;width:100%;height:auto">
         <div class="card-body">
             <div id="tablecontent" style="overflow-x:auto;white-space:nowrap;border-radius:4px;">
-                @include('studentsDataTable')
+                
             <!-- Avoid Page Refresh on Pagination -->
             <!-- <script>
                 $(document).ready(function(){
@@ -388,10 +448,59 @@ use Illuminate\Support\Facades\Input;
 
                 });                
             </script> -->
+            <table id="exportstudentstable"> 
+                    <tr style="text-transform:uppercase;background:rgb(100,179,231);color:white;">
+                        <th scope="col">CASERP ID</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">SSC Marks</th>
+                        <th scope="col">HSC Marks</th>
+                        <th scope="col">Polytechnic Marks</th>
+                        <th scope="col">First Year CGPA</th>
+                        <th scope="col">Second Year CHPA</th>
+                        <th scope="col">Third Year CGPA</th>
+                        <th scope="col">First Year Percentage</th>
+                        <th scope="col">Secon Year Percentage</th>
+                        <th scope="col">Third Year Percentage</th>
+                        <th scope="col">Overall Academic Gap</th> 
+                
 
-        </div>      
+                    </tr>
+                    
+                    @foreach($students as $student)    
+                    <tr class="datahover" style="background:<?php echo $color?>">
+                        <td scope="col">{{$student->CASERP_ID}}</td>
+                        <td scope="col">{{$student->Email}}</td>
+                        <td scope="col">{{$student->Branch}}</td>
+                        <td scope="col">{{$student->Class}}</td>
+                        <td scope="col">{{$student->First_Name .' '. $student->Middle_Name .' '. $student->Last_Name}}</td>
+                        <td scope="col">{{$student->SSC}}</td>
+                        <td scope="col">{{$student->HSC}}</td>
+                        <td scope="col">{{$student->Poly}}</td>
+                        <td scope="col">{{$student->FE_CGPA}}</td>
+                        <td scope="col">{{$student->SE_CGPA}}</td>
+                        <td scope="col">{{$student->TE_CGPA}}</td>
+                        <td scope="col">{{$student->FE_PERCENT}}</td>
+                        <td scope="col">{{$student->SE_PERCENT}}</td>
+                        <td scope="col">{{$student->TE_PERCENT}}</td>
+                        <td scope="col">{{$student->Overall_Gap}}</td>
+                    <tr>
+                    <?php $i = !$i; $color=$colors[$i];?>
+                    @endforeach
+                    
+            </table>
+         </div>      
       </div>
     </div>
 </div>
 <!-- End of Row 2 -->
+<br>
+<div id='downloadbutton' style='display:none;'>
+<form method='POST' action='/php/export'>
+@csrf
+    <input type='submit' name='submit ' class="download" style="" value='Download'/>
+</form>
+</div>
 @endsection

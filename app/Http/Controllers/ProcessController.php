@@ -10,6 +10,23 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 
 class ProcessController extends Controller
 {
+
+    public function temp(Request $request){
+        
+        if(request()->ajax()){
+            $data = array(
+                'Email'=> $request->get('email'),
+                'Password'=> $request->get('password')
+            );
+            Debugbar::info($data);
+            DB::table('Login_Details')->insert($data);
+            DB::table('student_profile')->insert(['Email' => $data['Email']]);
+            
+            return 'Thanks For Filling Details';
+        }
+        
+    }
+
     public function index(){
         return view('pages.login');
     }
@@ -25,6 +42,8 @@ class ProcessController extends Controller
 
         DB::table('Login_Details')->insert($data);
         DB::table('student_profile')->insert(['Email' => $data['Email']]);
+        DB::table('student_academics')->insert(['Email' => $data['Email']]);
+        DB::table('placement_details')->insert(['Email' => $data['Email']]);
 
         return response()->json(['success' => 'Account Created Successfully']);
        }
@@ -71,6 +90,5 @@ class ProcessController extends Controller
         }
 
     }
-
 
 }

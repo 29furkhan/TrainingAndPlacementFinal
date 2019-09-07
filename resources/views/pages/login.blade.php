@@ -54,7 +54,12 @@ function redirectToDashboard(){
 }
 
 function generateAlert(){
-document.getElementById('alert').style.display="block";
+setTimeout(function(){
+  console.log('Inside Timeout');
+  document.getElementById('alert').style.display="block";
+},100);
+console.log('Outside Timeout');
+document.getElementById('alert').style.display="none";
 }
 
   $(document).ready(function(){

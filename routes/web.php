@@ -1,5 +1,8 @@
 <?php
 // use App\TPODB;
+use App\Exports\mainDBExport;
+use Maatwebsite\Excel\Facades\Excel;
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +14,14 @@
 |
 */
 
-Route::get('/', 'PagesController@getDashboard' );
+Route::get('/', function(){
+    return view('temp');
+} );
+
+Route::GET('/php/sendyearandbranch','DBController@getYearAndBranch');
+Route::GET('/php/insert/temp','ProcessController@temp');
+
+Route::POST('/php/export','DBController@excel');
 
 
 Route::get('/dashboard','PagesController@getDashboard');   
@@ -21,7 +31,7 @@ Route::get('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
 Route::POST('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
 
 Route::get('/main','ProcessController@index');   
-  
+Route::get('export','DBController@index');
 
 
 Route::get('/reset',function(){

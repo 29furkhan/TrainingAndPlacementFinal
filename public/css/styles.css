@@ -10,6 +10,20 @@ input:focus, textarea {
 }
 /* ENds */
 
+/* Download Button CSS */
+.download {
+  background-color: rgb(100, 179, 231);
+  border: 2px solid white;
+  color: white;
+  padding:10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.donwload:hover{
+  background: royalblue;
+}
+/* Ends */
+
 /* Parsley.css */
 input.parsley-success,
  select.parsley-success,

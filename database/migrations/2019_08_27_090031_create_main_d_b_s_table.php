@@ -13,10 +13,22 @@ class CreateMainDBSTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_academics', function (Blueprint $table) {
+
+        Schema::create('Login_Details', function (Blueprint $table) {
             // $table->bigIncrements('id');
-            $table->string('CASERP_ID',11);
-            $table->primary('CASERP_ID');
+            $table->string('Email',255);
+            $table->primary('Email');
+            $table->string('password',50)->default('root');
+            $table->string('user_type',20)->default('student');
+            $table->timestamps();
+        });
+
+
+        Schema::create('student_academics', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('Email',255)->default('Null');
+            $table->foreign('Email')->references('Email')->on('Login_Details');
+            $table->string('CASERP_ID',11)->default('Empty');
             $table->decimal('SSC',6,3)->default(0);
             $table->decimal('HSC',6,3)->default(0);
             $table->decimal('Poly',6,3)->default(0);
@@ -39,19 +51,10 @@ class CreateMainDBSTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('Login_Details', function (Blueprint $table) {
-            // $table->bigIncrements('id');
-            $table->string('Email',255);
-            $table->primary('Email');
-            $table->string('password',50)->default('root');
-            $table->string('user_type',20)->default('student');
-            $table->timestamps();
-        });
-
         Schema::create('Placement_Details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('CASERP_ID',11);
-            $table->foreign('CASERP_ID')->references('CASERP_ID')->on('student_academics');
+            $table->string('Email',255)->default('Null');
+            $table->foreign('Email')->references('Email')->on('Login_Details');
             $table->string('Placement_Status',40)->default('Not Placed');
             $table->string('Company_Name',80)->default('Null');
             $table->string('Package',30)->default('0');
