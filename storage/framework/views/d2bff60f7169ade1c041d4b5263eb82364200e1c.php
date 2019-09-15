@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,8 +41,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script type="text/javascript" src="<?php echo e(URL::asset('js/main.js')); ?>"></script>
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   
   <!-- parsley.js -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
@@ -175,7 +175,7 @@ $(document).ready(function(){
   <div class="container"> 
 
     <form  id="signupform" class="login-form" style="margin-top: 3%">
-    @csrf
+    <?php echo csrf_field(); ?>
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         
@@ -222,3 +222,4 @@ $(document).ready(function(){
 </body>
 
 </html>
+<?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/pages/Student/signUp.blade.php ENDPATH**/ ?>

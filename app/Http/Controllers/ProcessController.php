@@ -6,25 +6,19 @@ use Illuminate\Http\Request;
 use App\mainDB;
 use DB;
 use Auth;
+use Validator;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use Hash;
 
 class ProcessController extends Controller
 {
-
-    public function temp(Request $request){
-        
+    public function samePageAJAX(Request $request){
         if(request()->ajax()){
-            $data = array(
-                'Email'=> $request->get('email'),
-                'Password'=> $request->get('password')
+            $authdata = array(
+                'query' => $request->get('queryinputfield')
             );
-            Debugbar::info($data);
-            DB::table('Login_Details')->insert($data);
-            DB::table('student_profile')->insert(['Email' => $data['Email']]);
-            
-            return 'Thanks For Filling Details';
+            return $authdata;
         }
-        
     }
 
     public function index(){
@@ -34,16 +28,34 @@ class ProcessController extends Controller
     public function insertLoginDetails(Request $request){
         
        if(request()->ajax()){
-           $data = array(
+           $pass = Hash::make($request->get('password'));
+           $authdata = array(
                'Email' => $request->get('email'),
-                'Password' => $request->get('password')
-
+               'Password' => $pass
            );
 
-        DB::table('Login_Details')->insert($data);
-        DB::table('student_profile')->insert(['Email' => $data['Email']]);
-        DB::table('student_academics')->insert(['Email' => $data['Email']]);
-        DB::table('placement_details')->insert(['Email' => $data['Email']]);
+           $names = array(
+            'First_Name' => ucfirst($request->get('first_name')),
+            'Last_Name'  => ucfirst($request->get('last_name'))
+           );
+
+           $users = array(
+            'Email' => $request->get('email'),
+            'Password' => $pass,
+            'Name' => ucfirst($request->get('first_name')) .' '. ucfirst($request->get('last_name'))
+        );
+
+
+        DB::table('Login_Details')->insert($authdata);
+        DB::table('student_profile')->insert(['Email' => $authdata['Email']]);
+        DB::table('student_profile')->where('Email', $authdata['Email'])->update(['First_Name' => $names['First_Name']]);
+        DB::table('student_profile')->where('Email', $authdata['Email'])->update(['Last_Name' => $names['Last_Name']]);
+        // DB::table('student_profile')->update();
+        DB::table('student_academics')->insert(['Email' => $authdata['Email']]);
+        DB::table('placement_details')->insert(['Email' => $authdata['Email']]);
+        DB::table('users')->insert($users);
+        DB::table('password_resets')->insert(['Email' => $authdata['Email']]);
+            
 
         return response()->json(['success' => 'Account Created Successfully']);
        }
@@ -52,25 +64,36 @@ class ProcessController extends Controller
 
     public function checkLoginAndEnter(Request $request){
         
-        if(request()->ajax()){
-            $data = array(
-                'Email' => $request->get('email'),
-                'Password' => $request->get('password')
-            );
-        }
-        $query = "select count(*) as count from login_details where email=? AND password =?";
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
 
-        $count = DB::select($query,[$data['Email'],$data['Password']]);
-        // Debugbar::info($count);
-        $countint = $count[0]->count;
-        Debugbar::info($countint);
-               
-        if($countint>0){
-            return response()->json(['success' => 'Verified','setter' => '1']);
+        $email  = $request->get('email');
+        $password =  $request->get('password');
+        // $emailByType = DB::select("select Email from login_details where user_type = 'TPO' ");
+        // Debugbar::info($emailByType[0]->Email);
+        if(Auth::attempt(['email' =>$email,'password'=>$password])){
+                return redirect('/dashboard');
         }
         else{
-            return response()->json(['success' => 'Illigal Data','setter' => '0']);
+            Debugbar::info('Inside Else');
+            return back()->with('error','Invalid Email or Password');
         }
+
+        // $query = "select count(*) as count from login_details where email=? AND password =?";
+
+        // $count = DB::select($query,[$authdata['Email'],$authdata['Password']]);
+        // // Debugbar::info($count);
+        // $countint = $count[0]->count;
+        // Debugbar::info($countint);
+               
+        // if($countint>0){
+        //     return response()->json(['success' => 'Verified','setter' => '1']);
+        // }
+        // else{
+        //     return response()->json(['success' => 'Illigal Data','setter' => '0']);
+        // }
     } 
 
     public function checkAvailabilityEmail(Request $request){
@@ -79,8 +102,8 @@ class ProcessController extends Controller
                 'Email' => $request->get('email')
             );
 
-            $data = DB::table('login_details')->where('email',$email)->count();
-            if ($data > 0){
+            $authdata = DB::table('login_details')->where('email',$email)->count();
+            if ($authdata > 0){
                 echo 'Duplicate';
             }
             else{
@@ -89,6 +112,12 @@ class ProcessController extends Controller
 
         }
 
+    }
+
+    function logout()
+    {
+     Auth::logout();
+     return redirect('/main');
     }
 
 }

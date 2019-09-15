@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('/js/main.js')}}"></script>
+  <script type="text/javascript" src="<?php echo e(URL::asset('/js/main.js')); ?>"></script>
   
 </head>
 
@@ -50,35 +50,37 @@
 
   <div class="container">
 
-    @if(isset(Auth::user()->email))
+    <?php if(isset(Auth::user()->email)): ?>
       <script>window.location='/dashboard';
       </script>
-    @endif
+    <?php endif; ?>
 
     
     <form method='post' action='/php/insert/logincheck' class="login-form" id="loginform" style="margin-top: 6%">
-    {{ csrf_field() }}
+    <?php echo e(csrf_field()); ?>
+
 
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
 
-      @if($message = Session::get('error'))
+      <?php if($message = Session::get('error')): ?>
         <div class="alert alert-danger">
             <button type='button' class="close" data-dismiss='alert'>x</button>
-            {{ $message }}
-        </div>
-      @endif
+            <?php echo e($message); ?>
 
-      @if(count($errors) > 0)
+        </div>
+      <?php endif; ?>
+
+      <?php if(count($errors) > 0): ?>
       <div style="display: flex;
             flex-direction: column;
             align-items: flex-start;" class="alert alert-danger">
-          @foreach($errors->all() as $error)
-            <b style='font-weight:400;color:red'>{{ $error }}</b>
-          @endforeach
+          <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <b style='font-weight:400;color:red'><?php echo e($error); ?></b>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           
         </div>
-      @endif
+      <?php endif; ?>
       
       <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
@@ -102,4 +104,4 @@
 
 </body>
 
-</html>
+</html><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/pages/login.blade.php ENDPATH**/ ?>

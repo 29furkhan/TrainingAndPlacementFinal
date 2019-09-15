@@ -15,8 +15,8 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 $dataset = $students;
 ?>
 
-@extends('layouts.TPO.commonHeaderTPO')
-@section('mainContentTPO')
+
+<?php $__env->startSection('mainContentTPO'); ?>
 
 <script>
 var query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email";
@@ -246,7 +246,7 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 
 <!-- Drop Downs -->
 <form id="exportform">
-@csrf
+<?php echo csrf_field(); ?>
 <div class="" style="display:flex;flex-wrap:wrap;">
     <!-- DropDown For Passing YEar -->
     <div>
@@ -270,9 +270,9 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
             <b style="font-weight:550;font-size:16px;">Branch</b>
             <select onMouseOver="hoverData(id);" onMouseOut="this.style.background='white'" id='branch' onmousedown="expand(id);" onblur="shrink(id)" onchange="shrink(id)" style="cursor:pointer;margin-right:30px;height:40px;box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;margin-top:5px;width:277px;font-weight:100;font-size:15px;border-radius:4px;background-color:#FFFFFF;">
             <option value='all' selected>All Branches</option>
-            @foreach($branch as $br)
-            <option value="{{$br->branch}}">{{$br->branch}}</option>
-            @endforeach
+            <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <option value="<?php echo e($br->branch); ?>"><?php echo e($br->branch); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <!-- <option value="MECH" >Mechanical Engineering</option>
             <option value="CIVIL" >Civil Engineering</option>
             <option value="ETC">Electronics And Telecommunications</option>
@@ -456,26 +456,26 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
                     </tr>
            
                    
-                    @foreach($dataset as $student)
+                    <?php $__currentLoopData = $dataset; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="datahover" style="background:$color">
-                            <td scope="col">{{$student->CASERP_ID}}</td>
-                            <td scope="col">{{$student->Email}}</td>
-                            <td scope="col">{{$student->Branch}}</td>
-                            <td scope="col">{{$student->Class}}</td>
-                            <td scope="col">{{$student->First_Name}} {{$student->Middle_Name}} {{$student->Last_Name}}</td>
-                            <td scope="col">{{$student->SSC}}</td>
-                            <td scope="col">{{$student->HSC}}</td>
-                            <td scope="col">{{$student->Poly}}</td>
-                            <td scope="col">{{$student->FE_CGPA}}</td>
-                            <td scope="col">{{$student->SE_CGPA}}</td>
-                            <td scope="col">{{$student->TE_CGPA}}</td>
-                            <td scope="col">{{$student->FE_PERCENT}}</td>
-                            <td scope="col">{{$student->SE_PERCENT}}</td>
-                            <td scope="col">{{$student->TE_PERCENT}}</td>
-                            <td scope="col">{{$student->Overall_Gap}}</td>
-                            <td scope="col">{{$student->Placement_Status}}</td>
-                            <td scope="col">{{$student->Company_Name}}</td>
-                            <td scope="col">{{$student->Package}}</td>
+                            <td scope="col"><?php echo e($student->CASERP_ID); ?></td>
+                            <td scope="col"><?php echo e($student->Email); ?></td>
+                            <td scope="col"><?php echo e($student->Branch); ?></td>
+                            <td scope="col"><?php echo e($student->Class); ?></td>
+                            <td scope="col"><?php echo e($student->First_Name); ?> <?php echo e($student->Middle_Name); ?> <?php echo e($student->Last_Name); ?></td>
+                            <td scope="col"><?php echo e($student->SSC); ?></td>
+                            <td scope="col"><?php echo e($student->HSC); ?></td>
+                            <td scope="col"><?php echo e($student->Poly); ?></td>
+                            <td scope="col"><?php echo e($student->FE_CGPA); ?></td>
+                            <td scope="col"><?php echo e($student->SE_CGPA); ?></td>
+                            <td scope="col"><?php echo e($student->TE_CGPA); ?></td>
+                            <td scope="col"><?php echo e($student->FE_PERCENT); ?></td>
+                            <td scope="col"><?php echo e($student->SE_PERCENT); ?></td>
+                            <td scope="col"><?php echo e($student->TE_PERCENT); ?></td>
+                            <td scope="col"><?php echo e($student->Overall_Gap); ?></td>
+                            <td scope="col"><?php echo e($student->Placement_Status); ?></td>
+                            <td scope="col"><?php echo e($student->Company_Name); ?></td>
+                            <td scope="col"><?php echo e($student->Package); ?></td>
                                     
                         <tr>
                             
@@ -484,7 +484,7 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
                             $i = !$i; 
                             $color=$colors[$i];
                         ?>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                      
                     <script> 
@@ -538,10 +538,11 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 
 <div id='downloadbutton' style='display:block;'>
 <form id='downloadformdata' method='POST' action='/php/export'>
-@csrf
+<?php echo csrf_field(); ?>
     <input name='hiddenquery' style='display:none;' type="text" id='hiddenquery'/>
     <script>document.getElementById('hiddenquery').value=query;</script>
     <input id='downloadbutton' type='submit' name='submit ' class="download" style="" value='Download'/>
 </form>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.TPO.commonHeaderTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/Pages/TPO/exportStudentsData.blade.php ENDPATH**/ ?>

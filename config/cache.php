@@ -31,6 +31,10 @@ return [
     |
     */
 
+    'none' => [
+        'driver' => 'null',
+    ],
+
     'stores' => [
 
         'apc' => [

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,43 +37,42 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
+  <script type="text/javascript" src="<?php echo e(URL::asset('js/main.js')); ?>"></script>
   </head>
 
   <!-- Modal CSS -->
   <link href="css/modal.css" rel=" stylesheet">
 
-<script>
-$(document).ready(function(){
-    $('#tempform').on('submit',function(e){
-        e.preventDefault();
-        $.ajax({
-            url:'/php/insert/temp',
-            type:'GET',
-            data:$(this).serialize(),
-            success:function(data){
-                alert(data + "Inserted Successfully");
-            }
-        });
-    });
-});
-</script>
-<body>
-<form method="GET" name='tempform'>
-@csrf
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input id = 'email' name='email' type="email" class="form-control" id="email">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input id="password" name="password" type="password" class="form-control" id="pwd">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <button id="submit" name='submit' type="submit" class="btn btn-default">Submit</button>
-</form>
+<body style = "background:#F0F0F0;overflow:auto;overflow-x:hidden;">
+  <!-- container section start -->
+  <section id="container" class="">
+  
 
+    <!-- Header Starts -->
+    <header style="border:2px solid #fff;" class="header common-header-bg">
+        <?php echo $__env->yieldContent('commonHeaderTPO'); ?>
+    </header> 
+    <!--header end-->
+
+    <!-- Sidebar Starts -->
+    <aside id="sidebarTPO" style="display:block;">
+      <div style="overflow:auto;" id="sidebar" class="nav-collapse ">
+        <?php echo $__env->yieldContent('commonSidebarTPO'); ?>
+      </div>
+    </aside>
+    <!-- sidebar menu end-->
+
+    <!-- Main-Content -->
+    <section id="main-content" style="margin-bottom:4%;margin-left:255px;margin-right:10px;">
+        <section class="wrapper">
+            <!--overview start-->
+            <?php echo $__env->yieldContent('mainContentTPO'); ?>
+        </section>
+    </section>
+    <!-- Main-Content Ends -->
+
+</section>    
 </body>
+
 </html>
+<?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/layouts/TPO/commonLayout.blade.php ENDPATH**/ ?>

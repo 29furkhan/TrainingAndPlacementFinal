@@ -19,7 +19,6 @@ Route::get('/', function(){
 } );
 
 Route::GET('/php/sendyearandbranch','DBController@getYearAndBranch');
-Route::GET('/php/insert/temp','ProcessController@temp');
 
 Route::POST('/php/export','DBController@excel');
 
@@ -27,11 +26,18 @@ Route::POST('/php/export','DBController@excel');
 Route::get('/dashboard','PagesController@getDashboard');   
 
 Route::get('/php/insert/login','ProcessController@insertLoginDetails');
-Route::get('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
-Route::POST('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
+
+Route::post('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
+
+Route::get('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
 
 Route::get('/main','ProcessController@index');   
-Route::get('export','DBController@index');
+
+Route::get('/export','DBController@index');
+
+Route::POST('/php/export/query','ProcessController@samePageAJAX');
+
+Route::get('/php/logout', 'ProcessController@logout');
 
 
 Route::get('/reset',function(){

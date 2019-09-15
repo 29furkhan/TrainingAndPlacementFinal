@@ -1,7 +1,6 @@
-@extends('layouts.TPO.commonLayout')
-@include('layouts.TPO.commonSidebarTPO')
+<?php echo $__env->make('layouts.TPO.commonSidebarTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@section('commonHeaderTPO')
+<?php $__env->startSection('commonHeaderTPO'); ?>
 
 <script>
     var flag = 0;
@@ -53,14 +52,14 @@
 
             <div class="dropdown" style='float:right;'>
                 <!-- user login dropdown start-->
-                @yield('getUsername')
+                <?php echo $__env->yieldContent('getUsername'); ?>
                 <ul class="dropdown-menu pull-right" class="log-arrow-up"> 
                         <br>
                         <li><a href="#"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
                         <br>
                         <li><a href="#"><i class="fa fa-cog" style="font-size:20px;"></i>&nbsp&nbsp&nbspSettings</a></li>
                         <br>
-                        @yield('logoutSection')
+                        <?php echo $__env->yieldContent('logoutSection'); ?>
                         <br>
                         
                 </ul>
@@ -69,4 +68,5 @@
 
             <!-- Profile Icon End -->
             
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.TPO.commonLayout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/layouts/TPO/commonHeaderTPO.blade.php ENDPATH**/ ?>
