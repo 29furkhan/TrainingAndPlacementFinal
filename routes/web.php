@@ -1,5 +1,8 @@
 <?php
 // use App\TPODB;
+use App\Exports\mainDBExport;
+use Maatwebsite\Excel\Facades\Excel;
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,36 +14,39 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.TPO.dashboardTPO');
-});
+Route::get('/', function(){
+    return view('temp');
+} );
+
+Route::GET('/php/sendyearandbranch','DBController@getYearAndBranch');
+
+Route::POST('/php/export','DBController@excel');
+
+
+Route::get('/dashboard','PagesController@getDashboard');   
+
+Route::get('/php/insert/login','ProcessController@insertLoginDetails');
+
+Route::post('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
+
+Route::get('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
+
+Route::get('/main','ProcessController@index');   
+
+Route::get('/export','DBController@index');
+
+Route::POST('/php/export/query','ProcessController@samePageAJAX');
+
+Route::get('/php/logout', 'ProcessController@logout');
+
+Route::get('/php/insert/profile','ProcessController@insertProfileDetails');
+
+Route::get('/profile','ProcessController@Rbranch');
 
 Route::get('/student', function () {
     return view('pages.Student.dashboardStudent');
 });
 
-Route::get('/profile', function () {
-    return view('pages.Student.profile');
-});
-
-Route::get('/dashboard','PagesController@getDashboard');   
-
-Route::get('/common', function () {
-    return view( 'layouts.commonLayout');
-});
-
-
-// Route::group(['prefix' => 'students'], function () {
-//     Route::get('/export','PagesController@exportStudentsData');
-// });
-
-
-Route::get('/export','TPODBController@index');
-Route::get('/export/fetch_data','TPODBController@fetch_data');
-
-Route::get('/login',function(){
-    return view('pages.login');
-});
 
 Route::get('/reset',function(){
     return view('pages.Student.reset');
@@ -49,3 +55,5 @@ Route::get('/reset',function(){
 Route::get('/signUp',function(){
     return view('pages.Student.signUp');
 });
+
+Route::POST('gotoconnect', 'connect@checkData');

@@ -50,10 +50,37 @@
 
   <div class="container">
 
-    <form class="login-form" method="POST" action="" style="margin-top: 6%">
+    @if(isset(Auth::user()->email))
+      <script>window.location='/dashboard';
+      </script>
+    @endif
+
+    
+    <form method='post' action='/php/insert/logincheck' class="login-form" id="loginform" style="margin-top: 6%">
+    {{ csrf_field() }}
+
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
-        <div class="input-group">
+
+      @if($message = Session::get('error'))
+        <div class="alert alert-danger">
+            <button type='button' class="close" data-dismiss='alert'>x</button>
+            {{ $message }}
+        </div>
+      @endif
+
+      @if(count($errors) > 0)
+      <div style="display: flex;
+            flex-direction: column;
+            align-items: flex-start;" class="alert alert-danger">
+          @foreach($errors->all() as $error)
+            <b style='font-weight:400;color:red'>{{ $error }}</b>
+          @endforeach
+          
+        </div>
+      @endif
+      
+      <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
           <input type="text" class="form-control" name="email" placeholder="Email" autofocus>
         </div>
@@ -65,7 +92,8 @@
                 <input type="checkbox" value="remember-me"> Remember me
                 <span class="pull-right"> <a href="#" onclick="document.location.href='reset'"> Forgot Password?</a></span>
             </label>
-        <button class="btn btn-primary btn-lg btn-block"  onclick="loginCredits()" type="button">Login</button>
+        <input type='submit' id="loginbutton" class="btn btn-primary btn-lg btn-block" value='Login'/>
+
         <button class="btn btn-info btn-lg btn-block" type="button" onclick="document.location.href='signUp'">Sign Up</button>
       </div>
     </form>
