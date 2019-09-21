@@ -1,12 +1,12 @@
 <?php
 session_start();
-// $myemail="";
-// $myemail=$_SESSION["myemail"];
 
- if(isset($_SESSION["myemail"])==false)
- {
-   header("Location: /login");
- }
+$myemail=$_SESSION["myemail"];
+
+// if(!isset($myemail))
+// {
+//   header("Location: /login");
+// }
 ?>
 
 @extends('layouts.commonHeaderStudent')
@@ -45,10 +45,14 @@ session_start();
                 @foreach($details as $ds)
                   <h4> {{$ds->FIRST_NAME}}  {{$ds->LAST_NAME}}</h4>
                 
-                  <div class="follow-ava">
-                    <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
+                  <div style="display:flex; flex-direction: column;align-items: center;">
+                    <div class="follow-ava">
+                      <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
+                    </div>
+
+                  
+                      <h6>Student</h6>
                   </div>
-                  <h6>       Student</h6>
                 </div>
                 <div class="col-lg-4 col-sm-4 follow-info">
                   <p>Name: {{$ds->FIRST_NAME}} {{$ds->MIDDLE_NAME}} {{$ds->LAST_NAME}}</p>

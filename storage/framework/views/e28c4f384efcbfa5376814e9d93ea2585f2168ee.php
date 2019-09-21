@@ -3,10 +3,10 @@ session_start();
 
 $myemail=$_SESSION["myemail"];
 
-if(!isset($myemail))
-{
-  header("Location: /login");
-}
+// if(!isset($myemail))
+// {
+//   header("Location: /login");
+// }
 ?>
 
 
@@ -46,10 +46,14 @@ if(!isset($myemail))
                 <?php $__currentLoopData = $details; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ds): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <h4> <?php echo e($ds->FIRST_NAME); ?>  <?php echo e($ds->LAST_NAME); ?></h4>
                 
-                  <div class="follow-ava">
-                    <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
+                  <div style="display:flex; flex-direction: column;align-items: center;">
+                    <div class="follow-ava">
+                      <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
+                    </div>
+
+                  
+                      <h6>Student</h6>
                   </div>
-                  <h6>       Student</h6>
                 </div>
                 <div class="col-lg-4 col-sm-4 follow-info">
                   <p>Name: <?php echo e($ds->FIRST_NAME); ?> <?php echo e($ds->MIDDLE_NAME); ?> <?php echo e($ds->LAST_NAME); ?></p>
@@ -480,4 +484,4 @@ document.getElementById("edit-profile").style.display="none";
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacement\resources\views/Pages/Student/profile.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\Prashant\resources\views/Pages/Student/profile.blade.php ENDPATH**/ ?>
