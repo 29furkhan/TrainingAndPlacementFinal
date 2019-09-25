@@ -41,11 +41,17 @@ Route::get('/php/logout', 'ProcessController@logout');
 
 
 Route::get('/reset',function(){
-    return view('pages.Student.reset');
+    return view('pages.reset');
 });
 
 Route::get('/signUp',function(){
-    return view('pages.Student.signUp');
+    return view('pages.signUp');
 });
 
-Route::POST('gotoconnect', 'connect@checkData');
+Route::get('/php/insert/profile','ProcessController@insertProfileDetails');
+
+Route::get('/profile','ProcessController@Rbranch');
+
+Route::get('/student', function () {
+    return view('pages.Student.dashboardStudent');
+});

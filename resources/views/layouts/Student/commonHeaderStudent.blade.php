@@ -1,8 +1,6 @@
-@extends('layouts.TPO.commonLayout')
-@include('layouts.TPO.commonSidebarTPO')
-@include('layouts.commonLoginLogout')
-
-@section('commonHeaderTPO')
+@extends('layouts.Student.commonLayoutStudent')
+@include('layouts.Student.commonSidebarStudent')
+@section('commonHeaderStudent')
 
 <script>
     var flag = 0;
@@ -35,7 +33,7 @@
     <div>
         <div style="display:flex;justify-content:space-between;">    
             <!-- Label for Portal End -->
-            <div class="logo">TPO Portal</div>
+            <div class="logo">Student Portal</div>
         
             <!-- Search Box Start -->
             <div id="searchdiv" class="" style="display:none;padding-left:20px;float:left;">
@@ -57,11 +55,11 @@
                 @yield('getUsername')
                 <ul class="dropdown-menu pull-right" class="log-arrow-up"> 
                         <br>
-                        <li><a href="#"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
+                        <li><a href="/profile"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
                         <br>
                         <li><a href="#"><i class="fa fa-cog" style="font-size:20px;"></i>&nbsp&nbsp&nbspSettings</a></li>
                         <br>
-                        @yield('logout')
+                        @yield('logoutSection')
                         <br>
                         
                 </ul>
