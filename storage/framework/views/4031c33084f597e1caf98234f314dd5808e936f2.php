@@ -1,4 +1,4 @@
-@section('commonSidebarStudent')
+<?php $__env->startSection('commonSidebarStudent'); ?>
 <script>
     var flag=0;
     var flag1=0;
@@ -80,4 +80,4 @@
         
         </ul>
 
-@endsection
+<?php $__env->stopSection(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>

@@ -1,4 +1,4 @@
-@extends('layouts.commonHeaderStudent')
+@extends('layouts.Student.commonHeaderStudent')
 
 @section('getUsername')
     @if(isset( Auth::user()->email))

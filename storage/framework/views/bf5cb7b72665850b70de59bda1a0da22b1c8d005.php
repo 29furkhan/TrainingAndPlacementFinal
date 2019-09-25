@@ -222,4 +222,4 @@ $(document).ready(function(){
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\TPO\resources\views/pages/Student/signUp.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/pages/signUp.blade.php ENDPATH**/ ?>

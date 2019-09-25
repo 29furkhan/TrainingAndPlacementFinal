@@ -48,7 +48,7 @@ $myemail=$_SESSION["myemail"];
                 
                   <div style="display:flex; flex-direction: column;align-items: center;">
                     <div class="follow-ava">
-                      <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
+                      <img src="images/user.png" alt="" style="height:75px;border-radius: 50%;">
                     </div>
 
                   
@@ -205,6 +205,17 @@ $myemail=$_SESSION["myemail"];
                             </div>
                           </div>
                           <div class="form-group">
+                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                            <select class="form-control" name="branch" id="branch">
+                                  <option value="Select" selected disabled>Select Branch  </option>
+                                      <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                          <option value="<?php echo e($br->branch); ?>"><?php echo e($br->branch); ?></option>
+                                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
                             <label class="col-lg-2 control-label">Class <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
                             <select class="form-control" name="class" id="class" >
@@ -212,21 +223,6 @@ $myemail=$_SESSION["myemail"];
                                   <option value="BECSE-I">BECSE-I </option>
                                   <option value="BECSE-II">BECSE-II  </option>
                                 </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
-                            <div class="col-lg-6">
-                            <select class="form-control" name="branch" id="branch">
-                                  <option value="Select" selected disabled>Select Branch  </option>
-                                              <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <option value="<?php echo e($br->branch); ?>"><?php echo e($br->branch); ?></option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                  <!-- <option value="Computer Science And Engineering">Computer Science And Engineering </option>
-                                  <option value="Information Technology">Information Technology  </option>
-                                  <option value="Civil Engineering">Civil Engineering  </option>
-                                  <option value="Mechanical Engineering">Mechanical Engineering  </option> -->
-                            </select>
                             </div>
                           </div>
                           <div class="form-group">
@@ -484,4 +480,4 @@ document.getElementById("edit-profile").style.display="none";
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\Prashant\resources\views/Pages/Student/profile.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/Pages/Student/profile.blade.php ENDPATH**/ ?>

@@ -9,7 +9,7 @@ $myemail=$_SESSION["myemail"];
 // }
 ?>
 
-@extends('layouts.commonHeaderStudent')
+@extends('layouts.Student.commonHeaderStudent')
 
 @section('getUsername')
     @if(isset( Auth::user()->email))
@@ -47,7 +47,7 @@ $myemail=$_SESSION["myemail"];
                 
                   <div style="display:flex; flex-direction: column;align-items: center;">
                     <div class="follow-ava">
-                      <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
+                      <img src="images/user.png" alt="" style="height:75px;border-radius: 50%;">
                     </div>
 
                   
@@ -204,6 +204,17 @@ $myemail=$_SESSION["myemail"];
                             </div>
                           </div>
                           <div class="form-group">
+                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                            <select class="form-control" name="branch" id="branch">
+                                  <option value="Select" selected disabled>Select Branch  </option>
+                                      @foreach($branch as $br)
+                                          <option value="{{$br->branch}}">{{$br->branch}}</option>
+                                      @endforeach
+                            </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
                             <label class="col-lg-2 control-label">Class <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
                             <select class="form-control" name="class" id="class" >
@@ -211,21 +222,6 @@ $myemail=$_SESSION["myemail"];
                                   <option value="BECSE-I">BECSE-I </option>
                                   <option value="BECSE-II">BECSE-II  </option>
                                 </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
-                            <div class="col-lg-6">
-                            <select class="form-control" name="branch" id="branch">
-                                  <option value="Select" selected disabled>Select Branch  </option>
-                                              @foreach($branch as $br)
-            <option value="{{$br->branch}}">{{$br->branch}}</option>
-            @endforeach
-                                  <!-- <option value="Computer Science And Engineering">Computer Science And Engineering </option>
-                                  <option value="Information Technology">Information Technology  </option>
-                                  <option value="Civil Engineering">Civil Engineering  </option>
-                                  <option value="Mechanical Engineering">Mechanical Engineering  </option> -->
-                            </select>
                             </div>
                           </div>
                           <div class="form-group">

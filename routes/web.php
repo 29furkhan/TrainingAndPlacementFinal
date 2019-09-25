@@ -39,6 +39,15 @@ Route::POST('/php/export/query','ProcessController@samePageAJAX');
 
 Route::get('/php/logout', 'ProcessController@logout');
 
+
+Route::get('/reset',function(){
+    return view('pages.reset');
+});
+
+Route::get('/signUp',function(){
+    return view('pages.signUp');
+});
+
 Route::get('/php/insert/profile','ProcessController@insertProfileDetails');
 
 Route::get('/profile','ProcessController@Rbranch');
@@ -46,14 +55,3 @@ Route::get('/profile','ProcessController@Rbranch');
 Route::get('/student', function () {
     return view('pages.Student.dashboardStudent');
 });
-
-
-Route::get('/reset',function(){
-    return view('pages.Student.reset');
-});
-
-Route::get('/signUp',function(){
-    return view('pages.Student.signUp');
-});
-
-Route::POST('gotoconnect', 'connect@checkData');

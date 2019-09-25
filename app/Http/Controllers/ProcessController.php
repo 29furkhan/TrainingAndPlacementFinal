@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\mainDB;
 use DB;
 use Auth;
-use Session;
 use Validator;
+use Session;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Hash;
 
@@ -25,14 +25,7 @@ class ProcessController extends Controller
     public function index(){
         return view('pages.login');
     }
-    public function logout() {
-        session_start();
 
-        $_SESSION= array();
-        session_destroy();
-        Auth::logout();
-        return redirect('/main');
-    }
     public function insertLoginDetails(Request $request){
         
        if(request()->ajax()){
@@ -69,21 +62,80 @@ class ProcessController extends Controller
        }
        
     }
+
+    public function checkLoginAndEnter(Request $request){
+        
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ]);
+
+        $email  = $request->get('email');
+        $password =  $request->get('password');
+        $type = DB::select("select user_type from users where email = '+$email+' ");
+
+        session_start();
+        $_SESSION["myemail"]=$email;
+        Debugbar::info($email);
+        $me=$email;
+        Session::put('me',$me);
+
+        if(Auth::attempt(['email' =>$email,'password'=>$password,'user_type'=>'TPO'])){
+                return redirect('/dashboard');
+        }
+        else if(Auth::attempt(['email' =>$email,'password'=>$password,'user_type'=>'students'])){
+            return redirect('/student');
+        }
+        else{
+            Debugbar::info('Inside Else');
+            return back()->with('error','Invalid Email or Password');
+        }
+    } 
+
+    public function checkAvailabilityEmail(Request $request){
+        if(request()->ajax()){
+            $email = array(
+                'Email' => $request->get('email')
+            );
+
+            $authdata = DB::table('login_details')->where('email',$email)->count();
+            if ($authdata > 0){
+                echo 'Duplicate';
+            }
+            else{
+                echo 'Unique';
+            }
+
+        }
+
+    }
+
+    function logout()
+    {
+        session_start();
+
+        $_SESSION= array();
+        session_destroy();
+       
+     Auth::logout();
+     return redirect('/main');
+    }
+
         //TO get Branch in Branch Dropdown in Edit Profile
-        public function Rbranch() {
+    public function Rbranch() {
             $me=Session::get('me');
     
             Debugbar::info($me);
             $branchquery = "select distinct branch from branch";
             $branch = DB::select($branchquery);
-            $all="select FIRST_NAME,MIDDLE_NAME,LAST_NAME,CLASS,BRANCH,PASSOUT_YEAR from Student_profile where Email='$me'";
+            $all="select FIRST_NAME,MIDDLE_NAME,LAST_NAME,BRANCH,CLASS,PASSOUT_YEAR from Student_profile where Email='$me'";
             $details=DB::select($all);
             $new="select CASERP_ID,SSC,HSC,Poly,FE_CGPA,SE_CGPA,TE_CGPA,FE_PERCENT,SE_PERCENT,TE_PERCENT from Student_academics where Email='$me'";
             $academic=DB::select($new);
             return view('Pages.Student.profile',compact('branch','details','academic'));
          }
 
-         public function insertProfileDetails(Request $request){
+    public function insertProfileDetails(Request $request){
             Debugbar::info('outside ');
             if(request()->ajax()){
                 Debugbar::info('Inside ');
@@ -93,8 +145,8 @@ class ProcessController extends Controller
                     'First_Name' => $request->get('first_name'),
                     'Middle_Name' => $request->get('middle_name'),
                     'Last_Name' => $request->get('last_name'),
-                    'Class' => $request->get('class'),
                     'Branch' => $request->get('branch'),
+                    'Class' => $request->get('class'),
                 );
                 $data1= array(
                     'CASERP_ID' => $request->get('s_id'),
@@ -138,67 +190,5 @@ class ProcessController extends Controller
              return response()->json(['success' => 'Account Created Successfully']);
             }
             
-         }
-    
-
-    public function checkLoginAndEnter(Request $request){
-        
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|min:8'
-        ]);
-
-        $email  = $request->get('email');
-        $password =  $request->get('password');
-
-        session_start();
-        $_SESSION["myemail"]=$email;
-        Debugbar::info($email);
-        $me=$email;
-        Session::put('me',$me);
-
-        // $emailByType = DB::select("select Email from login_details where user_type = 'TPO' ");
-        // Debugbar::info($emailByType[0]->Email);
-        if(Auth::attempt(['email' =>$email,'password'=>$password])){
-                return redirect('/student');
-        }
-        else{
-            Debugbar::info('Inside Else');
-            return back()->with('error','Invalid Email or Password');
-        }
-
-        // $query = "select count(*) as count from login_details where email=? AND password =?";
-
-        // $count = DB::select($query,[$authdata['Email'],$authdata['Password']]);
-        // // Debugbar::info($count);
-        // $countint = $count[0]->count;
-        // Debugbar::info($countint);
-               
-        // if($countint>0){
-        //     return response()->json(['success' => 'Verified','setter' => '1']);
-        // }
-        // else{
-        //     return response()->json(['success' => 'Illigal Data','setter' => '0']);
-        // }
-    } 
-
-    public function checkAvailabilityEmail(Request $request){
-        if(request()->ajax()){
-            $email = array(
-                'Email' => $request->get('email')
-            );
-
-            $authdata = DB::table('login_details')->where('email',$email)->count();
-            if ($authdata > 0){
-                echo 'Duplicate';
-            }
-            else{
-                echo 'Unique';
-            }
-
-        }
-
-    }
-
-
+    }  
 }

@@ -105,4 +105,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\TrainingAndPlacement\resources\views/layouts/commonLayoutStudent.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/layouts/Student/commonLayoutStudent.blade.php ENDPATH**/ ?>

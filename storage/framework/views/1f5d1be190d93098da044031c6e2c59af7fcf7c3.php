@@ -1,4 +1,5 @@
 <?php echo $__env->make('layouts.TPO.commonSidebarTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.commonLoginLogout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php $__env->startSection('commonHeaderTPO'); ?>
 
@@ -59,7 +60,7 @@
                         <br>
                         <li><a href="#"><i class="fa fa-cog" style="font-size:20px;"></i>&nbsp&nbsp&nbspSettings</a></li>
                         <br>
-                        <?php echo $__env->yieldContent('logoutSection'); ?>
+                        <?php echo $__env->yieldContent('logout'); ?>
                         <br>
                         
                 </ul>

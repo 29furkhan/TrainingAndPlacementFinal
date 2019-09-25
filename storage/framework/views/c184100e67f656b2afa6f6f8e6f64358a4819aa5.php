@@ -1,4 +1,4 @@
-<?php $__env->startSection('commonSidebarTPO'); ?>
+<?php $__env->startSection('commonSidebarStudent'); ?>
 <script>
     var flag=0;
     var flag1=0;
@@ -64,17 +64,9 @@
             <a style="padding-left:20px;" class="" href="index.html">
                 <i style="font-size:20px;" class="fa fa-file-video-o"></i>
                 &nbsp&nbsp          
-                <span style="font-size:20px;">Counselling</span>
+                <span style="font-size:20px;">Councelling</span>
                       </a>
-          </li>
-
-          <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
-                <i style="font-size:20px;" class="fa fa-picture-o"></i>
-                          &nbsp&nbsp
-                          <span style="font-size:20px;">Gallery</span>
-                      </a>
-          </li>
+          </li>  
 
           <li class="active">
             <a style="padding-left:20px;" class="" href="index.html">
@@ -84,50 +76,8 @@
                       </a>
           </li>
 
-        <li class="active">
-            <a style="color:white;cursor:pointer;padding-left:20px;" onclick="openStudent();">
-                <i style="font-size:20px;" class="fa fa-graduation-cap"></i>
-                          &nbsp
-                          <span style="font-size:20px;">Students</span>
-                
-                <i id="studentmenucaret" style="margin-right:20px;float:right;font-size:20px;" class="fa fa-caret-down"></i>
-                
-            </a>
-            
-            <ul id="studentmenu" class="sub" style="overflow:hidden;display:none;">
-                <li>
-                    <a style="padding-left:60px;" class="" href="#">Process Data</a>
-                </li>
 
-                <li>
-                    <a style="padding-left:60px;" class="" href="/export">Export Data</a>
-                </li>
-            </ul>
-            
-        </li>
-
-          
-        <li class="active">
-            <a style="color:white;cursor:pointer;padding-left:20px;" class="" onclick="openChart();">
-                <i style="font-size:20px;" class="fa fa-pie-chart"></i>
-                          &nbsp&nbsp
-                          <span style="font-size:20px;">Charts</span>
-                <i id="chartmenucaret" style="margin-right:20px;float:right;font-size:20px;" class="fa fa-caret-down"></i>
-                
-            </a>
-
-            <ul id="chartmenu" class="sub" style="overflow:hidden;display:none;">
-                <li>
-                    <a style="padding-left:60px;" class="" href="#">Drives Charts</a>
-                </li>
-
-                <li>
-                    <a style="padding-left:60px;" class="" href="#">Student Charts</a>
-                </li>
-            </ul>
-            
-        </li>
-
+        
         </ul>
 
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TPO\resources\views/layouts/TPO/commonSidebarTPO.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>

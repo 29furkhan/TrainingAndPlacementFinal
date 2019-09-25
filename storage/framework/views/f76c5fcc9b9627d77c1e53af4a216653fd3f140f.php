@@ -45,4 +45,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\Prashant\resources\views/pages/Student/dashboardStudent.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/pages/Student/dashboardStudent.blade.php ENDPATH**/ ?>

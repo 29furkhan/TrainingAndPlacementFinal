@@ -39,8 +39,11 @@
   <!-- Main.js -->
   <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
   </head>
+  
+  <!-- parsley.js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
 
-<body style = "background:#F0F0F0;overflow:scroll;overflow-x:hidden;">
+<body style = "background:#F0F0F0;overflow:auto;">
   <!-- container section start -->
   <section id="container" class="">
   

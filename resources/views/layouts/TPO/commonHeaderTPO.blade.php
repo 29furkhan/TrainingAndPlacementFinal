@@ -1,5 +1,6 @@
 @extends('layouts.TPO.commonLayout')
 @include('layouts.TPO.commonSidebarTPO')
+@include('layouts.commonLoginLogout')
 
 @section('commonHeaderTPO')
 
@@ -60,7 +61,7 @@
                         <br>
                         <li><a href="#"><i class="fa fa-cog" style="font-size:20px;"></i>&nbsp&nbsp&nbspSettings</a></li>
                         <br>
-                        @yield('logoutSection')
+                        @yield('logout')
                         <br>
                         
                 </ul>

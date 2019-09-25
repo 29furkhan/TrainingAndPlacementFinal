@@ -1,5 +1,4 @@
-<?php echo $__env->make('layouts.commonSidebarStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('layouts.commonFooterStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.Student.commonSidebarStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->startSection('commonHeaderStudent'); ?>
 
 <script>
@@ -69,4 +68,4 @@
             <!-- Profile Icon End -->
             
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.commonLayoutStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacement\resources\views/layouts/commonHeaderStudent.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonLayoutStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/layouts/Student/commonHeaderStudent.blade.php ENDPATH**/ ?>

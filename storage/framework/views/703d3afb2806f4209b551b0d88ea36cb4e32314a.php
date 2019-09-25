@@ -20,7 +20,8 @@
 <li><a href="/php/logout"><i class="fa fa-sign-out" style="font-size:20px;"></i>&nbsp&nbsp&nbspLog Out</a></li>
 <?php $__env->stopSection(); ?>                       
 
-<?php $__env->startSection('mainContentTPO'); ?>
+
+<?php $__env->startSection('mainContentStudent'); ?>
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
                     <h3 class="page-header" style="opacity:0.2;">
@@ -44,4 +45,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.TPO.commonHeaderTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacement\resources\views/Pages/TPO/dashboardTPO.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/pages/Student/dashboardStudent.blade.php ENDPATH**/ ?>
