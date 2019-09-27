@@ -73,7 +73,6 @@ class ProcessController extends Controller
         $email  = $request->get('email');
         $password =  $request->get('password');
         $type = DB::select("select user_type from users where email = '+$email+' ");
-
         $me=$email;
         Session::put('me',$me);
 
@@ -109,7 +108,6 @@ class ProcessController extends Controller
 
     function logout()
     {
-       
      Auth::logout();
      return redirect('/main');
     }
@@ -122,6 +120,7 @@ class ProcessController extends Controller
             $branchquery = "select distinct branch from branch";
             $branch = DB::select($branchquery);
             $all="select Email,FIRST_NAME,MIDDLE_NAME,LAST_NAME,BRANCH,CLASS,PASSOUT_YEAR from Student_profile where Email='$me'";
+            $all="select FIRST_NAME,MIDDLE_NAME,LAST_NAME,CLASS,BRANCH,PASSOUT_YEAR from Student_profile where Email='$me'";
             $details=DB::select($all);
             $new="select CASERP_ID,SSC,HSC,Poly,FE_CGPA,SE_CGPA,TE_CGPA,FE_PERCENT,SE_PERCENT,TE_PERCENT from Student_academics where Email='$me'";
             $academic=DB::select($new);
@@ -138,8 +137,8 @@ class ProcessController extends Controller
                     'First_Name' => $request->get('first_name'),
                     'Middle_Name' => $request->get('middle_name'),
                     'Last_Name' => $request->get('last_name'),
-                    'Branch' => $request->get('branch'),
                     'Class' => $request->get('class'),
+                    'Branch' => $request->get('branch'),
                 );
                 $data1= array(
                     'CASERP_ID' => $request->get('s_id'),
@@ -178,12 +177,6 @@ class ProcessController extends Controller
 
             DB::table('student_profile')->where('Email',$me)->update($data);
             DB::table('student_academics')->where('Email',$me)->update($data1);
-            // DB::table('users')->where('Email',$me)->update(['name' =>$data['First_Name'].' '.$data['Last_Name']]);
-            // DB::table('users')->where('Email',$me)->update(['Email'=>$data['Email']]);
-            // DB::table('student_academics')->where('Email',$me)->update(['Email'=>$data['Email']]);
-
-             //DB::table('student_profile')->insert(['Email' => $data['Email']]);
-     
              return response()->json(['success' => 'Account Created Successfully']);
             }
             

@@ -1,8 +1,11 @@
-
-
 <?php
 if(!isset( Auth::user()->email))
   echo"<script>window.location = '/main';</script>";
+
+<?php
+session_start();
+
+$myemail=$_SESSION["myemail"];
 
 ?>
 
@@ -45,6 +48,7 @@ if(!isset( Auth::user()->email))
                   <div style="display:flex; flex-direction: column;align-items: center;">
                     <div class="follow-ava">
                       <img src="images/user.png" alt="" style="height:75px;border-radius: 50%;">
+                      <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
                     </div>
 
                   
@@ -112,7 +116,7 @@ if(!isset( Auth::user()->email))
                           <div class="bio-row">
                             <p><span>Branch : </span>{{$ds->BRANCH}}</p>
                           </div>
-                      
+                          @endforeach
                           <div class="bio-row">
                             <p><span>Country :</span>India</p>
                           </div>
@@ -120,6 +124,8 @@ if(!isset( Auth::user()->email))
                             <p><span>Email </span><span id="Email_p" >{{$ds->Email}}</span></p>
                           </div>
                           @endforeach
+                            <p><span>Email </span><span id="Email_p" ></span></p>
+                          </div>
                           @foreach($academic as $ad)
                           <div class="bio-row">
                             <p><span>SSC : </span>{{$ad->SSC}}</p>
@@ -215,6 +221,13 @@ if(!isset( Auth::user()->email))
                             </div>
                           </div>
                           <div class="form-group">
+                            <label class="col-lg-2 control-label">Email <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                              <input type="email" class="form-control" id="email" name="email" placeholder=" " required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
+                              <label id='error_email' name = 'error_email' style="font-size:12px;display:none;color:red;font-weight:500;"> Email Not Available, Try Something Else </label>
+                            </div>
+                          </div>
+                          <div class="form-group">
                             <label class="col-lg-2 control-label">Class <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
                             <select class="form-control" name="class" id="class" >
@@ -225,7 +238,24 @@ if(!isset( Auth::user()->email))
                                   <option value="TE-II">TE-II  </option>
                                   <option value="BE-I">BE-I </option>
                                   <option value="BE-II">BE-II  </option>
+                                  <option value="BECSE-I">BECSE-I </option>
+                                  <option value="BECSE-II">BECSE-II  </option>
                                 </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                            <select class="form-control" name="branch" id="branch">
+                                  <option value="Select" selected disabled>Select Branch  </option>
+                                              @foreach($branch as $br)
+            <option value="{{$br->branch}}">{{$br->branch}}</option>
+            @endforeach
+                                  <!-- <option value="Computer Science And Engineering">Computer Science And Engineering </option>
+                                  <option value="Information Technology">Information Technology  </option>
+                                  <option value="Civil Engineering">Civil Engineering  </option>
+                                  <option value="Mechanical Engineering">Mechanical Engineering  </option> -->
+                            </select>
                             </div>
                           </div>
                           <div class="form-group">
@@ -321,6 +351,10 @@ if(!isset( Auth::user()->email))
  
 <!-- Email Availability -->
 <script>
+ mail_p="<?php echo $myemail ?>";
+  //console.log(mail_p);
+  document.getElementById('email').value=mail_p;
+  document.getElementById('Email_p').innerHTML=mail_p;
     document.getElementById('hsc1').style.display="none";
     document.getElementById('diploma1').style.display="none"; 
 
