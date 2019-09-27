@@ -1,3 +1,15 @@
+/*Change By Prashant profile*/
+
+.bio-row {
+
+  width: 50%;
+
+  float: left;
+
+  margin-bottom: 10px;
+
+  padding:0 15px;
+
 /* CSS FOR INPUT TEXT */
 input:focus, textarea {
   outline: none !important;
@@ -10,6 +22,81 @@ input:focus, textarea {
 }
 /* ENds */
 
+.bio-row p span {
+
+  width: 100px;
+
+  display: inline-block;
+
+}
+
+/* CSS FOR INPUT TEXT */
+input:focus, textarea {
+  outline: none !important;
+}
+/* Ends */
+
+/* custom form control */
+.form-control:focus{
+  background:white;
+}
+/* ENds */
+
+/* Download Button CSS */
+.download {
+  background-color: rgb(100, 179, 231);
+  border: 2px solid white;
+  color: white;
+  padding:10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.donwload:hover{
+  background: royalblue;
+}
+/* Ends */
+
+/* Parsley.css */
+input.parsley-success,
+ select.parsley-success,
+ textarea.parsley-success,input.parsley-success:focus {
+   color: #468847;
+   background-color: #DFF0D8;
+   border: 1px solid #D6E9C6;
+ }
+
+ input.parsley-error,
+ select.parsley-error,
+ textarea.parsley-error,input.parsley-error:focus {
+   color: #B94A48;
+   background-color: #F2DEDE;
+   border: 1px solid #EED3D7;
+ }
+
+ .parsley-errors-list {
+   margin: 2px 0 3px;
+   padding: 0;
+   list-style-type: none;
+   font-size: 0.9em;
+   line-height: 0.9em;
+   opacity: 0;
+
+   transition: all .3s ease-in;
+   -o-transition: all .3s ease-in;
+   -moz-transition: all .3s ease-in;
+   -webkit-transition: all .3s ease-in;
+ }
+
+ .parsley-errors-list.filled {
+   opacity: 1;
+ }
+ 
+ .parsley-type, .parsley-required, .parsley-equalto{
+  color:#ff0000;
+ }
+/* Parsley ENds */
+
+=======
 /* Download Button CSS */
 .download {
   background-color: rgb(100, 179, 231);

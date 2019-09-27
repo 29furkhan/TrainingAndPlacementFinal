@@ -73,6 +73,9 @@ class ProcessController extends Controller
         $email  = $request->get('email');
         $password =  $request->get('password');
         $type = DB::select("select user_type from users where email = '+$email+' ");
+        $me=$email;
+        Session::put('me',$me);
+
         if(Auth::attempt(['email' =>$email,'password'=>$password,'user_type'=>'TPO'])){
                 return redirect('/dashboard');
         }
@@ -116,6 +119,7 @@ class ProcessController extends Controller
             Debugbar::info($me);
             $branchquery = "select distinct branch from branch";
             $branch = DB::select($branchquery);
+            $all="select Email,FIRST_NAME,MIDDLE_NAME,LAST_NAME,BRANCH,CLASS,PASSOUT_YEAR from Student_profile where Email='$me'";
             $all="select FIRST_NAME,MIDDLE_NAME,LAST_NAME,CLASS,BRANCH,PASSOUT_YEAR from Student_profile where Email='$me'";
             $details=DB::select($all);
             $new="select CASERP_ID,SSC,HSC,Poly,FE_CGPA,SE_CGPA,TE_CGPA,FE_PERCENT,SE_PERCENT,TE_PERCENT from Student_academics where Email='$me'";
@@ -173,8 +177,6 @@ class ProcessController extends Controller
 
             DB::table('student_profile')->where('Email',$me)->update($data);
             DB::table('student_academics')->where('Email',$me)->update($data1);
-             //DB::table('student_profile')->insert(['Email' => $data['Email']]);
-     
              return response()->json(['success' => 'Account Created Successfully']);
             }
             

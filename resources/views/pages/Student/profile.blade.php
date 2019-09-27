@@ -1,12 +1,12 @@
 <?php
+if(!isset( Auth::user()->email))
+  echo"<script>window.location = '/main';</script>";
+
+<?php
 session_start();
 
 $myemail=$_SESSION["myemail"];
 
-// if(!isset($myemail))
-// {
-//   header("Location: /login");
-// }
 ?>
 
 @extends('layouts.Student.commonHeaderStudent')
@@ -47,6 +47,7 @@ $myemail=$_SESSION["myemail"];
                 
                   <div style="display:flex; flex-direction: column;align-items: center;">
                     <div class="follow-ava">
+                      <img src="images/user.png" alt="" style="height:75px;border-radius: 50%;">
                       <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
                     </div>
 
@@ -120,6 +121,9 @@ $myemail=$_SESSION["myemail"];
                             <p><span>Country :</span>India</p>
                           </div>
                           <div class="bio-row">
+                            <p><span>Email </span><span id="Email_p" >{{$ds->Email}}</span></p>
+                          </div>
+                          @endforeach
                             <p><span>Email </span><span id="Email_p" ></span></p>
                           </div>
                           @foreach($academic as $ad)
@@ -196,6 +200,26 @@ $myemail=$_SESSION["myemail"];
                             </div>
                           </div>
                           @endforeach
+                       
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Email <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                              <input type="email" class="form-control" id="email" name="email" value="{{$ds->Email}}"  placeholder=" " required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
+                              <label id='error_email' name = 'error_email' style="font-size:12px;display:none;color:red;font-weight:500;"> Email Not Available, Try Something Else </label>
+                            </div>
+                          </div>
+            
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                            <select class="form-control" name="branch" id="branch">
+                                  <option value="Select" selected disabled>Select Branch  </option>
+                                      @foreach($branch as $br)
+                                          <option value="{{$br->branch}}">{{$br->branch}}</option>
+                                      @endforeach
+                            </select>
+                            </div>
+                          </div>
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Email <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
@@ -208,6 +232,12 @@ $myemail=$_SESSION["myemail"];
                             <div class="col-lg-6">
                             <select class="form-control" name="class" id="class" >
                                   <option value="Select" selected disabled>Select Class  </option>
+                                  <option value="SE-I">SE-I </option>
+                                  <option value="SE-II">SE-II  </option>
+                                  <option value="TE-I">TE-I </option>
+                                  <option value="TE-II">TE-II  </option>
+                                  <option value="BE-I">BE-I </option>
+                                  <option value="BE-II">BE-II  </option>
                                   <option value="BECSE-I">BECSE-I </option>
                                   <option value="BECSE-II">BECSE-II  </option>
                                 </select>
