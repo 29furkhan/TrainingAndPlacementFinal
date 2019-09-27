@@ -522,26 +522,43 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 <br>
 <script>
 
-// $(document).ready(function(){
-//     $('#downloadbutton').on('click',function(e){
-//         e.preventDefault();
-//         console.log('Inside AJAX');
-//         $.ajax({
-//             url:'/php/export',
-//             type:'GET',
-//             data:{query:query}
-//         });
-//     });
-// });
-
 </script>
 
+<script>
+
+// function downloadSetQuery(){
+//     // alert(query);
+//     document.getElementById('hiddenquery').value=query;
+//     var qry = document.getElementById('hiddenquery').value;
+//     alert(qry);
+//     // alert(document.getElementById('hiddenquery').value);
+//     $.ajax({
+//         url:'/php/export',
+//         type:'POST',
+//         data:{
+//             "query":qry,
+//             "_token": "<?php echo e(csrf_token()); ?>",
+//         },
+//         suceess:function(){
+//             alert('success');
+//         }
+//     });
+// }
+
+function getData(){
+    document.getElementById('hiddenquery').value=query;
+    console.log(query + ' and Branch like "Mechanical%" ');
+    return true;
+}
+
+</script>
+    
+
 <div id='downloadbutton' style='display:block;'>
-<form id='downloadformdata' method='POST' action='/php/export'>
+<form onsubmit="return getData();" id='downloadformdata' method='POST' action='/php/export'>
 <?php echo csrf_field(); ?>
-    <input name='hiddenquery' style='display:none;' type="text" id='hiddenquery'/>
-    <script>document.getElementById('hiddenquery').value=query;</script>
-    <input id='downloadbutton' type='submit' name='submit ' class="download" style="" value='Download'/>
+    <input name='hiddenquery' style='display:none;' type="text" name='hiddenquery' id='hiddenquery'/>
+    <input id='downloadbutton' onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" type='submit' name='submit ' class="download" style="" value='Download'/>
 </form>
 </div>
 <?php $__env->stopSection(); ?>

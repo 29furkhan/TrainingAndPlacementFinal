@@ -1,6 +1,5 @@
-@extends('layouts.commonLayoutStudent')
-@include('layouts.commonSidebarStudent')
-@include('layouts.commonFooterStudent')
+@extends('layouts.Student.commonLayoutStudent')
+@include('layouts.Student.commonSidebarStudent')
 @section('commonHeaderStudent')
 
 <script>
@@ -53,21 +52,14 @@
 
             <div class="dropdown" style='float:right;'>
                 <!-- user login dropdown start-->
-                <a data-toggle="dropdown" style="cursor:pointer;text-decoration:none;" id="profile" class="" >
-                    <span class="profile-ava">
-                        <img alt="" style="height:33px;border-radius:50%;" src="images/profile-widget-avatar.jpg">
-                    </span>
-                    <span class="username" style="color:white;font-size:14px;">Jenifer Smith</span>
-                    <b class="caret"></b>
-                </a>
-
+                @yield('getUsername')
                 <ul class="dropdown-menu pull-right" class="log-arrow-up"> 
                         <br>
-                        <li><a href="#"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
+                        <li><a href="/profile"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
                         <br>
                         <li><a href="#"><i class="fa fa-cog" style="font-size:20px;"></i>&nbsp&nbsp&nbspSettings</a></li>
                         <br>
-                        <li><a href="#"><i class="fa fa-sign-out" style="font-size:20px;"></i>&nbsp&nbsp&nbspLog Out</a></li>
+                        @yield('logoutSection')
                         <br>
                         
                 </ul>

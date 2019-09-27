@@ -1,11 +1,6 @@
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
-<?php if(isset(Auth::user()->email)): ?>
-      <script>window.location='/dashboard';
-      </script>
-<?php endif; ?>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -227,4 +222,4 @@ $(document).ready(function(){
 </body>
 
 </html>
-<?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/pages/Student/signUp.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/pages/signUp.blade.php ENDPATH**/ ?>

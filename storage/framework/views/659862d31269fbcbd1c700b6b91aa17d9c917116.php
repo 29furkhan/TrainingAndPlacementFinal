@@ -37,7 +37,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
+  <script type="text/javascript" src="<?php echo e(URL::asset('js/main.js')); ?>"></script>
   </head>
   
   <!-- parsley.js -->
@@ -50,14 +50,14 @@
 
     <!-- Header Starts -->
     <header style="border:2px solid #fff;" class="header common-header-bg">
-        @yield('commonHeaderStudent')
+        <?php echo $__env->yieldContent('commonHeaderStudent'); ?>
     </header> 
     <!--header end-->
 
     <!-- Sidebar Starts -->
     <aside id="sidebarTPO" style="display:block;">
       <div style="overflow:auto;" id="sidebar" class="nav-collapse ">
-        @yield('commonSidebarStudent')
+        <?php echo $__env->yieldContent('commonSidebarStudent'); ?>
       </div>
     </aside>
     <!-- sidebar menu end-->
@@ -66,7 +66,7 @@
     <section id="main-content" style="margin-bottom:4%;margin-left:255px;margin-right:30px;">
         <section class="wrapper">
             <!--overview start-->
-            @yield('mainContentStudent')
+            <?php echo $__env->yieldContent('mainContentStudent'); ?>
         </section>
     </section>
     <!-- Main-Content Ends -->
@@ -75,7 +75,7 @@
     <!-- Footer -->
 <!-- <footer id="commonfooter" class="footer" style="margin-left:240px;height:9%;">
     <div style="display:flex;justify-content:center;">
-        @yield('commonFooterTPO')
+        <?php echo $__env->yieldContent('commonFooterTPO'); ?>
     </div>
 </footer> -->
 <!-- Footer Ends-->
@@ -105,3 +105,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/layouts/Student/commonLayoutStudent.blade.php ENDPATH**/ ?>

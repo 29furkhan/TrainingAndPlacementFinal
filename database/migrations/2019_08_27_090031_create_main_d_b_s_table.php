@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateMainDBSTable extends Migration
 {
-    /**cls
+    /**
      * Run the migrations.
      *
      * @return void
@@ -16,7 +16,7 @@ class CreateMainDBSTable extends Migration
 
         Schema::create('Login_Details', function (Blueprint $table) {
             // $table->bigIncrements('id');
-            $table->string('Email',80);
+            $table->string('Email',180);
             $table->primary('Email');
             $table->string('password')->default('root');
             $table->string('user_type',20)->default('student');
@@ -26,7 +26,7 @@ class CreateMainDBSTable extends Migration
 
         Schema::create('student_academics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Email',80)->default('Null');
+            $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
             $table->string('CASERP_ID',11)->default('Empty');
             $table->decimal('SSC',6,3)->default(0);
@@ -53,7 +53,7 @@ class CreateMainDBSTable extends Migration
 
         Schema::create('Placement_Details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Email',80)->default('Null');
+            $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
             $table->string('Placement_Status',40)->default('Not Placed');
             $table->string('Company_Name',80)->default('Null');
@@ -63,13 +63,13 @@ class CreateMainDBSTable extends Migration
 
         Schema::create('student_profile', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Email',80)->default('Null');
+            $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
             $table->string('First_Name',30)->default('Anonymous');
             $table->string('Middle_Name',30)->default('Anonymous');
             $table->string('Last_Name',30)->default('Anonymous');
-            $table->string('Class',8)->default('Null');
             $table->string('Branch',80)->default('Null');
+            $table->string('Class',8)->default('Null');
             $table->integer('Passout_Year')->lenght(4)->default(2020);
             
             $table->timestamps();

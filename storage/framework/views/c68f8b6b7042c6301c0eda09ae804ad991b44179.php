@@ -1,35 +1,39 @@
-
-
 <?php
-if(!isset( Auth::user()->email))
-  echo"<script>window.location = '/main';</script>";
+session_start();
 
+$myemail=$_SESSION["myemail"];
+
+// if(!isset($myemail))
+// {
+//   header("Location: /login");
+// }
 ?>
 
-@extends('layouts.Student.commonHeaderStudent')
 
-@section('getUsername')
-    @if(isset( Auth::user()->email))
+
+<?php $__env->startSection('getUsername'); ?>
+    <?php if(isset( Auth::user()->email)): ?>
         <a data-toggle="dropdown" style="cursor:pointer;text-decoration:none;" id="profile" class="" >
             <span class="profile-ava">
                 <img alt="" style="height:33px;border-radius:50%;" src="images/user.png">
             </span>
             <span class="username" style="color:white;font-size:14px;">
-            {{ Auth::user()->name }}
+            <?php echo e(Auth::user()->name); ?>
+
             </span>
             <b class="caret"></b>
         </a>
-    @else
+    <?php else: ?>
         <script>window.location = "/main";</script>
-   @endif
+   <?php endif; ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('logoutSection')
+<?php $__env->startSection('logoutSection'); ?>
 <li><a href="/php/logout"><i class="fa fa-sign-out" style="font-size:20px;"></i>&nbsp&nbsp&nbspLog Out</a></li>
-@endsection                       
+<?php $__env->stopSection(); ?>                       
 
-@section('mainContentStudent')
+<?php $__env->startSection('mainContentStudent'); ?>
 
 <div class="row">
                 <div class="col-lg-12" style="margin-top:85px;">
@@ -39,12 +43,12 @@ if(!isset( Auth::user()->email))
             <div class="profile-widget profile-widget-info">
               <div class="panel-body">
                 <div class="col-lg-2 col-sm-2">
-                @foreach($details as $ds)
-                  <h4> {{$ds->FIRST_NAME}}  {{$ds->LAST_NAME}}</h4>
+                <?php $__currentLoopData = $details; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ds): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <h4> <?php echo e($ds->FIRST_NAME); ?>  <?php echo e($ds->LAST_NAME); ?></h4>
                 
                   <div style="display:flex; flex-direction: column;align-items: center;">
                     <div class="follow-ava">
-                      <img src="images/user.png" alt="" style="height:75px;border-radius: 50%;">
+                      <img src="images/profile-widget-avatar.jpg" alt="" style="border-radius: 50%;">
                     </div>
 
                   
@@ -52,15 +56,15 @@ if(!isset( Auth::user()->email))
                   </div>
                 </div>
                 <div class="col-lg-4 col-sm-4 follow-info">
-                  <p>Name: {{$ds->FIRST_NAME}} {{$ds->MIDDLE_NAME}} {{$ds->LAST_NAME}}</p>
-                  @endforeach
-                  @foreach($academic as $ad) 
-                  <p>CAS_ID: {{$ad->CASERP_ID}}  </p>
-                  @endforeach
-                  @foreach($details as $ds)
-                  <p>Class: {{$ds->CLASS}}</p>
-                  <p>Branch: {{$ds->BRANCH}}</p>
-                  @endforeach
+                  <p>Name: <?php echo e($ds->FIRST_NAME); ?> <?php echo e($ds->MIDDLE_NAME); ?> <?php echo e($ds->LAST_NAME); ?></p>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  <?php $__currentLoopData = $academic; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                  <p>CAS_ID: <?php echo e($ad->CASERP_ID); ?>  </p>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  <?php $__currentLoopData = $details; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ds): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <p>Class: <?php echo e($ds->CLASS); ?></p>
+                  <p>Branch: <?php echo e($ds->BRANCH); ?></p>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   <h6>
                                     <span><i class="icon_clock_alt"></i>11:05 AM</span>
                                     <span><i class="icon_calendar"></i>25.10.13</span>
@@ -98,57 +102,56 @@ if(!isset( Auth::user()->email))
                         <h1>Bio Graph</h1>
                         <div class="row">
 
-                        @foreach($details as $ds)
+                        <?php $__currentLoopData = $details; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ds): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <div class="bio-row">
-                            <p><span>First Name :</span><span id="fname" >{{$ds->FIRST_NAME}}</span> </p>
+                            <p><span>First Name :</span><span id="fname" ><?php echo e($ds->FIRST_NAME); ?></span> </p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Last Name :</span><span id="fname" >{{$ds->LAST_NAME}}</span></p>
+                            <p><span>Last Name :</span><span id="fname" ><?php echo e($ds->LAST_NAME); ?></span></p>
                           </div>
                           
                           <div class="bio-row">
-                            <p><span>Class:</span>{{$ds->CLASS}}</p>
+                            <p><span>Class:</span><?php echo e($ds->CLASS); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Branch : </span>{{$ds->BRANCH}}</p>
+                            <p><span>Branch : </span><?php echo e($ds->BRANCH); ?></p>
                           </div>
-                      
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                           <div class="bio-row">
                             <p><span>Country :</span>India</p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Email </span><span id="Email_p" >{{$ds->Email}}</span></p>
+                            <p><span>Email </span><span id="Email_p" ></span></p>
                           </div>
-                          @endforeach
-                          @foreach($academic as $ad)
+                          <?php $__currentLoopData = $academic; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <div class="bio-row">
-                            <p><span>SSC : </span>{{$ad->SSC}}</p>
-                          </div>
-                          <div class="bio-row">
-                            <p><span>HSC :</span>{{$ad->HSC}}</p>
+                            <p><span>SSC : </span><?php echo e($ad->SSC); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Poly :</span>{{$ad->Poly}}</p>
+                            <p><span>HSC :</span><?php echo e($ad->HSC); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>FE CGPA :</span>{{$ad->FE_CGPA}}</p>
+                            <p><span>Poly :</span><?php echo e($ad->Poly); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>SE CGPA :</span>{{$ad->SE_CGPA}}</p>
+                            <p><span>FE CGPA :</span><?php echo e($ad->FE_CGPA); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>TE CGPA :</span>{{$ad->TE_CGPA}}</p>
+                            <p><span>SE CGPA :</span><?php echo e($ad->SE_CGPA); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>FE Percent :</span>{{$ad->FE_PERCENT}}</p>
+                            <p><span>TE CGPA :</span><?php echo e($ad->TE_CGPA); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>SE Percent :</span>{{$ad->SE_PERCENT}}</p>
+                            <p><span>FE Percent :</span><?php echo e($ad->FE_PERCENT); ?></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>TE Percent : </span>{{$ad->TE_PERCENT}}</p>
+                            <p><span>SE Percent :</span><?php echo e($ad->SE_PERCENT); ?></p>
                           </div>
-                        @endforeach
+                          <div class="bio-row">
+                            <p><span>TE Percent : </span><?php echo e($ad->TE_PERCENT); ?></p>
+                          </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                       </div>
                     </div>
@@ -163,7 +166,7 @@ if(!isset( Auth::user()->email))
                       <div class="panel-body bio-graph-info">
                         <h1> Profile Info</h1>
                         <form id="editform" class="form-horizontal" role="form">
-                        @csrf
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Student Id <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
@@ -171,11 +174,11 @@ if(!isset( Auth::user()->email))
                               <div id="fn"></div>
                             </div>
                           </div>
-                          @foreach($details as $ds)
+                          <?php $__currentLoopData = $details; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ds): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                           <div class="form-group">
                             <label class="col-lg-2 control-label">First Name <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="first_name" name="first_name" value="{{$ds->FIRST_NAME}}" placeholder=" " required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup" />
+                              <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo e($ds->FIRST_NAME); ?>" placeholder=" " required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup" />
                               <div id="fn"></div>
                             </div>
                           </div>
@@ -183,35 +186,22 @@ if(!isset( Auth::user()->email))
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Middle Name<span style="color:red;">*</span></label>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{$ds->MIDDLE_NAME}}" placeholder=" " required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup"/>
+                              <input type="text" class="form-control" id="middle_name" name="middle_name" value="<?php echo e($ds->MIDDLE_NAME); ?>" placeholder=" " required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup"/>
                               <div id="mn"></div>
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Last Name <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="last_name" name="last_name" value="{{$ds->LAST_NAME}}" placeholder=" " required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup"/>
+                              <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo e($ds->LAST_NAME); ?>" placeholder=" " required data-parsley-pattern="^[a-zA-Z]+$" data-parsley-trigger="keyup"/>
                             </div>
                           </div>
-                          @endforeach
-                       
+                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Email <span style="color:red;">*</span></label>
                             <div class="col-lg-6">
-                              <input type="email" class="form-control" id="email" name="email" value="{{$ds->Email}}"  placeholder=" " required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
+                              <input type="email" class="form-control" id="email" name="email" placeholder=" " required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
                               <label id='error_email' name = 'error_email' style="font-size:12px;display:none;color:red;font-weight:500;"> Email Not Available, Try Something Else </label>
-                            </div>
-                          </div>
-            
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
-                            <div class="col-lg-6">
-                            <select class="form-control" name="branch" id="branch">
-                                  <option value="Select" selected disabled>Select Branch  </option>
-                                      @foreach($branch as $br)
-                                          <option value="{{$br->branch}}">{{$br->branch}}</option>
-                                      @endforeach
-                            </select>
                             </div>
                           </div>
                           <div class="form-group">
@@ -219,13 +209,24 @@ if(!isset( Auth::user()->email))
                             <div class="col-lg-6">
                             <select class="form-control" name="class" id="class" >
                                   <option value="Select" selected disabled>Select Class  </option>
-                                  <option value="SE-I">SE-I </option>
-                                  <option value="SE-II">SE-II  </option>
-                                  <option value="TE-I">TE-I </option>
-                                  <option value="TE-II">TE-II  </option>
-                                  <option value="BE-I">BE-I </option>
-                                  <option value="BE-II">BE-II  </option>
+                                  <option value="BECSE-I">BECSE-I </option>
+                                  <option value="BECSE-II">BECSE-II  </option>
                                 </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Branch <span style="color:red;">*</span></label>
+                            <div class="col-lg-6">
+                            <select class="form-control" name="branch" id="branch">
+                                  <option value="Select" selected disabled>Select Branch  </option>
+                                              <?php $__currentLoopData = $branch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $br): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <option value="<?php echo e($br->branch); ?>"><?php echo e($br->branch); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                  <!-- <option value="Computer Science And Engineering">Computer Science And Engineering </option>
+                                  <option value="Information Technology">Information Technology  </option>
+                                  <option value="Civil Engineering">Civil Engineering  </option>
+                                  <option value="Mechanical Engineering">Mechanical Engineering  </option> -->
+                            </select>
                             </div>
                           </div>
                           <div class="form-group">
@@ -321,6 +322,10 @@ if(!isset( Auth::user()->email))
  
 <!-- Email Availability -->
 <script>
+ mail_p="<?php echo $myemail ?>";
+  //console.log(mail_p);
+  document.getElementById('email').value=mail_p;
+  document.getElementById('Email_p').innerHTML=mail_p;
     document.getElementById('hsc1').style.display="none";
     document.getElementById('diploma1').style.display="none"; 
 
@@ -478,4 +483,5 @@ document.getElementById("edit-profile").style.display="none";
   <!-- parsley.js -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/Pages/Student/profile.blade.php ENDPATH**/ ?>

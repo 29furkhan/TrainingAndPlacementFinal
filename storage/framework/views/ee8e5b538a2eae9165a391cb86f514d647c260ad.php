@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Student Portal</title>
+  <title>TPO Portal</title>
 
 
   <!-- Bootstrap -->
@@ -37,71 +37,42 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
+  <script type="text/javascript" src="<?php echo e(URL::asset('js/main.js')); ?>"></script>
   </head>
-  
-  <!-- parsley.js -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
 
-<body style = "background:#F0F0F0;overflow:auto;">
+  <!-- Modal CSS -->
+  <link href="css/modal.css" rel=" stylesheet">
+
+<body style = "background:#F0F0F0;overflow:auto;overflow-x:hidden;">
   <!-- container section start -->
   <section id="container" class="">
   
 
     <!-- Header Starts -->
     <header style="border:2px solid #fff;" class="header common-header-bg">
-        @yield('commonHeaderStudent')
+        <?php echo $__env->yieldContent('commonHeaderTPO'); ?>
     </header> 
     <!--header end-->
 
     <!-- Sidebar Starts -->
     <aside id="sidebarTPO" style="display:block;">
       <div style="overflow:auto;" id="sidebar" class="nav-collapse ">
-        @yield('commonSidebarStudent')
+        <?php echo $__env->yieldContent('commonSidebarTPO'); ?>
       </div>
     </aside>
     <!-- sidebar menu end-->
 
     <!-- Main-Content -->
-    <section id="main-content" style="margin-bottom:4%;margin-left:255px;margin-right:30px;">
+    <section id="main-content" style="margin-bottom:4%;margin-left:255px;margin-right:10px;">
         <section class="wrapper">
             <!--overview start-->
-            @yield('mainContentStudent')
+            <?php echo $__env->yieldContent('mainContentTPO'); ?>
         </section>
     </section>
     <!-- Main-Content Ends -->
-
-    <!-- Footer Starts -->
-    <!-- Footer -->
-<!-- <footer id="commonfooter" class="footer" style="margin-left:240px;height:9%;">
-    <div style="display:flex;justify-content:center;">
-        @yield('commonFooterTPO')
-    </div>
-</footer> -->
-<!-- Footer Ends-->
-
-<!-- Modal For Filters-->
-
-<div style="height:100%;" class="modal right fade" id="studentfilters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel2">Filter Students</h4>
-				</div>
-
-				<div class="modal-body">
-					
-				</div>
-
-			</div><!-- modal-content -->
-		</div><!-- modal-dialog -->
-	</div><!-- modal -->
-  <!-- Modal Ends -->
-
 
 </section>    
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/layouts/TPO/commonLayout.blade.php ENDPATH**/ ?>
