@@ -1,6 +1,4 @@
-@extends('layouts.TPO.commonHeaderTPO')
-
-@section('mainContentTPO')
+<?php $__env->startSection('mainContentTPO'); ?>
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
                     <h3 class="page-header" style="opacity:0.2;">
@@ -22,4 +20,6 @@
                     </ul>
                 </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.TPO.commonHeaderTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/Pages/TPO/dashboardTPO.blade.php ENDPATH**/ ?>

@@ -51,12 +51,16 @@
 
 <script>
 var setEmail = -1;
+var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 </script>
 
-<!-- Email Availability -->
+
 <script>
 
 function validateEmail(email) {
+  // Reg Ex for Password
+  var strongRegex = /^[A-Za-z]+$/;
+  // Email for Checking Availability of Email
   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
   return re.test(email);
 }
@@ -98,7 +102,7 @@ $(document).ready(function(){
 
     $.ajax({
       url:"/php/insert/checkavailability/email",
-      method:"POST",
+      method:"GET",
       data:{email:email,_token:_token},
       success:function(result){
         if (result=='Duplicate'){
@@ -174,6 +178,17 @@ $(document).ready(function(){
     @csrf
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
+        
+        <div id="" class="input-group">
+            <span style="color:black;font-size:16px;">First Name:</span>
+            <input  autocomplete="off" type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required data-parsley-pattern="/^[A-Za-z]+$/" data-parsley-trigger="keyup" />
+        </div>
+
+        <div class="input-group">
+            <span style="color:black;font-size:16px;">Last Name:</span>
+            <input  autocomplete="off" type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required data-parsley-pattern="/^[A-Za-z]+$/" data-parsley-trigger="keyup" />
+        </div>
+        
 
         <div id="emailgroup" class="input-group">
           <!-- <span class="input-group-addon"><i class="icon_mail"></i></span> -->
@@ -185,13 +200,14 @@ $(document).ready(function(){
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Password:</span>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-length="[8,20]" data-parsley-trigger="keyup"/>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,20]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
+            3. Password Should Contain Atleast 1 Uppercase Letter<br><br> 4. Password Should Contain Atleast 1 Special Character"/>
           </div>
 
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Re-Type Password:</span>
-            <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup"/>
+            <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup" />
           </div>
 
           <label id="msg" style="display:none;color:red;padding-bottom:15px;font-weight:500;" class=""></label>
@@ -202,12 +218,6 @@ $(document).ready(function(){
   </div>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-  <script>
-    function hello() {
-      swal("Done!", "You have succesfully submitted!", "success");
-    }
-  </script>
 
 </body>
 

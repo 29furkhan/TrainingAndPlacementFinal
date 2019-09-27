@@ -17,7 +17,7 @@ function searchContent(isearchinput,iexporttable)
         
         
         for (i = 0; i < tr.length; i++) {
-          td1 = tr[i].getElementsByTagName("td")[2];
+          td1 = tr[i].getElementsByTagName("td")[4];
           td2 = tr[i].getElementsByTagName("td")[0];
           if (td1 || td2) {
             txtValue1 = td1.textContent || td1.innerText;

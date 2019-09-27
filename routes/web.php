@@ -1,5 +1,8 @@
 <?php
 // use App\TPODB;
+use App\Exports\mainDBExport;
+use Maatwebsite\Excel\Facades\Excel;
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,25 +14,44 @@
 |
 */
 
-Route::get('/', 'PagesController@getDashboard' );
+Route::get('/', function(){
+    return view('temp');
+} );
+
+Route::GET('/php/sendyearandbranch','DBController@getYearAndBranch');
+
+Route::POST('/php/export','DBController@excel');
 
 
 Route::get('/dashboard','PagesController@getDashboard');   
 
 Route::get('/php/insert/login','ProcessController@insertLoginDetails');
-Route::get('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
-Route::POST('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
+
+Route::post('/php/insert/logincheck','ProcessController@checkLoginAndEnter');
+
+Route::get('/php/insert/checkavailability/email','ProcessController@checkAvailabilityEmail');
 
 Route::get('/main','ProcessController@index');   
-  
+
+Route::get('/export','DBController@index');
+
+Route::POST('/php/export/query','ProcessController@samePageAJAX');
+
+Route::get('/php/logout', 'ProcessController@logout');
 
 
 Route::get('/reset',function(){
-    return view('pages.Student.reset');
+    return view('pages.reset');
 });
 
 Route::get('/signUp',function(){
-    return view('pages.Student.signUp');
+    return view('pages.signUp');
 });
 
-Route::POST('gotoconnect', 'connect@checkData');
+Route::get('/php/insert/profile','ProcessController@insertProfileDetails');
+
+Route::get('/profile','ProcessController@Rbranch');
+
+Route::get('/student', function () {
+    return view('pages.Student.dashboardStudent');
+});
