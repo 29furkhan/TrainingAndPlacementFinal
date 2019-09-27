@@ -1,3 +1,15 @@
+@if(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+    <script>
+      window.location='/errorUserPage';
+    </script>
+@elseif(!isset(Auth::user()->email))
+    <script>
+      window.location='/main';
+    </script>
+@endif
+
+
+
 @extends('layouts.TPO.commonHeaderTPO')
 
 @section('mainContentTPO')

@@ -1,3 +1,17 @@
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
+    <script>
+      window.location='/errorUserPage';
+    </script>
+<?php elseif(!isset(Auth::user()->email)): ?>
+    <script>
+      window.location='/main';
+    </script>
+<?php endif; ?>
+
+
+
+
+
 <?php $__env->startSection('mainContentTPO'); ?>
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
