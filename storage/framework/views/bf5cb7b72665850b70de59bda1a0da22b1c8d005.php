@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+    <script>
+      window.location='/dashboard';
+    </script>
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
+    <script>
+      window.location='/student';
+    </script>
+<?php endif; ?>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">

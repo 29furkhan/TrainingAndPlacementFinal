@@ -1,3 +1,13 @@
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+    <script>
+      window.location='/errorUserPage';
+    </script>
+<?php elseif(!isset(Auth::user()->email)): ?>
+    <script>
+      window.location='/main';
+    </script>
+<?php endif; ?>
+
 <?php
 session_start();
 

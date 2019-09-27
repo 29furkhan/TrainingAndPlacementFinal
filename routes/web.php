@@ -14,6 +14,11 @@ use Maatwebsite\Excel\Facades\Excel;
 |
 */
 
+
+Route::get('/errorUserPage',function(){
+    return view('Pages.errorUserPage');
+});
+
 Route::get('/', function(){
     return view('temp');
 } );

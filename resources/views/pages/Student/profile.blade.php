@@ -1,3 +1,13 @@
+@if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO')
+    <script>
+      window.location='/errorUserPage';
+    </script>
+@elseif(!isset(Auth::user()->email))
+    <script>
+      window.location='/main';
+    </script>
+@endif
+
 <?php
 if(!isset( Auth::user()->email))
   echo"<script>window.location = '/main';</script>";

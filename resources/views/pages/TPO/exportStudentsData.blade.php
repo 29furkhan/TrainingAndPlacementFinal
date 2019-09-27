@@ -1,3 +1,14 @@
+@if(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+    <script>
+      window.location='/errorUserPage';
+    </script>
+@elseif(!isset(Auth::user()->email))
+    <script>
+      window.location='/main';
+    </script>
+@endif
+
+
 <?php
 use Illuminate\Support\Facades\Input;  
 use Barryvdh\Debugbar\Facade as Debugbar;
