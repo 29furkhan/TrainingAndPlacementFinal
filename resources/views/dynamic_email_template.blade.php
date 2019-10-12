@@ -1,3 +1,4 @@
+<h1> MGM COLLEGE OF ENGINEERING </h1>
 @foreach($details as $ds)
 <p>Hi, {{$ds->Name}}</p>
 <p>Here is the password for your registered email : {{$ds->Password}}</p>
