@@ -28,7 +28,8 @@ class CreateMainDBSTable extends Migration
             $table->bigIncrements('id');
             $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
-            $table->string('CASERP_ID',11)->default('Empty');
+            $table->string('CASERP_ID',180);
+            $table->unique('CASERP_ID');
             $table->decimal('SSC',6,3)->default(0);
             $table->decimal('HSC',6,3)->default(0);
             $table->decimal('Poly',6,3)->default(0);
@@ -68,8 +69,8 @@ class CreateMainDBSTable extends Migration
             $table->string('First_Name',30)->default('Anonymous');
             $table->string('Middle_Name',30)->default('Anonymous');
             $table->string('Last_Name',30)->default('Anonymous');
-            $table->string('Branch',80)->default('Null');
             $table->string('Class',8)->default('Null');
+            $table->string('Branch',80)->default('Null');
             $table->integer('Passout_Year')->lenght(4)->default(2020);
             
             $table->timestamps();

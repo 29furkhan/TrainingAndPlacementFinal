@@ -1,3 +1,9 @@
+<?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+?>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -27,29 +33,26 @@
 
 <body class="login-img3-body">
 
-  <div class="container">
+<div class="container">
 
-    <form class="login-form" method="POST" action="php/send_mail.php">
-      <div class="login-wrap">
-        <p class="login-img"><i class="icon_lock_alt"></i></p>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="email" class="form-control" name="mail_to" placeholder="Enter Email" autofocus>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="hello();" >Reset</button>
+<form class="login-form" method="POST" action="{{url('reset/send')}}">
+{{ csrf_field() }}
+<div class="login-wrap">
+    <p class="login-img"><i class="icon_lock_alt"></i></p>
+    @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>{{ $message }}</strong>
       </div>
-    </form>
+    @endif
+    <div class="input-group">
+      <span class="input-group-addon"><i class="icon_profile"></i></span>
+      <input type="email" class="form-control" name="email" placeholder="Enter Email" autofocus>
+    </div>
+    <button class="btn btn-primary btn-lg btn-block" type="submit" name='send' value='Send'  >Reset</button>
   </div>
-
-  
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-  <script>
-    
-   function hello() {
-      swal("Done!", "Email Send Successfully !", "success");
-    };
-  </script>
+</form>
+</div>
 
 </body>
 

@@ -18,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\DBController' => $baseDir . '/app/Http/Controllers/DBController.php',
     'App\\Http\\Controllers\\PagesController' => $baseDir . '/app/Http/Controllers/PagesController.php',
     'App\\Http\\Controllers\\ProcessController' => $baseDir . '/app/Http/Controllers/ProcessController.php',
+    'App\\Http\\Controllers\\StudentsController' => $baseDir . '/app/Http/Controllers/StudentsController.php',
     'App\\Http\\Controllers\\TPO\\TPODBController' => $baseDir . '/app/Http/Controllers/TPO/TPODBController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',

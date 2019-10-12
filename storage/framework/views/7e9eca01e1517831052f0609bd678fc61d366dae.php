@@ -35,7 +35,7 @@
 </script>
 
         <!-- sidebar menu start-->
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu" style="">
           <li class="active">
             <a style="padding-left:20px;"  onclick="" href="/dashboard">
                 <i style="font-size:20px;" class="fa fa-tachometer"></i>
@@ -45,7 +45,7 @@
           </li>
           
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/dashboard">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                 <i style="font-size:20px;" class="fa fa-industry"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Drives</span>
@@ -53,7 +53,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
             <i style="font-size:20px;" class="fa fa-tasks"></i>
                 &nbsp&nbsp          
             <span style="font-size:20px;">Activities</span>
@@ -61,7 +61,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                 <i style="font-size:20px;" class="fa fa-file-video-o"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Counselling</span>
@@ -69,7 +69,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                 <i style="font-size:20px;" class="fa fa-picture-o"></i>
                           &nbsp&nbsp
                           <span style="font-size:20px;">Gallery</span>
@@ -77,7 +77,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                           <i style="font-size:20px;" class="fa fa-clipboard"></i>
                           &nbsp&nbsp
                           <span style="font-size:20px;">Notice Board</span>
@@ -96,7 +96,7 @@
             
             <ul id="studentmenu" class="sub" style="overflow:hidden;display:none;">
                 <li>
-                    <a style="padding-left:60px;" class="" href="#">Process Data</a>
+                    <a style="padding-left:60px;" class="" href="/process">Process Data</a>
                 </li>
 
                 <li>
@@ -118,11 +118,11 @@
 
             <ul id="chartmenu" class="sub" style="overflow:hidden;display:none;">
                 <li>
-                    <a style="padding-left:60px;" class="" href="#">Drives Charts</a>
+                    <a style="padding-left:60px;" class="" href="/underConstructionPage">Drives Charts</a>
                 </li>
 
                 <li>
-                    <a style="padding-left:60px;" class="" href="#">Student Charts</a>
+                    <a style="padding-left:60px;" class="" href="/underConstructionPage">Student Charts</a>
                 </li>
             </ul>
             

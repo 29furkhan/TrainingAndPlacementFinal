@@ -13,7 +13,6 @@
 }
 
 
-
 .bio-row p span {
 
   width: 100px;
@@ -202,7 +201,7 @@ ul:hover > li:not(:hover) {
   position: fixed;
   background: rgb(100,179,231);
   border-right:2px solid white;
-
+  border-left:2px solid white;
 }
 
 ul.sidebar-menu , ul.sidebar-menu li ul.sub{
@@ -234,7 +233,7 @@ ul li {
 
 ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
 
-  background: rgb(100,179,231);
+  /* background: rgb(61, 73, 82); */
   color: #fff;
   display: block;
   -webkit-transition: all 0.3s ease;

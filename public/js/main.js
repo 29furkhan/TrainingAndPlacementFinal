@@ -2,7 +2,10 @@ var globaltablesetter=0;
 
 function searchContent(isearchinput,iexporttable)
 {
+    globaltablesetter=1;
+    // console.log('Called');
     if(globaltablesetter==1){
+        console.log('Inside');
         var filter, tr, td1,td2, i, txtValue1,txtValue2;
         var esearchinput;
         var eexporttable;
