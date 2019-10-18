@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4
+class ComposerStaticInit271bec8e71e468699c0f52e101a2248a
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -481,6 +481,7 @@ class ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4
         'App\\Http\\Controllers\\DBController' => __DIR__ . '/../..' . '/app/Http/Controllers/DBController.php',
         'App\\Http\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PagesController.php',
         'App\\Http\\Controllers\\ProcessController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProcessController.php',
+        'App\\Http\\Controllers\\SendEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/SendEmailController.php',
         'App\\Http\\Controllers\\StudentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/StudentsController.php',
         'App\\Http\\Controllers\\TPO\\TPODBController' => __DIR__ . '/../..' . '/app/Http/Controllers/TPO/TPODBController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -491,6 +492,7 @@ class ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mail\\SendMail' => __DIR__ . '/../..' . '/app/Mail/SendMail.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -4553,10 +4555,10 @@ class ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit8034c8f1f166f5cffaad4606fa5b54d4::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit271bec8e71e468699c0f52e101a2248a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit271bec8e71e468699c0f52e101a2248a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit271bec8e71e468699c0f52e101a2248a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit271bec8e71e468699c0f52e101a2248a::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -8,7 +8,7 @@ use App\Mail\SendMail;
 use App\mainDB;
 use DB;
 use Auth;
-
+use Session;
 
 class SendEmailController extends Controller
 {
@@ -27,12 +27,11 @@ class SendEmailController extends Controller
             'email'     =>  $request->email
         );
         $mail=$data['email'];
-
-        $query = "select Name,Password from users where Email='$mail'";
+        Session::put('me',$mail);
+        $query = "select Name,Password,email from users where Email='$mail'";
         $details = DB::select($query);
      Mail::to($data['email'])->send(new SendMail($details));
-     return back()->with('success', 'Thanks for contacting us!');
-
+    return \Redirect::route('ResetPassword')->with('success', 'OTP is send to Your Email');    //  return view('pages.resetPassword')->with('success', 'OTP is send to Your Email');
     }
 }
 

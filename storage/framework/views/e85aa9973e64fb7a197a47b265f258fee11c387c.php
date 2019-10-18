@@ -5,7 +5,7 @@ header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,16 +35,17 @@ header('Pragma: no-cache');
 
 <div class="container">
 
-<form class="login-form" method="POST" action="{{url('reset/send')}}">
-{{ csrf_field() }}
+<form class="login-form" method="POST" action="<?php echo e(url('reset/send')); ?>">
+<?php echo e(csrf_field()); ?>
+
 <div class="login-wrap">
     <p class="login-img"><i class="icon_lock_alt"></i></p>
-    <!-- @if ($message = Session::get('success'))
+    <!-- <?php if($message = Session::get('success')): ?>
       <div class="alert alert-success alert-block">
           <button type="button" class="close" data-dismiss="alert">×</button>
-          <strong>{{ $message }}</strong>
+          <strong><?php echo e($message); ?></strong>
       </div>
-    @endif -->
+    <?php endif; ?> -->
     <div class="input-group">
       <span class="input-group-addon"><i class="icon_profile"></i></span>
       <input type="email" class="form-control" name="email" placeholder="Enter Email" autofocus>
@@ -57,3 +58,4 @@ header('Pragma: no-cache');
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-StudentBranch\resources\views/pages/reset.blade.php ENDPATH**/ ?>

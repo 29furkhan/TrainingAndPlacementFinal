@@ -65,6 +65,9 @@ Route::get('/signUp',function(){
     return view('pages.signUp');
 });
 
+Route::get('/ResetPassword',function(){
+    return view('pages.resetPassword');
+})->name('ResetPassword');
 Route::get('/php/insert/profile','ProcessController@insertProfileDetails');
 
 Route::get('/profile','ProcessController@Rbranch');
