@@ -12,112 +12,141 @@ use Barryvdh\Debugbar\Facade as Debugbar;
 class DBController extends Controller
 {
 
-    // private $qry;
-    public function index() {
-        // Debugbar::info('I am Called');
+    public function index(Request $request) {
+
         $branchquery = "select distinct branch from branch";
         $branch = DB::select($branchquery);
-        $qry = 'select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email';
-        $students = DB::select($qry);
-        // Debugbar::info($students);
-        return view('Pages.TPO.exportStudentsData',compact('students','branch'));
+             
+        if(request()->ajax()){
+            
+            $branchdata = $request->get('branch');
+            $yeardata = $request->get('year');
+            if($branchdata=='all'){
+                if($yeardata=='all'){
+                    $qry = 'select * from student_profile sp INNER JOIN
+                            student_academics sa INNER JOIN placement_details pd
+                            ON sp.Email = sa.Email and sp.Email = pd.Email and sp.Email not like "tpo@mgmcen.ac.in" ';
+                    
+                    $students = DB::select($qry);
+                    $cnt = count($students);
+                    $students = json_encode($students);
+                            
+                    if($cnt>0)
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'1','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                    else
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'0','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                    
+                    
+                } // End if inner if
+                else{
+                    $qry = "select * from student_profile sp INNER JOIN 
+                            student_academics sa INNER JOIN placement_details pd 
+                            ON sp.Email = sa.Email and sp.Email = pd.Email and Passout_Year= '$yeardata'
+                            and sp.Email not like 'tpo@mgmcen.ac.in' ";
+
+                    $students = DB::select($qry);
+                    $cnt = count($students);
+                    $students = json_encode($students);
+                    
+                    if($cnt>0)
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'1','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                    else
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'0','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                      
+                    
+                }
+            }// End of Outer if
+            else if($yeardata=='all'){
+                if($branchdata=='all'){
+                    $qry = 'select * from student_profile sp INNER JOIN 
+                            student_academics sa INNER JOIN placement_details pd
+                            ON sp.Email = sa.Email and sp.Email = pd.Email
+                            and sp.Email not like "tpo@mgmcen.ac.in" ';
+                    
+                    $students = DB::select($qry);
+                    $cnt = count($students);
+                    $students = json_encode($students);
+
+                    if($cnt>0)
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'1','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                    else
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'0','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                      
+                       
+                }// End inner if
+                else{
+                    $qry = "select * from student_profile sp 
+                            INNER JOIN student_academics sa 
+                            INNER JOIN placement_details pd 
+                            where sp.Email = sa.Email and sp.Email = pd.Email and Branch='$branchdata'
+                            and sp.Email not like 'tpo@mgmcen.ac.in' ";
+                    // Debugbar::info($branchdata);
+                    
+                    $students = DB::select($qry);
+                    $cnt = count($students);
+                    $students = json_encode($students);
+                    
+
+                    if($cnt>0)
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'1','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                    else
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'0','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                    // return response()->json(['sucess'=>'Success','studentsjson'=>$students,'branchjson'=>$branch]); 
+                }// End Inner Else
+            }// End outer else if
+            else{
+                $qry = "select * from student_profile sp 
+                        INNER JOIN student_academics sa 
+                        INNER JOIN placement_details pd 
+                        ON sp.Email = sa.Email and sp.Email = pd.Email 
+                        and sp.Email not like 'tpo%' and sp.branch='$branchdata' 
+                        and sp.passout_year='$yeardata'
+                        and sp.Email not like 'tpo@mgmcen.ac.in' ";
+
+                $students = DB::select($qry);
+                $cnt = count($students);
+                $students = json_encode($students);
+                
+                if($cnt>0)
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'1','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }
+                else
+                    {
+                        return response()->json(['sucess'=>'Success','databit'=>'0','studentsjson'=>$students,'branchjson'=>$branch]);
+                    }   
+            }// End outer Else
+        }// If request->ajax ends
+        return view('Pages.TPO.exportStudentsData',compact('branch'));
      }
      
-     public function getYearAndBranch(Request $request){
-        $branchquery = "select distinct branch from branch";
-        $branch = DB::select($branchquery);
-        // Debugbar::info('Aagaya');
-         if(request()->ajax()){
-            $data = array(
-                'Branch' => $request->get('branch'),
-                'Passout_Year' =>$request->get('year')
-            );
-            // Debugbar::info($data);
-            // All Years All Branches
-            if($data['Passout_Year']=='all'){
-                if($data['Branch']=='all'){
-                    $qry = 'select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email';
-                    $students = DB::select($qry);
-                    Debugbar::info($students);
-                    if(!empty($students)){
-                        Debugbar::info('Returning View for all Students of All Years');
-                        return view('Pages.TPO.exportStudentsData',compact('students','branch'));
-                    }
-                    else{
-                        return view('Pages.TPO.exportStudentsData',compact('students','branch'));
-                    }
-                }
-                else{
-                    Debugbar::info('Inside Else');
-                    $qry = 'select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email and Branch= ?';
-                    $students = DB::select($qry,[$data['Branch']]);
-                    if(!empty($students)){
-                        Debugbar::info($students);
-                        // Debugbar::info('Returning View for all Students of All Years with Different Branches');
-                        
-                        return response()->json(['sucess'=>'Success','studentsjson'=>$students,'branchjson'=>$branch]);    
-                    }
-                    else{
-                        return view('Pages.TPO.exportStudentsData',compact('students','branch'));    
-                    }
-
-                }
-            }
-            else if($data['Branch']=='all'){
-                if($data['Passout_Year']=='all'){
-                    $this->qry = 'select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email';
-                    $students = DB::select($this->qry);
-                    $students = json_encode($students);
-                    // foreach ($students as $students => $value) {
-                    //     Debugbar::info($students[0]->$value);
-                    // }
-
-                    if(!empty($students)){
-                        return response()->json(['success' => 'Data Found','bit'=>'1','queryresult' => $students]);
-                    }
-                    else{
-                        return response()->json(['success' => 'No Data Found','bit'=>'0']);
-                    }
-                }
-                else{
-                    $qry = 'select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd where sp.Email = sa.Email and sp.Email = pd.Email and Passout_Year=?';
-                    $students = DB::select($qry,[$data['Passout_Year']]);
-                    $students = json_encode($students);
-                    if(!empty($students)){
-                        return response()->json(['success' => 'Data Found','bit'=>'1','queryresult' => $students]);
-                    }
-                    else{
-                        return response()->json(['success' => 'No Data Found','bit'=>'0']);
-                    }
-
-
-                }
-            }
-            else{
-                $qry = "select distinct * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd where sp.Email = sa.Email and sp.Email = pd.Email and Branch=? and Passout_Year=?";
-                $students = DB::select($qry,[$data['Branch'],$data['Passout_Year']]);
-                $students = json_encode($students);
-                if(!empty($students)){
-                    return response()->json(['success' => 'Data Found','bit'=>'1','queryresult' => $students]);
-                }
-                else{
-                    return response()->json(['success' => 'No Data Found','bit'=>'0']);
-                }
-            }   
-            
-         }//End Ajax()->request()
-     }
-
+     
      public function excel(Request $request){
         // $query = 'select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email';
         // if(request()->ajax()){
         //     $dataqry = array(
         //         'query' => $request->get('query')
         //     );
-                // Debugbar::info($query);
-                $query = $_POST['hiddenquery'];            
+                Debugbar::info("aaye re");
+                $query = $_POST['hiddenquery'];   
+                // echo $query;         
                 $data = DB::select($query);
-                Debugbar::info($data);
                 $output = '';
                 if(isset($data)){
                     $output.= '

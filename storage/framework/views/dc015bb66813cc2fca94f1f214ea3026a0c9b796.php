@@ -45,7 +45,7 @@
           </li>
           
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/dashboard">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                 <i style="font-size:20px;" class="fa fa-industry"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Drives</span>
@@ -53,7 +53,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
             <i style="font-size:20px;" class="fa fa-tasks"></i>
                 &nbsp&nbsp          
             <span style="font-size:20px;">Activities</span>
@@ -61,7 +61,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                 <i style="font-size:20px;" class="fa fa-file-video-o"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Councelling</span>
@@ -69,7 +69,7 @@
           </li>  
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="index.html">
+            <a style="padding-left:20px;" class="" href="/underConstructionPage">
                           <i style="font-size:20px;" class="fa fa-clipboard"></i>
                           &nbsp&nbsp
                           <span style="font-size:20px;">Notice Board</span>
@@ -80,4 +80,4 @@
         
         </ul>
 
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-StudentBranch\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>

@@ -1,6 +1,22 @@
+<?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+?>
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+    <script>
+      window.location='/dashboard';
+    </script>
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
+    <script>
+      window.location='/student';
+    </script>
+<?php endif; ?>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
@@ -57,42 +73,42 @@ var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\
 
 <script>
 
-function validateEmail(email) {
-  // Reg Ex for Password
-  var strongRegex = /^[A-Za-z]+$/;
-  // Email for Checking Availability of Email
-  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
-  return re.test(email);
-}
+// function validateEmail(email) {
+//   // Reg Ex for Password
+//   var strongRegex = /^[A-Za-z]+$/;
+//   // Email for Checking Availability of Email
+//   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
+//   return re.test(email);
+// }
 
-function enableErrorEmail(email){
-  document.getElementById('emailgroup').style.paddingBottom = '0px';
-  document.getElementById('error_email').style.display="block";
-  document.getElementById('email').style.color="#B94A48";
-  document.getElementById('email').style.background="#F2DEDE";
-  document.getElementById('email').style.border="1px solid #EED3D7";
-}
+// function enableErrorEmail(email){
+//   document.getElementById('emailgroup').style.paddingBottom = '0px';
+//   document.getElementById('error_email').style.display="block";
+//   document.getElementById('email').style.color="#B94A48";
+//   document.getElementById('email').style.background="#F2DEDE";
+//   document.getElementById('email').style.border="1px solid #EED3D7";
+// }
 
-function disableErrorEmail(email){
-  console.log('disable');
-  document.getElementById('emailgroup').style.paddingBottom = '15px';
-  if(validateEmail(email)){
+// function disableErrorEmail(email){
+//   console.log('disable');
+//   document.getElementById('emailgroup').style.paddingBottom = '15px';
+//   if(validateEmail(email)){
 
-    document.getElementById('error_email').style.display="none";
-    document.getElementById('email').style.color="#468847";
-    document.getElementById('email').style.background="#DFF0D8";
-    document.getElementById('email').style.border="1px solid #D6E9C6";
-  }
-  else{
-    document.getElementById('error_email').style.display="none";
-    document.getElementById('email').style.color="#B94A48";
-    document.getElementById('email').style.background="#F2DEDE";
-    document.getElementById('email').style.border="1px solid #EED3D7";
-  }
-  document.getElementById('error_email').style.display="none";
+//     document.getElementById('error_email').style.display="none";
+//     document.getElementById('email').style.color="#468847";
+//     document.getElementById('email').style.background="#DFF0D8";
+//     document.getElementById('email').style.border="1px solid #D6E9C6";
+//   }
+//   else{
+//     document.getElementById('error_email').style.display="none";
+//     document.getElementById('email').style.color="#B94A48";
+//     document.getElementById('email').style.background="#F2DEDE";
+//     document.getElementById('email').style.border="1px solid #EED3D7";
+//   }
+//   document.getElementById('error_email').style.display="none";
     
   
-}
+// }
 
 $(document).ready(function(){
   $('#email').keyup(function(){
@@ -106,12 +122,16 @@ $(document).ready(function(){
       data:{email:email,_token:_token},
       success:function(result){
         if (result=='Duplicate'){
-          enableErrorEmail(email);
+          document.getElementById('emailgroup').style.paddingBottom = '0px';
+          document.getElementById('error_email').style.display="block";
+          document.getElementById('email').style.background="#FFFFFF";
           $('#submit').attr('disabled','disabled');
-          // $('#submit').attr('disbaled','disabled');
+          
         }
         else{
-          disableErrorEmail(email);
+          document.getElementById('emailgroup').style.paddingBottom = '15px';
+          document.getElementById('error_email').style.display="none";
+          document.getElementById('email').style.background="#FFFFFF";
           $('#submit').attr('disabled',false);
         }
       }
@@ -195,7 +215,7 @@ $(document).ready(function(){
           <span style="color:black;font-size:16px;">Email:</span>
           <input  autocomplete="off" type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
         </div>
-        <label id='error_email' name = 'error_email' style="font-size:12px;display:none;color:red;font-weight:500;"> Email Not Available, Try Something Else </label>
+        <label id='error_email' name = 'error_email' style="font-size:12px;display:none;color:red;font-weight:500;"> Duplicate Entry Found, Try Something Else </label>
         
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->

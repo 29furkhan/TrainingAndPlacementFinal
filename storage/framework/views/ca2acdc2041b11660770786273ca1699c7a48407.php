@@ -1,4 +1,21 @@
 <?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+?>
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
+    <script>
+      window.location='/errorUserPage';
+    </script>
+<?php elseif(!isset(Auth::user()->email)): ?>
+    <script>
+      window.location='/main';
+    </script>
+<?php endif; ?>
+
+
+<?php
 use Illuminate\Support\Facades\Input;  
 use Barryvdh\Debugbar\Facade as Debugbar;
 ?>
@@ -11,12 +28,13 @@ use Barryvdh\Debugbar\Facade as Debugbar;
     $output='';
 ?>
 <!-- PHP for Fetching Students Data -->
-<?php
-$dataset = $students;
-?>
 
 
 <?php $__env->startSection('mainContentTPO'); ?>
+
+
+    
+
 
 <script>
 var query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email";
@@ -283,23 +301,71 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
     </div>    
 
     <!-- Show Button -->
-    <div class="">
+    <div>
         <div style="margin-right:30px;display:flex;flex-wrap:wrap;flex-direction:column;justify-content:space-between;">
             <b>&nbsp&nbsp&nbsp</b>
-            <button id="show" onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" type="button" name="show" style="border-radius:4px;color:white;border:2px solid white;margin-top:7px;font-weight:550;font-size:15px;background-color:rgb(100,179,231);box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;width:87.69px;height:42px;">SHOW</button>
+            <button id="show" onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" type="submit" name="show" style="border-radius:4px;color:white;border:2px solid white;margin-top:7px;font-weight:550;font-size:15px;background-color:rgb(100,179,231);box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;width:87.69px;height:42px;">SHOW</button>
         </div>
     </div>
     
+    <script>
+
+        function getData(){
+            // alert('Called');
+            var getYear,getBranch;
+            var getYear = document.getElementById('passyear').value;
+            var getBranch = document.getElementById('branch').value;
+
+            if(getYear=='all'){
+                if(getBranch=='all')
+                    query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email";
+                else
+                    query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email and sp.branch ='"+getBranch+"'";
+            }// Outer if for year==all    
+            else if(getBranch=='all'){
+                if(getYear=='all'){
+                    query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email";  
+                }
+                else{
+                    query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email and sp.Passout_Year ='"+getYear+"'";
+                }
+            }// Outer Else if close branch==all
+            else{
+                query="select * from student_profile sp INNER JOIN student_academics sa INNER JOIN placement_details pd ON sp.Email = sa.Email and sp.Email = pd.Email and sp.Passout_Year ='"+getYear+"'"+" and sp.Branch='"+getBranch+"'";  
+            }
+
+            document.getElementById('hiddenquery').value=query;
+            // console.log(query + ' and Branch like "Mechanical%" ');
+            return true;
+        }
+
+    </script>
 
     <!-- Filter Button -->
     <div id="filters" style="margin-right:30px;display:block;"class="">
-        <div style="display:flex;flex-wrap:wrap;flex-direction:column;justify-content:space-between;">
+        <div id="innerfilter" style="display:none;flex-wrap:wrap;flex-direction:column;justify-content:space-between;">
             <b>&nbsp&nbsp&nbsp</b>
             <button data-toggle="modal" data-target="#myModal" id="filterbtn" onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" type="button" name="show" style="border-radius:4px;color:white;border:2px solid white;margin-top:7px;font-weight:550;font-size:15px;background-color:rgb(100,179,231);box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;width:100px;height:42px;"><span><i class="fa fa-filter"></i>&nbsp&nbspFILTERS</span></button>
         </div>
     </div>
     <!-- Filter Ends --> 
+    
+
 </form>
+
+<!-- Download Button -->
+<div id='downloadbutton' style="display:none;">
+        <div style="margin-right:30px;display:flex;flex-wrap:wrap;flex-direction:column;justify-content:space-between;">
+            <b>&nbsp&nbsp&nbsp</b>
+            <form onsubmit="return getData();" id='downloadformdata' method='POST' action='/php/export'>
+            <?php echo csrf_field(); ?>
+                <input name='hiddenquery' style='display:none;' type="text" name='hiddenquery' id='hiddenquery'/> 
+                <button id='downloadbutton' onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" style="border-radius:4px;color:white;border:2px solid white;margin-top:7px;font-weight:550;font-size:15px;background-color:rgb(100,179,231);box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;width:auto;height:42px;" type='submit' name='submit ' class="download" value='DOWNLOAD'><i style="font-size:20px;" class="fa fa-download" aria-hidden="true"></i></button>
+            </form>
+        </div>
+</div>
+
+	
 
 <!-- Modal For Filters-->
 	<div class="modal right fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -410,17 +476,22 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 			</div><!-- modal-content -->
 		</div><!-- modal-dialog -->
 	</div><!-- modal -->
-	
 
-
+    
 </div>
 <!-- End of One Row  -->
 
 <br>
-<p id='demo'></p>
+
+<div class="alert alert-danger" id="NoDataFound" style="display:none;">
+    <div id="NoDataFoundMsg" style="font-size:20px;color:rgb(100,179,231);font-weight:600%;">
+        Sorry!!No Data Found
+    </div>
+</div>
 
 
 <!-- New Row 2 -->
+
 <div class='alert alert-danger' id='NoDataFound' style="display:none;">
     <h4 id='NoDataFoundMsg' style="color:rgb(100,179,231);">No Data Found</h4>
 </div>
@@ -429,12 +500,12 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
     <h4 id='DataFoundMsg' style="color:rgb(100,179,231);">Data For Branch And Passout Year</h3>
 </div>
                      
-<div id="maincards" class="maincards" style="margin-right:10px;display:block;flex-wrap:wrap;">
-    <div class="card" style="border-radius:8px;width:100%;height:auto">
+<div id="maincards" class="maincards" style="display:none;margin-right:10px;display:block;flex-wrap:wrap;">
+    <div id='actualcard' class="card" style="display:none;border-radius:8px;width:100%;height:auto;max-height:50vh;overflow-y:auto;">
         <div class="card-body">
-            <div id="tablecontent" style="overflow-x:auto;white-space:nowrap;border-radius:4px;">
+            <div id="tablecontent" style="overflow-x:auto;overflow-y:auto;white-space:nowrap;border-radius:4px;">
                 <table id="exportstudentstable"> 
-                    <tr id='demo2' style="text-transform:uppercase;background:rgb(100,179,231);color:white;">
+                    <tr id='demo2' style="text-transform:uppercase;background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);color:white;">
                         <th scope="col">CASERP ID</th>
                         <th scope="col">Email</th>
                         <th scope="col">Branch</th>
@@ -453,65 +524,122 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
                         <th scope="col">Placement Status</th> 
                         <th scope="col">Company Name</th> 
                         <th scope="col">Package</th> 
-                    </tr>
-           
-                   
-                    <?php $__currentLoopData = $dataset; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr class="datahover" style="background:$color">
-                            <td scope="col"><?php echo e($student->CASERP_ID); ?></td>
-                            <td scope="col"><?php echo e($student->Email); ?></td>
-                            <td scope="col"><?php echo e($student->Branch); ?></td>
-                            <td scope="col"><?php echo e($student->Class); ?></td>
-                            <td scope="col"><?php echo e($student->First_Name); ?> <?php echo e($student->Middle_Name); ?> <?php echo e($student->Last_Name); ?></td>
-                            <td scope="col"><?php echo e($student->SSC); ?></td>
-                            <td scope="col"><?php echo e($student->HSC); ?></td>
-                            <td scope="col"><?php echo e($student->Poly); ?></td>
-                            <td scope="col"><?php echo e($student->FE_CGPA); ?></td>
-                            <td scope="col"><?php echo e($student->SE_CGPA); ?></td>
-                            <td scope="col"><?php echo e($student->TE_CGPA); ?></td>
-                            <td scope="col"><?php echo e($student->FE_PERCENT); ?></td>
-                            <td scope="col"><?php echo e($student->SE_PERCENT); ?></td>
-                            <td scope="col"><?php echo e($student->TE_PERCENT); ?></td>
-                            <td scope="col"><?php echo e($student->Overall_Gap); ?></td>
-                            <td scope="col"><?php echo e($student->Placement_Status); ?></td>
-                            <td scope="col"><?php echo e($student->Company_Name); ?></td>
-                            <td scope="col"><?php echo e($student->Package); ?></td>
-                                    
-                        <tr>
-                            
-                    
-                        <?php  
-                            $i = !$i; 
-                            $color=$colors[$i];
-                        ?>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                     
+                    </tr>   
                     <script> 
                         var hoverflag=0;
                         var getYear,getBranch;
                         $(document).ready(function(){
                             
-                            $('#show').on('click',function(){
+                            $('#exportform').on('submit',function(e){
+                                e.preventDefault();
                                 var getYear = document.getElementById('passyear').value;
                                 var getBranch = document.getElementById('branch').value;
+                                var msg="";
+                                // alert(getYear + getBranch);
                                 $.ajax({
-                                    url:'/php/sendyearandbranch',
-                                    type:'GET',
-                                    dataTye:'json',
-                                    data:{year:getYear,branch:getBranch},
-                                    success:function(data){
-                                        // change();
-                                        // 
-                                        // var students = data.studentsjson[0].Email;
-                                        console.log(data.studentsjson.length);
-                                        for(var i=0;i<data.studentsjson.length;i++)
-                                            $('#demo').html(data.studentsjson[i].Email);
-                                        // console.log(students);
-                                    }
-                                });
-                            });
-                        });
+                                     url:'/php/sendyearandbranch',
+                                     type:'GET',
+                                //     dataTye:'json',
+                                     data:{year:getYear,branch:getBranch},
+                                     success:function(data){
+                                        if(data.databit=='1'){
+                                            globalsetter = 1;
+                                            document.getElementById('NoDataFound').style.display='none';
+                                            document.getElementById('searchdiv').style.display="block";
+                                            document.getElementById('maincards').style.display="block";
+                                            document.getElementById('downloadbutton').style.display='block';
+                                            document.getElementById('filters').style.display="block";
+                                            
+                                            document.getElementById('actualcard').style.display="block";
+                                            document.getElementById('searchdiv').style.display="block";
+                                            document.getElementById('downloadbutton').style.display="flex";
+                                            document.getElementById('innerfilter').style.display="flex";
+                                            
+                                            $("#exportstudentstable").find("tr:gt(0)").remove();
+                                            table = document.getElementById('exportstudentstable');
+                                            
+                                            cell = []
+                                            color = ['white','#f2f2f2'];
+                                            var index = 0
+                                            
+                                            var datajson = JSON.parse(data.studentsjson);
+                                            
+                                            for(var i=0;i<datajson.length;i++){
+                                                
+                                                row = table.insertRow(i+1);
+                                                col = color[index];
+                                                
+                                                if(index){
+                                                    index=0;
+                                                }
+                                                else{
+                                                    index=1;
+                                                }
+
+                                                row.style.background=col; 
+                                                
+                                                for(var j=0;j<18;j++){
+                                                    
+                                                    cell[j] = row.insertCell(j);
+                                                }
+                                                
+                                                cell[0].innerHTML = datajson[i].CASERP_ID;
+                                                cell[1].innerHTML = datajson[i].Email;
+                                                cell[2].innerHTML = datajson[i].Branch;
+                                                cell[3].innerHTML = datajson[i].Class;
+                                                cell[4].innerHTML = datajson[i].First_Name + ' ' + datajson[i].Middle_Name+" "+
+                                                                    datajson[i].Last_Name;
+                                                cell[5].innerHTML = datajson[i].SSC;
+                                                cell[6].innerHTML = datajson[i].HSC;
+                                                cell[7].innerHTML = datajson[i].Poly;
+                                                cell[8].innerHTML = datajson[i].FE_CGPA;
+                                                cell[9].innerHTML = datajson[i].SE_CGPA;
+                                                cell[10].innerHTML = datajson[i].TE_CGPA;
+                                                cell[11].innerHTML = datajson[i].FE_PERCENT;
+                                                cell[12].innerHTML = datajson[i].SE_PERCENT;
+                                                cell[13].innerHTML = datajson[i].TE_PERCENT;
+                                                cell[14].innerHTML = datajson[i].Overall_Gap;
+                                                cell[15].innerHTML = datajson[i].Placement_Status;
+                                                cell[16].innerHTML = datajson[i].Company_Name;
+                                                cell[17].innerHTML = datajson[i].Package;
+                                                cell = [];
+                                            }
+                                        } // End if
+                                        else{
+                                            document.getElementById('NoDataFound').style.display='block';
+                                            if(getYear=='all')
+                                            {
+                                               if(getBranch=='all')
+                                                    msg = 'Sorry!!! No Data Found';
+                                                else
+                                                    msg = 'Sorry!!! No Data For ' +getBranch;
+                                            }
+                                            else if(getBranch=='all'){
+                                                if(getYear=='all')
+                                                    msg = 'Sorry!!! No Data Found';
+                                                else
+                                                    msg = 'Sorry!!! No Data Found For Batch '+getYear ;
+                                            }
+                                            else{
+                                                msg="Sorry!!! No Data Found For Branch "+getBranch+' '+getYear;
+                                            }
+                                            document.getElementById('NoDataFoundMsg').innerHTML = msg;
+                                            globaltablesetter=0;
+                                            document.getElementById('searchdiv').style.display="none";
+                                            document.getElementById('maincards').style.display="none";
+                                            document.getElementById('downloadbutton').style.display='none';
+                                            document.getElementById('filters').style.display="none";
+                                            document.getElementById('actualcard').style.display="none";
+                                            document.getElementById('searchdiv').style.display="none";
+                                            document.getElementById('downloadbutton').style.display="none";
+                                            document.getElementById('innerfilter').style.display="none";
+                                            
+                                            // document.getElementById('DataFound').style.display="none";
+                                        }
+                                    } // End Success
+                                }); // End AJAX
+                            }); // End on submit
+                        }); // End Jquery
                     </script>
             </table>
          </div>      
@@ -520,46 +648,6 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 </div>
 <!-- End of Row 2 -->
 <br>
-<script>
 
-</script>
-
-<script>
-
-// function downloadSetQuery(){
-//     // alert(query);
-//     document.getElementById('hiddenquery').value=query;
-//     var qry = document.getElementById('hiddenquery').value;
-//     alert(qry);
-//     // alert(document.getElementById('hiddenquery').value);
-//     $.ajax({
-//         url:'/php/export',
-//         type:'POST',
-//         data:{
-//             "query":qry,
-//             "_token": "<?php echo e(csrf_token()); ?>",
-//         },
-//         suceess:function(){
-//             alert('success');
-//         }
-//     });
-// }
-
-function getData(){
-    document.getElementById('hiddenquery').value=query;
-    console.log(query + ' and Branch like "Mechanical%" ');
-    return true;
-}
-
-</script>
-    
-
-<div id='downloadbutton' style='display:block;'>
-<form onsubmit="return getData();" id='downloadformdata' method='POST' action='/php/export'>
-<?php echo csrf_field(); ?>
-    <input name='hiddenquery' style='display:none;' type="text" name='hiddenquery' id='hiddenquery'/>
-    <input id='downloadbutton' onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" type='submit' name='submit ' class="download" style="" value='Download'/>
-</form>
-</div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.TPO.commonHeaderTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/Pages/TPO/exportStudentsData.blade.php ENDPATH**/ ?>

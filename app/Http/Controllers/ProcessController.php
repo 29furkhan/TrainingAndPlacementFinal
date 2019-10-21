@@ -63,6 +63,43 @@ class ProcessController extends Controller
        
     }
 
+    public function resetP(Request $request)
+    {
+        Debugbar::info('inside resetpassword');
+        if(request()->ajax()){
+            $pass = Hash::make($request->get('password'));
+            $authdata = array(
+                'Email' => $request->get('email'),
+                'Password' => $pass
+            );
+            $mail= $authdata['Email'];
+            $tokenquery = "select token from password_resets where email='$mail'";
+            $token = DB::select($tokenquery);
+
+            foreach($token as $tn){    
+            Debugbar::info("  $tn->token ");
+            
+            $OTP= $request->get('token');
+            //$OTP=Hash::make($OTP);
+            Debugbar::info($OTP);
+            
+            if($tn->token != $OTP){
+                Debugbar::info('OTP Incorrect');
+                return response()->json(['success' => 'Incorrect OTP Please Try Again']);
+            }
+            if($tn->token == $OTP)
+             {
+            Debugbar::info('OTP Verified');
+            DB::table('login_Details')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
+            DB::table('users')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
+            DB::table('password_resets')->where('Email',$mail)->update(['token' => 'NULL']);
+            return response()->json(['success' => 'Password Reset Successfully']);
+            }
+           
+        }
+        }
+
+    }
     public function checkLoginAndEnter(Request $request){
         
         $this->validate($request, [
@@ -74,9 +111,6 @@ class ProcessController extends Controller
         $password =  $request->get('password');
         $type = DB::select("select user_type from users where email = '+$email+' ");
 
-        session_start();
-        $_SESSION["myemail"]=$email;
-        Debugbar::info($email);
         $me=$email;
         Session::put('me',$me);
 
@@ -110,12 +144,11 @@ class ProcessController extends Controller
 
     }
 
+   
+
+
     function logout()
     {
-        session_start();
-
-        $_SESSION= array();
-        session_destroy();
        
      Auth::logout();
      return redirect('/main');
@@ -125,15 +158,30 @@ class ProcessController extends Controller
     public function Rbranch() {
             $me=Session::get('me');
     
-            Debugbar::info($me);
+            // Debugbar::info($me);
             $branchquery = "select distinct branch from branch";
             $branch = DB::select($branchquery);
-            $all="select FIRST_NAME,MIDDLE_NAME,LAST_NAME,BRANCH,CLASS,PASSOUT_YEAR from Student_profile where Email='$me'";
+            $all="select sa.CASERP_ID,sp.Email,sp.FIRST_NAME,sp.MIDDLE_NAME,sp.LAST_NAME,sp.BRANCH,sp.CLASS,sp.PASSOUT_YEAR from Student_profile sp INNER JOIN student_academics sa where sp.Email=sa.Email and sp.Email='$me'";
             $details=DB::select($all);
-            $new="select CASERP_ID,SSC,HSC,Poly,FE_CGPA,SE_CGPA,TE_CGPA,FE_PERCENT,SE_PERCENT,TE_PERCENT from Student_academics where Email='$me'";
+            Debugbar::info($details);
+            $new="select * from Student_academics where Email='$me'";
             $academic=DB::select($new);
-            return view('Pages.Student.profile',compact('branch','details','academic'));
+            $queryforclasses = "select class from branch";
+            $classes=DB::select($queryforclasses);
+            $placement_status = DB::select("select placement_status,company_name,package from placement_details where Email ='$me'");
+            return view('Pages.Student.profile',compact('branch','details','academic','classes','placement_status'));
          }
+
+    public function getClassForGivenBranch(Request $request){
+        if(request()->ajax()){
+            $branch = $request->get("data");
+            $query = "select distinct class from branch where branch='$branch'";
+            $classes=DB::select($query);
+            $classes = json_encode($classes);
+            Debugbar::info($classes);
+            return $classes;
+        }
+    }
 
     public function insertProfileDetails(Request $request){
             Debugbar::info('outside ');
@@ -147,6 +195,7 @@ class ProcessController extends Controller
                     'Last_Name' => $request->get('last_name'),
                     'Branch' => $request->get('branch'),
                     'Class' => $request->get('class'),
+
                 );
                 $data1= array(
                     'CASERP_ID' => $request->get('s_id'),
@@ -159,35 +208,41 @@ class ProcessController extends Controller
                     'FE_PERCENT' => $request->get('fe_percent'),
                     'SE_PERCENT' => $request->get('se_percent'),
                     'TE_PERCENT' => $request->get('te_percent'),
-    
+                    'OVERALL_GAP' =>$request->get('overall_gap')
     
                 );
                 Debugbar::info("Hello");
                 Debugbar::info($data1['Poly']);
                 if($data1['Poly']==null )
                 {
-                   $data1['Poly']="0";
+                   $data1['Poly']="0.000";
                 }
                 if( $data1['FE_CGPA']==null && $data1['FE_PERCENT']==null)
                 {
-                    $data1['FE_CGPA']="0";
-                    $data1['FE_PERCENT']="0";
+                    $data1['FE_CGPA']="0.0";
+                    $data1['FE_PERCENT']="0.000";
                 }
                 if($data1['HSC']==null)
                 {
-                   $data1['HSC']="0";
+                   $data1['HSC']="0.000";
                 }
     
              Debugbar::info($data);
+             Debugbar::info($data1);
+             
             //  DB::table('student_profile')->insert($data);
             //  Debugbar::info($data);
             $me=Session::get('me');
 
             DB::table('student_profile')->where('Email',$me)->update($data);
             DB::table('student_academics')->where('Email',$me)->update($data1);
+            DB::table('users')->where('Email',$me)->update(['name' =>$data['First_Name'].' '.$data['Last_Name']]);
+            // DB::table('users')->where('Email',$me)->update(['Email'=>$data['Email']]);
+            // DB::table('student_academics')->where('Email',$me)->update(['Email'=>$data['Email']]);
+
              //DB::table('student_profile')->insert(['Email' => $data['Email']]);
      
-             return response()->json(['success' => 'Account Created Successfully']);
+             return response()->json(['success' => 'Profile Updated Successfully']);
             }
             
     }  

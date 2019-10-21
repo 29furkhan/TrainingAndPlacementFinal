@@ -1,3 +1,10 @@
+<?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,14 +56,14 @@
   
 
     <!-- Header Starts -->
-    <header style="border:2px solid #fff;" class="header common-header-bg">
+    <header style="background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);border:2px solid #fff;" class="header common-header-bg">
         <?php echo $__env->yieldContent('commonHeaderStudent'); ?>
     </header> 
     <!--header end-->
 
     <!-- Sidebar Starts -->
-    <aside id="sidebarTPO" style="display:block;">
-      <div style="overflow:auto;" id="sidebar" class="nav-collapse ">
+    <aside id="sidebarTPO" style="background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);display:block;">
+      <div style="overflow:auto;background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);" id="sidebar" class="nav-collapse ">
         <?php echo $__env->yieldContent('commonSidebarStudent'); ?>
       </div>
     </aside>

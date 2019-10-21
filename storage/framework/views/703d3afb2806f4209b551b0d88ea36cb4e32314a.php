@@ -1,3 +1,22 @@
+<?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+?>
+
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+    <script>
+      window.location='/errorUserPage';
+    </script>
+<?php elseif(!isset(Auth::user()->email)): ?>
+    <script>
+      window.location='/main';
+    </script>
+<?php endif; ?>
+
+
+
 <?php $__env->startSection('getUsername'); ?>
     <?php if(isset( Auth::user()->email)): ?>
         <a data-toggle="dropdown" style="cursor:pointer;text-decoration:none;" id="profile" class="" >
@@ -44,5 +63,6 @@
                 </div>
 </div>
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Furkhan\XAMPP\htdocs\TPO\resources\views/pages/Student/dashboardStudent.blade.php ENDPATH**/ ?>

@@ -68,4 +68,4 @@
             <!-- Profile Icon End -->
             
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.Student.commonLayoutStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TPOPrash\resources\views/layouts/Student/commonHeaderStudent.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonLayoutStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-StudentBranch\resources\views/layouts/Student/commonHeaderStudent.blade.php ENDPATH**/ ?>
