@@ -85,7 +85,7 @@ class ProcessController extends Controller
             
             if($tn->token != $OTP){
                 Debugbar::info('OTP Incorrect');
-                return response()->json(['success' => 'Incorrect OTP Please Try Again']);
+                return response()->json(['success' => 'Incorrect OTP Please Try Again','databit'=>'0']);
             }
             if($tn->token == $OTP)
              {
@@ -93,7 +93,7 @@ class ProcessController extends Controller
             DB::table('login_Details')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
             DB::table('users')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
             DB::table('password_resets')->where('Email',$mail)->update(['token' => 'NULL']);
-            return response()->json(['success' => 'Password Reset Successfully']);
+            return response()->json(['success' => 'Password Reset Successfully','databit'=>'1']);
             }
            
         }

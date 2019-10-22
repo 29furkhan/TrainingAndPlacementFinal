@@ -62,6 +62,7 @@ function redirectToLogin(){
   location.replace("/main");
 }
 
+
 $(document).ready(function(){
     $('#reset_password').parsley();
 
@@ -83,7 +84,8 @@ $('#reset_password').on('submit',function(event){
             $('#submit').attr('disabled',false);
             $('#submit').val('Submit');
             alert(data.success);
-            redirectToLogin();
+            if(data.databit == "1")
+              redirectToLogin();
           }
         });
       }
@@ -115,12 +117,12 @@ $('#reset_password').on('submit',function(event){
     <div id="emailgroup" class="input-group">
           <!-- <span class="input-group-addon"><i class="icon_mail"></i></span> -->
           <span style="color:black;font-size:16px;">Email:</span>
-          <input  autocomplete="off" type="email" class="form-control" value="<?php echo $me ;?>" id="email" name="email" placeholder="Enter Email" required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
+          <input  autocomplete="off" readonly type="email" class="form-control" value="<?php echo $me ;?>" id="email" name="email" placeholder="Enter Email" required data-parsley-type="email" data-parsley-trigger="keyup" data-parsley-type-message="Please Enter a Valid Email Address" />
         </div>
 
     <div class="input-group">
             <span style="color:black;font-size:16px;">OTP:</span>
-            <input  autocomplete="off" type="text"  class="form-control" id="token" name="token" placeholder="Enter Last Name" required data-parsley-pattern="/^[0-9]+$/" data-parsley-trigger="keyup" />
+            <input  autocomplete="off" type="text"  class="form-control" id="token" name="token" placeholder="Enter OTP" required data-parsley-pattern="/^[0-9]+$/" data-parsley-trigger="keyup" />
     </div>
     <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
