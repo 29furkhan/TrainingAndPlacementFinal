@@ -43,7 +43,7 @@ header('Pragma: no-cache');
 
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background:linear-gradient(to right top, #d8fcb2, #ecd471, #ffa152, #ff6263, #ff0093, #f300a4, #e300b5, #cd00c7, #ed00a2, #fe007c, #ff0056, #ff0030);">
+        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
             <div class="card-body">
                 <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">TOTAL STUDENTS</b>
                 <hr>
@@ -56,7 +56,7 @@ header('Pragma: no-cache');
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background:linear-gradient(to right top, #6bd1b3, #77d6ac, #86dba3, #97df9a, #aae391, #c3d773, #ddc95c, #f7b751, #ff895c, #ff5888, #f244c3, #8a5ffb);">
+        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
             <div class="card-body">
                 <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">PLACED STUDENTS</b>
                 <hr>
@@ -82,7 +82,7 @@ header('Pragma: no-cache');
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #ffffff, #e6faff, #a6fdff, #45ffff, #00ffd2, #00f6c3, #00ecb5, #00e3a6, #00c8d7, #00a7ff, #007aff, #2100ff);">
+        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
             <div class="card-body">
                 <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">ENTREPRENEURS</b>
                 <hr>

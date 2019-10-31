@@ -148,4 +148,4 @@ $('#reset_password').on('submit',function(event){
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-StudentBranch\resources\views/pages/resetPassword.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/pages/resetPassword.blade.php ENDPATH**/ ?>

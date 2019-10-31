@@ -53,7 +53,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/underConstructionPage">
+            <a style="padding-left:20px;" class="" href="/activityStudent">
             <i style="font-size:20px;" class="fa fa-tasks"></i>
                 &nbsp&nbsp          
             <span style="font-size:20px;">Activities</span>
@@ -80,4 +80,4 @@
         
         </ul>
 
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-StudentBranch\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>

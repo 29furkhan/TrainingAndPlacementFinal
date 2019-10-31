@@ -39,7 +39,8 @@ header('Pragma: no-cache');
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
-  
+  <link rel="shortcut icon" href="/images/elearning.ico" />
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   

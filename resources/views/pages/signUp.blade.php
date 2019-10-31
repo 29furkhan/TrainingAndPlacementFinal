@@ -25,6 +25,8 @@ header('Pragma: no-cache');
   <link rel="shortcut icon" href="images/favicon.png">
 
   <title>Sign Up Page</title>
+  <link rel="shortcut icon" href="/images/elearning.ico" />
+
 
   <link href="css/style.css" rel="stylesheet">
   
@@ -199,6 +201,7 @@ $(document).ready(function(){
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         
+        
         <div id="" class="input-group">
             <span style="color:black;font-size:16px;">First Name:</span>
             <input  autocomplete="off" type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required data-parsley-pattern="/^[A-Za-z]+$/" data-parsley-trigger="keyup" />
@@ -207,6 +210,11 @@ $(document).ready(function(){
         <div class="input-group">
             <span style="color:black;font-size:16px;">Last Name:</span>
             <input  autocomplete="off" type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required data-parsley-pattern="/^[A-Za-z]+$/" data-parsley-trigger="keyup" />
+        </div>
+        
+        <div class="input-group">
+            <span style="color:black;font-size:16px;">CASERP_ID:</span>
+            <input  autocomplete="off" type="text" class="form-control" id="caserp_id" name="caserp_id" placeholder="Enter CASERP_ID" required data-parsley-pattern="^[S|s]{1}[0-9]{10}$" data-parsley-trigger="keyup" />
         </div>
         
 

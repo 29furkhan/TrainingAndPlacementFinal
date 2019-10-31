@@ -24,14 +24,12 @@ $paramList["CHANNEL_ID"] = $CHANNEL_ID;
 $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
 
-/*
-$paramList["CALLBACK_URL"] = "http://localhost/PaytmKit/pgResponse.php";
-$paramList["MSISDN"] = $MSISDN; //Mobile number of customer
-$paramList["EMAIL"] = $EMAIL; //Email ID of customer
-$paramList["VERIFIED_BY"] = "EMAIL"; //
-$paramList["IS_USER_VERIFIED"] = "YES"; //
-
-*/
+// /*
+$paramList["CALLBACK_URL"] = "http://localhost/paytmproject/index.php";
+// $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
+// $paramList["EMAIL"] = $EMAIL; //Email ID of customer
+// $paramList["VERIFIED_BY"] = "EMAIL"; //
+// $paramList["IS_USER_VERIFIED"] = "YES"; //
 
 //Here checksum string will return by getChecksumFromArray() function.
 $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);

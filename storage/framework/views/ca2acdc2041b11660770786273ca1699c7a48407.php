@@ -467,9 +467,9 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
                     </div>
 
 
-
-                    <input value="Apply" type="submit" id="apply" class="btn btn-info"   onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" style="margin-right:10%;width:30%;height:40px;color:white;background-color:rgb(100,179,231);font-weight:500;"/>
-                    <input value="Reset" type="button" id="reset" class="btn btn-info"  onMouseOver="this.style.background='rgb(40,169,231)'" onMouseOut="this.style.background='rgb(100,179,231)'" style="background-color:rgb(100,179,231);width:30%;height:40px;color:white;font-weight:500;"/>
+                    <input value="Reset" type="button" id="reset" class="btn btn-danger"     style="width:30%;height:40px;font-weight:500;"/>
+                    <input value="Apply" type="submit" id="apply" class="btn btn-primary"    style="margin-right:10%;width:30%;height:40px;font-weight:500;"/>
+                    
                 </form>       
                 </div>
 

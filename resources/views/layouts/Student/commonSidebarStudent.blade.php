@@ -53,7 +53,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/underConstructionPage">
+            <a style="padding-left:20px;" class="" href="/activityStudent">
             <i style="font-size:20px;" class="fa fa-tasks"></i>
                 &nbsp&nbsp          
             <span style="font-size:20px;">Activities</span>

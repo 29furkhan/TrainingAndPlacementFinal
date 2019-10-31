@@ -13,6 +13,15 @@ class CreateMainDBSTable extends Migration
      */
     public function up()
     {
+        
+        Schema::create('Activities', function (Blueprint $table) {
+            $table->string('Activity_ID',20);
+            $table->primary('Activity_ID');
+            $table->string('Activity_Name')->default('BLANK');
+            $table->string('Activity_Description',800)->default('BLANK');
+            $table->integer('Activity_Fee')->default(0);
+            $table->timestamps();
+        });
 
         Schema::create('Login_Details', function (Blueprint $table) {
             // $table->bigIncrements('id');
@@ -25,11 +34,10 @@ class CreateMainDBSTable extends Migration
 
 
         Schema::create('student_academics', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
-            $table->string('CASERP_ID',180);
-            $table->unique('CASERP_ID');
+            $table->string('CASERP_ID',11);
+            $table->primary('CASERP_ID');
             $table->decimal('SSC',6,3)->default(0);
             $table->decimal('HSC',6,3)->default(0);
             $table->decimal('Poly',6,3)->default(0);

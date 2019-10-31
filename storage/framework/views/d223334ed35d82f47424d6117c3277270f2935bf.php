@@ -7,6 +7,7 @@ header('Pragma: no-cache');
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
+<link rel="shortcut icon" href="/images/elearning.ico" />
   <?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
     <script>
       window.location='/dashboard';

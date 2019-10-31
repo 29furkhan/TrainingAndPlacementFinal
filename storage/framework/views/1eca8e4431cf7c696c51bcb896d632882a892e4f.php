@@ -14,7 +14,7 @@ header('Pragma: no-cache');
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin Template</title>
+  <title>Forget Password</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -40,12 +40,12 @@ header('Pragma: no-cache');
 
 <div class="login-wrap">
     <p class="login-img"><i class="icon_lock_alt"></i></p>
-    <?php if($message = Session::get('success')): ?>
+    <!-- <?php if($message = Session::get('success')): ?>
       <div class="alert alert-success alert-block">
           <button type="button" class="close" data-dismiss="alert">×</button>
           <strong><?php echo e($message); ?></strong>
       </div>
-    <?php endif; ?>
+    <?php endif; ?> -->
     <div class="input-group">
       <span class="input-group-addon"><i class="icon_profile"></i></span>
       <input type="email" class="form-control" name="email" placeholder="Enter Email" autofocus>
