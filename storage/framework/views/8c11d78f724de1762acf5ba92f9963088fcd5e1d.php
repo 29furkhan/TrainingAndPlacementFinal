@@ -160,4 +160,4 @@
 
         </ul>
 
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/layouts/TPO/commonSidebarTPO.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TPO\resources\views/layouts/TPO/commonSidebarTPO.blade.php ENDPATH**/ ?>

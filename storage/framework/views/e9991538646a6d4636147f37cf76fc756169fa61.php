@@ -19,4 +19,4 @@
 <?php $__env->startSection('logout'); ?>
 <li><a href="/php/logout"><i class="fa fa-sign-out" style="font-size:20px;"></i>&nbsp&nbsp&nbspLog Out</a></li>
 <?php $__env->stopSection(); ?>                       
-<?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/layouts/commonLoginLogout.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\TPO\resources\views/layouts/commonLoginLogout.blade.php ENDPATH**/ ?>

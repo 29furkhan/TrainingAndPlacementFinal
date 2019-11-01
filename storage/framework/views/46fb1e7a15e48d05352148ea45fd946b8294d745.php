@@ -65,4 +65,4 @@ header('Pragma: no-cache');
 <?php $__env->stopSection(); ?>
 
 
-<?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/pages/Student/dashboardStudent.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonHeaderStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TPO\resources\views/pages/Student/dashboardStudent.blade.php ENDPATH**/ ?>

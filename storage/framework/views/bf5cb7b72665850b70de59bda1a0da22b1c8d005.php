@@ -204,12 +204,12 @@ $(document).ready(function(){
         
         <div id="" class="input-group">
             <span style="color:black;font-size:16px;">First Name:</span>
-            <input  autocomplete="off" type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required data-parsley-pattern="/^[A-Za-z]+$/" data-parsley-trigger="keyup" />
+            <input  autocomplete="off" type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name" required data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-trigger="keyup" />
         </div>
 
         <div class="input-group">
             <span style="color:black;font-size:16px;">Last Name:</span>
-            <input  autocomplete="off" type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required data-parsley-pattern="/^[A-Za-z]+$/" data-parsley-trigger="keyup" />
+            <input  autocomplete="off" type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-trigger="keyup" />
         </div>
         
         <div class="input-group">
@@ -228,14 +228,14 @@ $(document).ready(function(){
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Password:</span>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,20]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
+            <input onkeyup="enableConfirm(id);" type="text" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,100]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
             3. Password Should Contain Atleast 1 Uppercase Letter<br><br> 4. Password Should Contain Atleast 1 Special Character"/>
           </div>
 
-          <div class="input-group">
+          <div id="div_password_again" style="display:none;" class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Re-Type Password:</span>
-            <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup" />
+            <input type="text" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup"/>
           </div>
 
           <label id="msg" style="display:none;color:red;padding-bottom:15px;font-weight:500;" class=""></label>
@@ -245,8 +245,15 @@ $(document).ready(function(){
     </form>
   </div>
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function enableConfirm(id){
+    if($('#password').parsley().isValid())
+    {
+      $('#div_password_again').show();
+    }
 
+}
+</script>
 </body>
 
 </html>

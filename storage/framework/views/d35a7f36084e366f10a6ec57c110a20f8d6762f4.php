@@ -80,4 +80,4 @@
         
         </ul>
 
-<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?><?php /**PATH C:\xampp\htdocs\TPO\resources\views/layouts/Student/commonSidebarStudent.blade.php ENDPATH**/ ?>

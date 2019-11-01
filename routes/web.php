@@ -83,6 +83,7 @@ Route::get('/ResetPassword',function(){
 
 Route::get('/php/insert/resetP','ProcessController@resetP');
 
+
 Route::get('/signUp',function(){
     return view('pages.signUp');
 });

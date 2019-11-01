@@ -118,4 +118,4 @@ header('Pragma: no-cache');
 
 </body>
 
-</html><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/pages/login.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\TPO\resources\views/pages/login.blade.php ENDPATH**/ ?>

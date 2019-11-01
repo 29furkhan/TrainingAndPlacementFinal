@@ -91,4 +91,4 @@ header("Expires: 0");
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/layouts/TPO/commonLayout.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\TPO\resources\views/layouts/TPO/commonLayout.blade.php ENDPATH**/ ?>

@@ -26,4 +26,4 @@ DB::table('password_resets')->where('Email',$me)->update(['token' =>$OTP]);
 
 <script>
 
-</script><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/dynamic_email_template.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\xampp\htdocs\TPO\resources\views/dynamic_email_template.blade.php ENDPATH**/ ?>

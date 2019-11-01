@@ -1,7 +1,5 @@
-<?php echo $__env->make('layouts.TPO.commonSidebarTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('layouts.commonLoginLogout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-<?php $__env->startSection('commonHeaderTPO'); ?>
+<?php echo $__env->make('layouts.Student.commonSidebarStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->startSection('commonHeaderStudent'); ?>
 
 <script>
     var flag = 0;
@@ -34,7 +32,7 @@
     <div>
         <div style="display:flex;justify-content:space-between;">    
             <!-- Label for Portal End -->
-            <div class="logo">TPO Portal</div>
+            <div class="logo">Student Portal</div>
         
             <!-- Search Box Start -->
             <div id="searchdiv" class="" style="display:none;padding-left:20px;float:left;">
@@ -56,11 +54,11 @@
                 <?php echo $__env->yieldContent('getUsername'); ?>
                 <ul class="dropdown-menu pull-right" class="log-arrow-up"> 
                         <br>
-                        <li><a href="#"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
+                        <li><a href="/profile"><i class="fa fa-user" style="font-size:20px;"></i>&nbsp&nbsp&nbspMy Profile</a></li>
                         <br>
                         <li><a href="#"><i class="fa fa-cog" style="font-size:20px;"></i>&nbsp&nbsp&nbspSettings</a></li>
                         <br>
-                        <?php echo $__env->yieldContent('logout'); ?>
+                        <?php echo $__env->yieldContent('logoutSection'); ?>
                         <br>
                         
                 </ul>
@@ -70,4 +68,4 @@
             <!-- Profile Icon End -->
             
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.TPO.commonLayout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TrainingAndPlacementFinal-TPOBranch\resources\views/layouts/TPO/commonHeaderTPO.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.Student.commonLayoutStudent', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\TPO\resources\views/layouts/Student/commonHeaderStudent.blade.php ENDPATH**/ ?>

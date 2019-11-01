@@ -9,11 +9,37 @@ class CreateMainDBSTable extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
+     * @return voID
      */
     public function up()
     {
         
+        Schema::create('Department',function(Blueprint $table){
+            $table->string('Dept_ID',20);
+            $table->primary('Dept_ID');
+            $table->string('Dept_Name',40); 
+        });
+
+        Schema::create('Authority',function(Blueprint $table){
+            $table->string('Auth_ID',20);
+            $table->primary('Auth_ID');
+            $table->string('Dept_ID',20)->default('Null');
+            $table->foreign('Dept_ID')->references('Dept_ID')->on('Department');
+            $table->string('Auth_Name',40)->default('Anonymous');
+            $table->string('Auth_Department',40)->default('Null');
+            $table->string('Designation')->default('Null');
+        });
+
+        Schema::create('Notices', function (Blueprint $table) {
+            $table->string('Notice_ID',20);
+            $table->primary('Notice_ID');
+            $table->string('Auth_ID',20)->default('Null');
+            $table->foreign('Auth_ID')->references('Auth_ID')->on('Authority');
+            $table->string('Notice_Subject')->default('BLANK');
+            $table->string('Notice_Content',800)->default('BLANK');
+            $table->timestamps();
+        });
+
         Schema::create('Activities', function (Blueprint $table) {
             $table->string('Activity_ID',20);
             $table->primary('Activity_ID');
@@ -24,7 +50,7 @@ class CreateMainDBSTable extends Migration
         });
 
         Schema::create('Login_Details', function (Blueprint $table) {
-            // $table->bigIncrements('id');
+            // $table->bigIncrements('ID');
             $table->string('Email',180);
             $table->primary('Email');
             $table->string('password')->default('root');
@@ -54,14 +80,14 @@ class CreateMainDBSTable extends Migration
 
 
         Schema::create('Branch', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('ID');
             $table->string('Branch',80)->default('Null');
             $table->string('Class',8)->default('Null');
             $table->timestamps();
         });
 
         Schema::create('Placement_Details', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('ID');
             $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
             $table->string('Placement_Status',40)->default('Not Placed');
@@ -71,11 +97,11 @@ class CreateMainDBSTable extends Migration
         });
 
         Schema::create('student_profile', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('ID');
             $table->string('Email',180)->default('Null');
             $table->foreign('Email')->references('Email')->on('Login_Details');
             $table->string('First_Name',30)->default('Anonymous');
-            $table->string('Middle_Name',30)->default('Anonymous');
+            $table->string('MIDdle_Name',30)->default('Anonymous');
             $table->string('Last_Name',30)->default('Anonymous');
             $table->string('Class',8)->default('Null');
             $table->string('Branch',80)->default('Null');
@@ -91,7 +117,7 @@ class CreateMainDBSTable extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return voID
      */
     public function down()
     {

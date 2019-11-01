@@ -70,6 +70,45 @@ class ProcessController extends Controller
        
     }
 
+    public function resetP(Request $request)
+    {
+        Debugbar::info('inside resetpassword');
+        if(request()->ajax()){
+            $pass = Hash::make($request->get('password'));
+            $authdata = array(
+                'Email' => $request->get('email'),
+                'Password' => $pass
+            );
+            $mail= $authdata['Email'];
+            $tokenquery = "select token from password_resets where email='$mail'";
+            $token = DB::select($tokenquery);
+
+            foreach($token as $tn){    
+            Debugbar::info("  $tn->token ");
+            
+            $OTP= $request->get('token');
+            //$OTP=Hash::make($OTP);
+            Debugbar::info($OTP);
+            
+            if($tn->token != $OTP){
+                Debugbar::info('OTP Incorrect');
+                return response()->json(['success' => 'Incorrect OTP Please Try Again','databit'=>'0']);
+            }
+            if($tn->token == $OTP)
+             {
+            Debugbar::info('OTP Verified');
+            DB::table('login_Details')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
+            DB::table('users')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
+            DB::table('password_resets')->where('Email',$mail)->update(['token' => 'NULL']);
+            return response()->json(['success' => 'Password Reset Successfully','databit'=>'1']);
+            }
+           
+        }
+        }
+
+    }
+
+
     public function checkLoginAndEnter(Request $request){
         
         $this->validate($request, [
@@ -149,44 +188,6 @@ class ProcessController extends Controller
             return $classes;
         }
     }
-    public function resetP(Request $request)
-    {
-        Debugbar::info('inside resetpassword');
-        if(request()->ajax()){
-            $pass = Hash::make($request->get('password'));
-            $authdata = array(
-                'Email' => $request->get('email'),
-                'Password' => $pass
-            );
-            $mail= $authdata['Email'];
-            $tokenquery = "select token from password_resets where email='$mail'";
-            $token = DB::select($tokenquery);
-
-            foreach($token as $tn){    
-            Debugbar::info("  $tn->token ");
-            
-            $OTP= $request->get('token');
-            //$OTP=Hash::make($OTP);
-            Debugbar::info($OTP);
-            
-            if($tn->token != $OTP){
-                Debugbar::info('OTP Incorrect');
-                return response()->json(['success' => 'Incorrect OTP Please Try Again','databit'=>'0']);
-            }
-            if($tn->token == $OTP)
-             {
-            Debugbar::info('OTP Verified');
-            DB::table('login_Details')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
-            DB::table('users')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
-            DB::table('password_resets')->where('Email',$mail)->update(['token' => 'NULL']);
-            return response()->json(['success' => 'Password Reset Successfully','databit'=>'1']);
-            }
-           
-        }
-        }
-
-    }
-
 
     public function insertProfileDetails(Request $request){
             Debugbar::info('outside ');

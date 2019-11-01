@@ -5,17 +5,17 @@ header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
-@if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO')
+<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
     <script>
       window.location='/dashboard';
     </script>
-@elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
     <script>
       window.location='/student';
     </script>
-@endif
+<?php endif; ?>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,8 +59,8 @@ header('Pragma: no-cache');
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script type="text/javascript" src="<?php echo e(URL::asset('js/main.js')); ?>"></script>
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   
   <!-- parsley.js -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.1/parsley.js"></script>
@@ -197,7 +197,7 @@ $(document).ready(function(){
   <div class="container"> 
 
     <form  id="signupform" class="login-form" style="margin-top: 3%">
-    @csrf
+    <?php echo csrf_field(); ?>
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         
@@ -228,14 +228,14 @@ $(document).ready(function(){
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Password:</span>
-            <input onkeyup="enableConfirm(id);" type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,100]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
+            <input onkeyup="enableConfirm(id);" type="text" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,100]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
             3. Password Should Contain Atleast 1 Uppercase Letter<br><br> 4. Password Should Contain Atleast 1 Special Character"/>
           </div>
 
           <div id="div_password_again" style="display:none;" class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Re-Type Password:</span>
-            <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup"/>
+            <input type="text" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup"/>
           </div>
 
           <label id="msg" style="display:none;color:red;padding-bottom:15px;font-weight:500;" class=""></label>
@@ -257,3 +257,4 @@ function enableConfirm(id){
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\TPO\resources\views/pages/signUp.blade.php ENDPATH**/ ?>
