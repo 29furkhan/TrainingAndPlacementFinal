@@ -49,6 +49,18 @@ class CreateMainDBSTable extends Migration
             $table->timestamps();
         });
 
+
+        Schema::create('Drives', function (Blueprint $table) {
+            $table->string('Drive_ID',20);
+            $table->primary('Drive_ID');
+            $table->string('Company_Name')->default('MGM');
+            $table->string('Criteria',1500)->default('MGM');
+            $table->string('Placed_People')->default('yes');
+            $table->string('Venue')->default("MGMs College of Engineering Nanded");
+            $table->string('Drive_Description',1400)->default('BLANK');
+            $table->timestamps();
+        });
+
         Schema::create('Login_Details', function (Blueprint $table) {
             // $table->bigIncrements('ID');
             $table->string('Email',180);
@@ -110,6 +122,12 @@ class CreateMainDBSTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('Counselling', function (Blueprint $table) {
+            $table->increments('V_ID')->start_from(1);
+            $table->string('Title',80)->default('Null');
+            $table->string('Link',60)->default('Null');
+            $table->string('Video_Description',1400)->default('BLANK');
+        });
 
         
     }

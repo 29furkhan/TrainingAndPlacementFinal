@@ -61,7 +61,7 @@
           </li>
           
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/underConstructionPage">
+            <a style="padding-left:20px;" class="" href="/drivesTPO">
                 <i style="font-size:20px;" class="fa fa-industry"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Drives</span>
@@ -69,27 +69,14 @@
           </li>
 
           <li class="active">
-            <a style="color:white;cursor:pointer;padding-left:20px;" onclick="openActivities();">
-                <i style="font-size:20px;" class="fa fa-graduation-cap"></i>
-                          &nbsp
-                          <span style="font-size:20px;">Activities</span>
-                
-                <i id="activitymenucaret" style="margin-right:20px;float:right;font-size:20px;" class="fa fa-caret-down"></i>
-                
-            </a>
-            
-            <ul id="activitymenu" class="sub" style="overflow:hidden;display:none;">
-                <li>
-                    <a style="padding-left:60px;" class="" href="/activities">Activities</a>
-                </li>
+            <a style="padding-left:20px;" class="" href="/activities">
+                <i style="font-size:20px;" class="fa fa-industry"></i>
+                &nbsp&nbsp          
+                <span style="font-size:20px;">Activities</span>
+                      </a>
+          </li>
 
-                <li>
-                    <a style="padding-left:60px;" class="" href="/underConstructionPage">Export Activities</a>
-                </li>
-            </ul>
-            
-        </li>
-
+          
           <li class="active">
             <a style="padding-left:20px;" class="" href="/underConstructionPage">
                 <i style="font-size:20px;" class="fa fa-file-video-o"></i>

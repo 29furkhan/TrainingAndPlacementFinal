@@ -4,6 +4,11 @@ header("Pragma: no-cache"); // HTTP 1.0.
 header("Expires: 0");
 ?>
 
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +19,7 @@ header("Expires: 0");
   
   <title>TPO Portal</title>
   <link rel="shortcut icon" href="/images/elearning.ico" />
+
 
 
 <!-- Bootstrap Watch -->

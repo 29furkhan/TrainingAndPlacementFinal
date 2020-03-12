@@ -69,6 +69,7 @@ class ActivitiesController extends Controller
 
     public function deleteActivity(Request $request){
         $data =  $request->get('activity_id');
+        Debugbar::info($data);
         $res = DB::table('activities')->where('activity_id', $data)->delete();
         if($res){
             return "Activity Deleted Successfully";

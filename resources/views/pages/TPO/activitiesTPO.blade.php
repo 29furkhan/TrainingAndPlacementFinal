@@ -12,7 +12,15 @@ header('Pragma: no-cache');
   var globalsearchactive = 0;
 </script>
 
-@if(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+@if($detect->isMobile())
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+@elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students')
     <script>
       window.location='/errorUserPage';
     </script>
@@ -116,7 +124,7 @@ header('Pragma: no-cache');
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
                     <h3 class="page-header" style="opacity:0.2;">
-                        <i style="font-size:30px;" class="fa fa-user"></i>
+                        <i style="font-size:30px;" class="fa fa-graduation-cap"></i>
                         &nbsp&nbspActivities
                     </h3>
                     <ul class="breadcrumb" style="width:99%;border-radius:5px;">
@@ -126,12 +134,7 @@ header('Pragma: no-cache');
                             &nbspHome</a>
                         </li>
 
-                        <li style="font-size:15px;">
-                            <i style="opacity:0.2;" class="fa fa-graduation-cap"></i>
-                            &nbsp
-                            <b style="font-weight:500;">Activities</b>
-                        </li>
-
+                        
                         <li style="font-size:15px;">
                             <i style="opacity:0.2;" class="fa fa-graduation-cap"></i>
                             &nbsp

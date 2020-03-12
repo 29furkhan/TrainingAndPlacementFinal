@@ -72,7 +72,7 @@ class ProcessController extends Controller
 
     public function resetP(Request $request)
     {
-        Debugbar::info('inside resetpassword');
+    //    Debugbar::info('inside resetpassword');
         if(request()->ajax()){
             $pass = Hash::make($request->get('password'));
             $authdata = array(
@@ -84,30 +84,29 @@ class ProcessController extends Controller
             $token = DB::select($tokenquery);
 
             foreach($token as $tn){    
-            Debugbar::info("  $tn->token ");
+            //Debugbar::info("  $tn->token ");
             
-            $OTP= $request->get('token');
-            //$OTP=Hash::make($OTP);
-            Debugbar::info($OTP);
+                $OTP= $request->get('token');
+                //$OTP=Hash::make($OTP);
+                Debugbar::info($OTP);
+                
+                if($tn->token != $OTP){
+                    Debugbar::info('OTP Incorrect');
+                    return response()->json(['success' => 'Incorrect OTP Please Try Again','databit'=>'0']);
+                }
+                if($tn->token == $OTP)
+                {
+                Debugbar::info('OTP Verified');
+                DB::table('login_Details')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
+                DB::table('users')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
+                DB::table('password_resets')->where('Email',$mail)->update(['token' => 'NULL']);
+                return response()->json(['success' => 'Password Reset Successfully','databit'=>'1']);
+                }
             
-            if($tn->token != $OTP){
-                Debugbar::info('OTP Incorrect');
-                return response()->json(['success' => 'Incorrect OTP Please Try Again','databit'=>'0']);
             }
-            if($tn->token == $OTP)
-             {
-            Debugbar::info('OTP Verified');
-            DB::table('login_Details')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
-            DB::table('users')->where('Email',$mail)->update(['Password' =>$authdata['Password']]);
-            DB::table('password_resets')->where('Email',$mail)->update(['token' => 'NULL']);
-            return response()->json(['success' => 'Password Reset Successfully','databit'=>'1']);
-            }
-           
-        }
         }
 
     }
-
 
     public function checkLoginAndEnter(Request $request){
         
@@ -153,6 +152,27 @@ class ProcessController extends Controller
 
     }
 
+    public function checkAvailabilityCASERP_ID(Request $request){
+        if(request()->ajax()){
+            
+            $caserp_id = array(
+                'CASERP_ID' => $request->get('caserp_id')
+            );
+            Debugbar::info($caserp_id);
+            $authdata = DB::table('student_academics')->where('CASERP_ID',$caserp_id['CASERP_ID'])->count();
+            if ($authdata > 0){
+               
+                echo 'Duplicate';
+            }
+            else{
+                echo 'Unique';
+            }
+
+        }
+
+    }
+
+
     function logout()
     {
        
@@ -167,7 +187,7 @@ class ProcessController extends Controller
             // Debugbar::info($me);
             $branchquery = "select distinct branch from branch";
             $branch = DB::select($branchquery);
-            $all="select sa.CASERP_ID,sp.Email,sp.FIRST_NAME,sp.MIDDLE_NAME,sp.LAST_NAME,sp.BRANCH,sp.CLASS,sp.PASSOUT_YEAR from Student_profile sp INNER JOIN student_academics sa where sp.Email=sa.Email and sp.Email='$me'";
+            $all="select sa.CASERP_ID,sp.Email,sp.FIRST_NAME,sp.MIDDLE_NAME,sp.LAST_NAME,sp.BRANCH,sp.CLASS,sp.PASSOUT_YEAR from student_profile sp INNER JOIN student_academics sa where sp.Email=sa.Email and sp.Email='$me'";
             $details=DB::select($all);
             Debugbar::info($details);
             $new="select * from Student_academics where Email='$me'";
@@ -252,4 +272,10 @@ class ProcessController extends Controller
             }
             
     }  
+    public function couns(){
+        $counselling = DB::select("select * from Counselling");
+        Debugbar::info($counselling);
+        if(isset($counselling))
+            return view('Pages.Student.counselling',compact('counselling'));
+    }
 }

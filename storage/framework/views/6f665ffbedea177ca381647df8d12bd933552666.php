@@ -5,7 +5,15 @@ header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
 
-<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+<?php if($detect->isMobile()): ?>
+    <script>
+      window.location='/notAllowedDevice';
+	</script>
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
     <script>
       window.location='/errorUserPage';
     </script>
@@ -20,7 +28,7 @@ header('Pragma: no-cache');
     <?php if(isset( Auth::user()->email)): ?>
         <a data-toggle="dropdown" style="cursor:pointer;text-decoration:none;" id="profile" class="" >
             <span class="profile-ava">
-                <img alt="" style="height:33px;border-radius:50%;" src="images/user.png">
+                <img alt="" style="height:33px;border-radius:50%;" src="https://github.com/29furkhan/TrainingAndPlacementFinal/blob/master/user.png?raw=true">
             </span>
             <span class="username" style="color:white;font-size:14px;">
             <?php echo e(Auth::user()->name); ?>

@@ -4,7 +4,17 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
-@if(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+
+@if($detect->isMobile())
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+@elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students')
     <script>
       window.location='/errorUserPage';
     </script>
@@ -438,7 +448,7 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
                     </div>
 
 
-                    <label>Overall Percentage Crieria (Engg)</label>
+                    <label>Overall Percentage Criteria (Engg)</label>
                         <select id="percentcr" style="margin-bottom:20px;" class="form-control">
                             <option selected value='60+ (Including 60%) '>60+ (Including 60%) </option>
                             <option value = "70+ (Including 70%) " >70+ (Including 70%)</option>
@@ -503,7 +513,7 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 <div id="maincards" class="maincards" style="display:none;margin-right:10px;display:block;flex-wrap:wrap;">
     <div id='actualcard' class="card" style="display:none;border-radius:8px;width:100%;height:auto;max-height:50vh;overflow-y:auto;">
         <div class="card-body">
-            <div id="tablecontent" style="overflow-x:auto;overflow-y:auto;white-space:nowrap;border-radius:4px;">
+            <div id="tablecontent" style="white-space:nowrap;border-radius:4px;">
                 <table id="exportstudentstable"> 
                     <tr id='demo2' style="text-transform:uppercase;background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);color:white;">
                         <th scope="col">CASERP ID</th>

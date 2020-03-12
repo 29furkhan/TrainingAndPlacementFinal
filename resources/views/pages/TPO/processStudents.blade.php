@@ -10,7 +10,16 @@ header('Pragma: no-cache');
   var globalsearchactive = 0;
 </script>
 
-@if(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+
+@if($detect->isMobile())
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+@elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students')
     <script>
       window.location='/errorUserPage';
     </script>
@@ -54,7 +63,7 @@ header('Pragma: no-cache');
 </div>
 
 <!-- Search Box Start -->
-<div class="row">
+<div class="row" style="justify-content:flex-end;margin-right:3px;">
   <div id="searchprocess" class="col-lg-4 col-sm-4 col-md-4">
       <div class="">
         <div class="search" style="box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;">
@@ -66,7 +75,7 @@ header('Pragma: no-cache');
   </div>
 </div>
 <!-- Search Box End -->
-<br>
+
 <br>
 <div id='rowstudenttable' class="row" style="display:none;white-space:nowrap;">
   <div class="col-lg-12 col-md-12" style="white-space:nowrap;">

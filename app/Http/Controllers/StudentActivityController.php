@@ -330,7 +330,7 @@ class StudentActivityController extends Controller
         $amount = $request->get('amount');
         $order = new Payments();
         $email = $request->get('caserp_id');
-        $caserp_id = DB::select("select CASERP_ID from student_Academics where email = '$email'");
+        $caserp_id = DB::select("select CASERP_ID from student_academics where email = '$email'");
         $caserp_id = json_encode($caserp_id);
         $caserp_id = substr($caserp_id, 15, 11);
         $order->order_id = $order_id;

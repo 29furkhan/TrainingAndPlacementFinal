@@ -503,7 +503,7 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
 <div id="maincards" class="maincards" style="display:none;margin-right:10px;display:block;flex-wrap:wrap;">
     <div id='actualcard' class="card" style="display:none;border-radius:8px;width:100%;height:auto;max-height:50vh;overflow-y:auto;">
         <div class="card-body">
-            <div id="tablecontent" style="overflow-x:auto;overflow-y:auto;white-space:nowrap;border-radius:4px;">
+            <div id="tablecontent" style="white-space:nowrap;border-radius:4px;">
                 <table id="exportstudentstable"> 
                     <tr id='demo2' style="text-transform:uppercase;background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);color:white;">
                         <th scope="col">CASERP ID</th>

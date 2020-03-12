@@ -4,6 +4,16 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+
+@if($detect->isMobile())
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+@endif
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

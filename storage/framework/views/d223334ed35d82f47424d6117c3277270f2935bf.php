@@ -4,11 +4,20 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
+
+<?php
+  $detect = new Mobile_Detect;
+?>
+
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
 <link rel="shortcut icon" href="/images/elearning.ico" />
-  <?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+  <?php if($detect->isMobile()): ?>
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+  <?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
     <script>
       window.location='/dashboard';
     </script>
@@ -17,6 +26,9 @@ header('Pragma: no-cache');
       window.location='/student';
     </script>
   <?php endif; ?>
+
+ 
+  
 
 
   <meta charset="utf-8">
@@ -60,13 +72,23 @@ header('Pragma: no-cache');
   <!-- Main.js -->
   <script type="text/javascript" src="<?php echo e(URL::asset('/js/main.js')); ?>"></script>
   
-  
+  <script>
+   window.addEventListener("load", function () {
+    const loader = document.querySelector(".loader");
+    loader.className += " hidden"; // class "loader hidden"
+});
+</script>
+
 
 </head>
 
 
 <!--  Main Content Starts -->
 <body class="login-img3-body">
+
+<div class="loader">
+    <div class="lds-facebook"><div></div><div></div><div></div></div>
+</div>
 
   <div class="container">
     
@@ -75,8 +97,11 @@ header('Pragma: no-cache');
 
 
       <div class="login-wrap">
-        <p class="login-img"><i class="icon_lock_alt"></i></p>
-
+      
+      <div style="display:flex;justify-content:center;">
+        <img class="login-img" style="height:1em;" src="/images/elearning.ico"/>
+      </div>
+      <br>
       <?php if($message = Session::get('error')): ?>
         <div class="alert alert-danger">
             <button type='button' class="close" data-dismiss='alert'>x</button>
@@ -97,11 +122,11 @@ header('Pragma: no-cache');
       <?php endif; ?>
       
       <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
           <input type="text" class="form-control" name="email" placeholder="Email" autofocus>
         </div>
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
           <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <label class="checkbox">

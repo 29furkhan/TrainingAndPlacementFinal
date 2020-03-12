@@ -4,10 +4,18 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
+<?php
+  $detect = new Mobile_Detect;
+?>
+
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
-<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
+<?php if($detect->isMobile()): ?>
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='TPO'): ?>
     <script>
       window.location='/dashboard';
     </script>
@@ -74,44 +82,19 @@ var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\
 
 
 <script>
+var flag_email='unlock';
+var flag_caserp='unlock';
 
-// function validateEmail(email) {
-//   // Reg Ex for Password
-//   var strongRegex = /^[A-Za-z]+$/;
-//   // Email for Checking Availability of Email
-//   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})+$/;
-//   return re.test(email);
-// }
+function validityCheck(){
+    if(flag_email=='unlock' && flag_caserp=='unlock'){
+      $('#submit').attr('disabled',false);
+    }
+    else{
+      ('#submit').attr('disabled','disabled');
+    }
+}
 
-// function enableErrorEmail(email){
-//   document.getElementById('emailgroup').style.paddingBottom = '0px';
-//   document.getElementById('error_email').style.display="block";
-//   document.getElementById('email').style.color="#B94A48";
-//   document.getElementById('email').style.background="#F2DEDE";
-//   document.getElementById('email').style.border="1px solid #EED3D7";
-// }
-
-// function disableErrorEmail(email){
-//   console.log('disable');
-//   document.getElementById('emailgroup').style.paddingBottom = '15px';
-//   if(validateEmail(email)){
-
-//     document.getElementById('error_email').style.display="none";
-//     document.getElementById('email').style.color="#468847";
-//     document.getElementById('email').style.background="#DFF0D8";
-//     document.getElementById('email').style.border="1px solid #D6E9C6";
-//   }
-//   else{
-//     document.getElementById('error_email').style.display="none";
-//     document.getElementById('email').style.color="#B94A48";
-//     document.getElementById('email').style.background="#F2DEDE";
-//     document.getElementById('email').style.border="1px solid #EED3D7";
-//   }
-//   document.getElementById('error_email').style.display="none";
-    
-  
-// }
-
+// Code for Checking the Email
 $(document).ready(function(){
   $('#email').keyup(function(){
     var email_error = '';
@@ -128,13 +111,46 @@ $(document).ready(function(){
           document.getElementById('error_email').style.display="block";
           document.getElementById('email').style.background="#FFFFFF";
           $('#submit').attr('disabled','disabled');
-          
+          flag_email='lock'; 
         }
         else{
           document.getElementById('emailgroup').style.paddingBottom = '15px';
           document.getElementById('error_email').style.display="none";
           document.getElementById('email').style.background="#FFFFFF";
-          $('#submit').attr('disabled',false);
+          flag_email='unlock';
+          validityCheck();
+        }
+      }
+    });
+  });
+});
+
+// Code for Checking CASID:
+$(document).ready(function(){
+  $('#caserp_id').keyup(function(){
+    var caserp_id_error = '';
+    var caserp_id = $('#caserp_id').val();
+    var _token = $('input[name="_token"]').val();
+    //alert(caserp_id);
+    $.ajax({
+      url:"/php/insert/checkavailability/caserp_id",
+      method:"GET",
+      data:{caserp_id:caserp_id,_token:_token},
+      success:function(result){
+        if (result=='Duplicate'){
+          flag_caserp='lock';
+          $('#submit').attr('disabled','disabled');
+          document.getElementById('caserp_idgroup').style.paddingBottom = '0px';
+          document.getElementById('error_caserp_id').style.display="block";
+          document.getElementById('caserp_id').style.background="cyan";
+          
+        }
+        else{
+          document.getElementById('caserp_idgroup').style.paddingBottom = '15px';
+          document.getElementById('error_caserp_id').style.display="none";
+          document.getElementById('caserp_id').style.background="#FFFFFF";
+          flag_caserp='unlock';
+          validityCheck();
         }
       }
     });
@@ -199,8 +215,10 @@ $(document).ready(function(){
     <form  id="signupform" class="login-form" style="margin-top: 3%">
     <?php echo csrf_field(); ?>
       <div class="login-wrap">
-        <p class="login-img"><i class="icon_lock_alt"></i></p>
-        
+        <div style="display:flex;justify-content:center;">
+          <img class="login-img" style="height:1em;" src="https://raw.githubusercontent.com/29furkhan/TrainingAndPlacementFinal/master/elearning.ico"/>
+        </div>
+        <br>
         
         <div id="" class="input-group">
             <span style="color:black;font-size:16px;">First Name:</span>
@@ -212,10 +230,12 @@ $(document).ready(function(){
             <input  autocomplete="off" type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name" required data-parsley-pattern="/^[A-Za-z ]+$/" data-parsley-trigger="keyup" />
         </div>
         
-        <div class="input-group">
+        <div id="caserp_idgroup" class="input-group">
             <span style="color:black;font-size:16px;">CASERP_ID:</span>
             <input  autocomplete="off" type="text" class="form-control" id="caserp_id" name="caserp_id" placeholder="Enter CASERP_ID" required data-parsley-pattern="^[S|s]{1}[0-9]{10}$" data-parsley-trigger="keyup" />
         </div>
+        <label id='error_caserp_id' name = 'error_caserp_id' style="font-size:12px;display:none;color:red;font-weight:500;"> Duplicate Entry Found, Try Something Else </label>
+        
         
 
         <div id="emailgroup" class="input-group">
@@ -228,14 +248,14 @@ $(document).ready(function(){
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Password:</span>
-            <input onkeyup="enableConfirm(id);" type="text" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,100]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
+            <input onkeyup="enableConfirm(id);" type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,100]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
             3. Password Should Contain Atleast 1 Uppercase Letter<br><br> 4. Password Should Contain Atleast 1 Special Character"/>
           </div>
 
           <div id="div_password_again" style="display:none;" class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Re-Type Password:</span>
-            <input type="text" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup"/>
+            <input type="password" class="form-control" id="password_again" name="password_again" placeholder="Re-Type Password" required data-parsley-equalto="#password" data-parsley-trigger="keyup"/>
           </div>
 
           <label id="msg" style="display:none;color:red;padding-bottom:15px;font-weight:500;" class=""></label>

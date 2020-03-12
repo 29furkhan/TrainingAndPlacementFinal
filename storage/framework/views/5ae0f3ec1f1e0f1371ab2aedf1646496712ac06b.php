@@ -10,7 +10,15 @@ header('Pragma: no-cache');
   var globalsearchactive = 0;
 </script>
 
-<?php if(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+<?php if($detect->isMobile()): ?>
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
     <script>
       window.location='/errorUserPage';
     </script>

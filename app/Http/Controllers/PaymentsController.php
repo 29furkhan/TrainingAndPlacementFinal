@@ -19,10 +19,10 @@ class PaymentsController extends Controller
 			$order->status = 'complete';
 			$order->transaction_id = $transaction_id;
 			$order->save();
-			return view( 'Pages.order-complete', compact( 'order', 'status' ) );
+			return view( 'pages.order-complete', compact( 'order', 'status' ) );
 
 		} else if( 'TXN_FAILURE' === $request['STATUS'] ){
-			return view( 'Pages.payment-failed' );
+			return view( 'pages.payment-failed' );
 		}
 	}
 
@@ -298,10 +298,10 @@ class PaymentsController extends Controller
 	 * Config Paytm Settings from config_paytm.php file of paytm kit
 	 */
 	function getConfigPaytmSettings() {
-		define('PAYTM_ENVIRONMENT', 'TEST'); // PROD
-		define('PAYTM_MERCHANT_KEY', 'fCocVn3muayrk#eq'); //Change this constant's value with Merchant key downloaded from portal
-		define('PAYTM_MERCHANT_MID', 'Hdttox61199878435055'); //Change this constant's value with MID (Merchant ID) received from Paytm
-		define('PAYTM_MERCHANT_WEBSITE', 'WEBSTAGING'); //Change this constant's value with Website name received from Paytm
+		define('PAYTM_ENVIRONMENT', 'PROD'); // PROD
+		define('PAYTM_MERCHANT_KEY', 'qlb#5KqGALFElR9J'); //Change this constant's value with Merchant key downloaded from portal
+		define('PAYTM_MERCHANT_MID', 'BYIaoL12933512274460'); //Change this constant's value with MID (Merchant ID) received from Paytm
+		define('PAYTM_MERCHANT_WEBSITE', 'DEFAULT'); //Change this constant's value with Website name received from Paytm
 
 		$PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
 		$PAYTM_TXN_URL='https://securegw-stage.paytm.in/theia/processTransaction';

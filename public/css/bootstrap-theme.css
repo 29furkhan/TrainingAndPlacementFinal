@@ -4884,6 +4884,7 @@ body.modal-open,
   margin-left: auto;
   margin-right: auto;
   width: auto;
+  overflow-y: initial !important;
   /* padding: 10px; */
   z-index: 1050;
 }
@@ -4928,6 +4929,7 @@ body.modal-open,
 .modal-body {
   position: relative;
   padding: 20px;
+  overflow-y: auto;
 }
 .modal-footer {
   margin-top: 15px;

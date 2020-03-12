@@ -4,7 +4,16 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
-@if(isset(Auth::user()->email) && Auth::user()->user_type=='TPO')
+
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+@if($detect->isMobile())
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+@elseif(isset(Auth::user()->email) && Auth::user()->user_type=='TPO')
     <script>
       window.location='/errorUserPage';
     </script>
@@ -27,7 +36,7 @@ if(!isset( Auth::user()->email))
     @if(isset( Auth::user()->email))
         <a data-toggle="dropdown" style="cursor:pointer;text-decoration:none;" id="profile" class="" >
             <span class="profile-ava">
-                <img alt="" style="height:33px;border-radius:50%;" src="images/user.png">
+                <img alt="" style="height:33px;border-radius:50%;" src="https://github.com/29furkhan/TrainingAndPlacementFinal/blob/master/user.png?raw=true">
             </span>
             <span class="username" style="color:white;font-size:14px;">
             {{ Auth::user()->name }}
@@ -59,7 +68,7 @@ if(!isset( Auth::user()->email))
                   <center><h4> {{$ds->FIRST_NAME}}  {{$ds->LAST_NAME}}</h4></center>
                   <div style="display:flex; flex-direction: column;align-items: center;">
                     <div class="follow-ava">
-                      <img src="images/user.png" alt="" style="height:75px;border-radius: 50%;">
+                      <img src="https://github.com/29furkhan/TrainingAndPlacementFinal/blob/master/user.png?raw=true" alt="" style="height:75px;border-radius: 50%;">
                     </div>
 
                   

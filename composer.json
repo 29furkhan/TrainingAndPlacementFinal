@@ -12,7 +12,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

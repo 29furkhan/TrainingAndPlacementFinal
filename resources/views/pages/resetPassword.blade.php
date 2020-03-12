@@ -7,6 +7,7 @@
 // use Auth;
 // use Session;
 
+
 $me=Session::get('me');
 
 header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
@@ -14,6 +15,17 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 ?>
+
+<?php
+  $detect = new Mobile_Detect;
+?>
+
+@if($detect->isMobile())
+    <script>
+      window.location='/notAllowedDevice';
+    </script>
+@endif
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -127,9 +139,9 @@ $('#reset_password').on('submit',function(event){
     <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
             <span style="color:black;font-size:16px;">Password:</span>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,20]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required data-parsley-pattern='/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/'  data-parsley-length="[8,100]" data-parsley-trigger="keyup" data-parsley-error-message="<br>1. Password Should Contain Atleast 1 Number <br><br>2. Password Should Contain Atleast 1 Lowercase Letter<br><br>
             3. Password Should Contain Atleast 1 Uppercase Letter<br><br> 4. Password Should Contain Atleast 1 Special Character"/>
-          </div>
+            </div>
 
           <div class="input-group">
             <!-- <span class="input-group-addon"><i class="icon_key"></i></span> -->
