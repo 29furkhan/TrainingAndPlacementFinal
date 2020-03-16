@@ -16,14 +16,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 // Route::resource('/activityStudent','PaymentsController');
 
-// Routes for Drives
-// Route::get('/counselling',function(){
-//     return view('Pages.Student.counselling');
-// });
-// Route::get('/counsellingTPO',function(){
-//     return view('Pages.TPO.counsellingTPO');
-// });
 
+// Routes For Counselling Portal Added By Prashant
 Route::get('/counselling','ProcessController@Couns');
 
 Route::get('/counsellingTPO','CounsellingController@index');
@@ -31,6 +25,11 @@ Route::get('/counsellingTPO','CounsellingController@index');
 Route::get('/php/add/video','CounsellingController@create');
 
 Route::GET('/php/video/delete','CounsellingController@deleteVideo');
+
+Route::GET('/php/edit/video','CounsellingController@editVideo');
+//Routes End
+
+Route::GET('/php/video/edit/get','CounsellingController@getDataToEdit');
 
 Route::get('/drivesTPO','DrivesController@index');
 
@@ -41,11 +40,9 @@ Route::get('/notAllowedDevice',function(){
 });
 Route::GET('/php/activity/edit/get','ActivitiesController@getDataToEdit');
 
-Route::GET('/php/video/edit/get','CounsellingController@getDataToEdit');
 
 Route::GET('/php/edit/activity','ActivitiesController@editActivity');
 
-Route::GET('/php/edit/video','CounsellingController@editVideo');
 
 Route::GET('/activityStudent','StudentActivityController@index');
 Route::GET('/activityStudent/storeData','StudentActivityController@storeData');

@@ -61,7 +61,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/underConstructionPage">
+            <a style="padding-left:20px;" class="" href="/counselling">
                 <i style="font-size:20px;" class="fa fa-file-video-o"></i>
                 &nbsp&nbsp          
                 <span style="font-size:20px;">Councelling</span>

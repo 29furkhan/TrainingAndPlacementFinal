@@ -66,7 +66,7 @@ header('Pragma: no-cache');
 
         <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </div>
         </form>
     </div>
@@ -79,7 +79,7 @@ header('Pragma: no-cache');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">EDIT ACTIVITY</h4>
+        <h4 class="modal-title" id="exampleModalLabel">EDIT VIDEO</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -94,6 +94,11 @@ header('Pragma: no-cache');
                 <div style="margin-bottom:20px;">
                 <b> Title </b>
                 <input id="modal_title" placeholder="Enter the Title" name='modal_title'  class="form-control" type="text" required/>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                <b> Link </b>
+                <input id="modal_link" placeholder="Enter the Link" name='modal_link'  class="form-control" type="text" required/>
                 </div>
 
                 <div style="margin-bottom:20px;">
@@ -118,7 +123,7 @@ header('Pragma: no-cache');
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
                     <h3 class="page-header" style="opacity:0.2;">
-                        <i style="font-size:30px;" class="fa fa-industry"></i>
+                        <i style="font-size:30px;" class="fa fa-users"></i>
                         &nbsp&nbspCounselling
                     </h3>
                     <ul class="breadcrumb" style="width:99%;border-radius:5px;">
@@ -129,7 +134,7 @@ header('Pragma: no-cache');
                         </li>
 
                         <li style="font-size:15px;">
-                            <i style="opacity:0.2;" class="fa fa-graduation-cap"></i>
+                            <i style="opacity:0.2;" class="fa fa-users"></i>
                             &nbsp
                             <b style="font-weight:500;">Counselling</b>
                         </li>
@@ -139,8 +144,8 @@ header('Pragma: no-cache');
                 </div>
 </div>
 
-<button data-target="#createModal" data-toggle="modal" title="Create a Fresh Drive" style="border-radius:0;"class='btn btn-primary'>
-CREATE
+<button data-target="#createModal" data-toggle="modal" title="Add a New Video" style="border-radius:0;"class='btn btn-primary'>
+ADD VIDEO
 </button>
 <br><br>
 <!-- CARDS -->
@@ -149,33 +154,36 @@ CREATE
 <div class="row">
 <?php $__currentLoopData = $counselling; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cn): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-<div class="card col-sm-5" style="
+<div class="card col-md-4" style="
     margin-right: 5%;
-    margin-bottom: 2%; box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;margin-right:10px;display:block;flex-wrap:wrap;
+    margin-bottom: 2%; box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;display:block;flex-wrap:wrap;
 ">
   <div class="card-body">
-  <div class="embed-responsive embed-responsive-4by3">
+  <div class="embed-responsive embed-responsive-21by9">
   <iframe class="embed-responsive-item" src="<?php echo e($cn->Link); ?>" allowfullscreen></iframe>
 </div>
     <h5 class="card-title"><?php echo e($cn->Title); ?></h5>
+    <p class="para" ><?php echo e($cn->Video_Description); ?></p><br>
 
 <br>
-<div style="width:170px;display:flex;justify-content:space-between;flex-wrap:wrap;">
-                  <div>
+<div style="width:170px;display:flex;justify-content:space-between;flex-wrap:wrap;position: absolute;
+    bottom: 4%;">
+                  <!-- <div>
                       <form action='/php/activity/download'>
                           <input type="text" id="" name="" value="" style="display:none;"/>
                           <button type="submit" data-toggle="tooltip" title="Download Excel Sheet!" style="border-radius:0;width:40px;"  class="dwnld btn btn-primary">
                               <i style="font-size:17px;" class="fa fa-download"> </i>
                           </button>
                       </form>
-                  </div>
+                  </div> -->
                   <div>
-                      <button type="button"  id="editActivityBtn<?php echo e($cn->V_ID); ?>" title="Edit the Activity!" style="border-radius:0;margin-right:15px;" class="edt btn btn-primary">
+                      <button type="button"  id="editActivityBtn<?php echo e($cn->V_ID); ?> " title="Edit Video!" style="border-radius:0;margin-right:15px;" class="edt btn btn-primary">
                           <i style="font-size:17px;" class="fa fa-pencil"> </i>
                       </button>
-                      <button id="deleteActivityBtn<?php echo e($cn->V_ID); ?>" type="button" data-toggle="modal" title="Delete Video!" style="border-radius:0;margin-right:15px;"  class="dlt btn btn-primary">
+                      <button id="deleteActivityBtn<?php echo e($cn->V_ID); ?> " type="button" data-toggle="modal" title="Delete Video!" style="border-radius:0;margin-right:15px;"  class="dlt btn btn-primary">
                           <i style="font-size:17px;" class="fa fa-trash"> </i>
                       </button>
+                     
                   </div>
 </div>
 </div>
@@ -204,7 +212,10 @@ CREATE
 </div>
 
 <script>
-
+function desc()
+{
+    document.getElementById('para').style.display="block";
+}
 function validate(){
   var data_description = $('#description').val();
   var data_criteria = $('#criteria_text').val();
@@ -254,25 +265,27 @@ $('#confirmmodal').on('hidden.bs.modal', function () {
   deleteFlag = 0;
 })
 
-function setter(title,activity_desc,activity_fee){
+function setter(title,activity_desc,link){
     document.getElementById('modal_title').value = title;
     document.getElementById('modal_activity_desc').value = activity_desc;
-    document.getElementById('modal_activity_fee').value  = activity_fee;
+    document.getElementById('modal_link').value  = link;
+    // document.getElementById('modal_activity_fee').value  = activity_fee;
 }
 
 $(document).on("click", ".edt", function() {
     btnid = $(this).attr("id");
     v_id = btnid.substr(15);
-    var activity_desc,activity_fee,title;
+    var activity_desc,activity_fee,title,link;
     // Get Rest of The Data
     $.ajax({
         url:'/php/video/edit/get',
         data:{'v_id':v_id},
         success:function(data){
-            // console.log(data.data[0].Activity_Fee);
+            console.log(data.data[0].Video_Description);
             title = data.data[0].Title;
-            activity_desc = data.data[0].Description;
-            setter(title,activity_desc);
+            activity_desc = data.data[0].Video_Description;
+            link=data.data[0].Link;
+            setter(title,activity_desc,link);
         }  
     });
     document.getElementById('modal_v_id').value = v_id;

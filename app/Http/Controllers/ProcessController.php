@@ -272,6 +272,8 @@ class ProcessController extends Controller
             }
             
     }  
+
+    //Code for Displaying Counselling Videos on Student Portal added By Prashant
     public function couns(){
         $counselling = DB::select("select * from Counselling");
         Debugbar::info($counselling);

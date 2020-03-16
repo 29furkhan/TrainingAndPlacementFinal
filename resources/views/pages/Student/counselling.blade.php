@@ -1,3 +1,4 @@
+<!-- Code For Counselling Portal Of Student Created By Prashant -->
 <?php
 header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -51,7 +52,7 @@ header('Pragma: no-cache');
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
                     <h3 class="page-header" style="opacity:0.2;">
-                        <i style="font-size:30px;" class="fa fa-tachometer"></i>
+                        <i style="font-size:30px;" class="fa fa-users"></i>
                         &nbsp&nbspCounselling
                     </h3>
                     <ul class="breadcrumb" style="width:99%;border-radius:5px;">
@@ -62,7 +63,7 @@ header('Pragma: no-cache');
                         </li>
                         
                         <li style="font-size:15px;">
-                            <i style="opacity:0.2;" class="fa fa-tachometer"></i>
+                            <i style="opacity:0.2;" class="fa fa-users"></i>
                             &nbsp
                             <b style="font-weight:500;">Counselling</b>
                         </li>
@@ -79,15 +80,16 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
 <div class="container">
 <div class="row">
 @foreach($counselling as $cn)
-<div class="card col-sm-5" style="
+<div class="card col-md-4" style="
     margin-right: 5%;
-    margin-bottom: 2%; box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;margin-right:10px;display:block;flex-wrap:wrap;
+    margin-bottom: 2%; box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;display:block;flex-wrap:wrap;
 ">
   <div class="card-body">
-  <div class="embed-responsive embed-responsive-4by3">
+  <div class="embed-responsive embed-responsive-21by9">
   <iframe class="embed-responsive-item" src="{{$cn->Link}}" allowfullscreen></iframe>
 </div>
-    <h5 class="card-title">{{$cn->Title}}</h5>
+    <h5 class="card-title"><b>{{$cn->Title}}</b></h5>
+    <b>Description:</b><p>{{$cn->Video_Description}}</p>
 </div>
 </div>
 

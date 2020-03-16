@@ -1,5 +1,5 @@
 <?php
-
+// Controller created By Prashant to add, edit and Delete video from Counselling Portal
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -59,7 +59,9 @@ class CounsellingController extends Controller
         $V_ID = $_GET['modal_v_id'];
         $Title= $_GET['modal_title'];
         $Description = $_GET['modal_activity_desc'];
-        $res = DB::update("update Counselling set Title= '$Title',Video_Description = '$Description'
+        $Link=$_GET['modal_link'];
+
+        $res = DB::update("update Counselling set Title= '$Title',Video_Description = '$Description',Link='$Link'
                where V_ID='$V_ID'");
         Debugbar::info($res);
         return redirect()->back();
