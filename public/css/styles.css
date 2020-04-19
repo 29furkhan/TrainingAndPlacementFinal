@@ -1,0 +1,828 @@
+/* CSS For Spinner */
+
+.loader {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader > img {
+  width: 100px;
+}
+
+.loader.hidden {
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+      opacity: 0;
+      visibility: hidden;
+  }
+}
+
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: rgb(182, 225, 247);
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+/* Ends Spinner */
+
+/*Change By Prashant profile*/
+
+.bio-row {
+
+  width: 50%;
+
+  float: left;
+
+  margin-bottom: 10px;
+
+  padding:0 15px;
+
+}
+
+
+.bio-row p span {
+
+  width: 100px;
+
+  display: inline-block;
+
+}
+
+/* CSS FOR INPUT TEXT */
+input:focus, textarea {
+  outline: none !important;
+}
+/* Ends */
+
+/* custom form control */
+.form-control:focus{
+  background:white;
+}
+/* ENds */
+
+/* Download Button CSS */
+.download {
+  background-color: rgb(100, 179, 231);
+  border: 2px solid white;
+  color: white;
+  padding:10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+.donwload:hover{
+  background: royalblue;
+}
+/* Ends */
+
+/* Parsley.css */
+input.parsley-success,
+ select.parsley-success,
+ textarea.parsley-success,input.parsley-success:focus {
+   color: #468847;
+   background-color: #DFF0D8;
+   border: 1px solid #D6E9C6;
+ }
+
+ input.parsley-error,
+ select.parsley-error,
+ textarea.parsley-error,input.parsley-error:focus {
+   color: #B94A48;
+   background-color: #F2DEDE;
+   border: 1px solid #EED3D7;
+ }
+
+ .parsley-errors-list {
+   margin: 2px 0 3px;
+   padding: 0;
+   list-style-type: none;
+   font-size: 0.9em;
+   line-height: 0.9em;
+   opacity: 0;
+
+   transition: all .3s ease-in;
+   -o-transition: all .3s ease-in;
+   -moz-transition: all .3s ease-in;
+   -webkit-transition: all .3s ease-in;
+ }
+
+ ul.parsley-errors-list{
+   list-style: none;
+ }
+
+ .parsley-errors-list.filled {
+   opacity: 1;
+ }
+ 
+ .parsley-type, .parsley-required, .parsley-equalto{
+  color:#ff0000;
+ }
+/* Parsley ENds */
+
+/* Tags CSS */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #F0F0F0;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+.datahover:hover {background-color:lightgrey !important;}
+/* Tags CSS Ends */
+
+
+/* Cards CSS ENDS */
+
+
+/* Footer Starts */
+.footer{
+  position: fixed;
+  border:2px solid #fff;
+  bottom:0;
+  border-left:none;
+  width:100%;
+  line-height: 50px;
+  height:50px;
+  background: rgb(100,179,231);
+  color:white;
+}
+
+/* Footer Ends */
+/* Main Content CSS */
+.page-header {
+
+  margin: 12px 0 20px;
+
+  border-bottom: none;
+
+  opacity: 0.7;
+
+  text-transform: uppercase;
+
+}
+
+/* Main Content ENDS */
+
+
+/* Search Box CSS */
+.wrap{
+  width:500px;     
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  border: 1px solid rgb(100,179,231);
+  border-radius:5px;
+}
+
+.searchTerm {
+  width: 100%;
+  padding: 5px;
+  height: auto;
+  border: none;
+  color: #d4d4d4;
+  border-radius:5px 0px 0px 5px;
+}
+
+.searchTerm:focus{
+  color: #707070;
+  border-radius:5px;
+}
+
+.searchButton {
+  width: 40px;
+  height: 30px;
+  border: none;
+  background: #ffffff;
+  text-align: center;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 0px 5px 5px 0px;
+}
+/* Search Box CSS End */
+
+/* Nav Bars CSS */
+
+
+
+ul > li {
+  opacity: 1.0;
+}
+
+ul:hover > li:not(:hover) {
+  opacity: 0.5;
+}
+
+.nav-collapse.collapse {
+
+  display: inline;
+
+}
+
+#sidebar {
+
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  background: rgb(100,179,231);
+  border-right:2px solid white;
+  border-left:2px solid white;
+}
+
+ul.sidebar-menu , ul.sidebar-menu li ul.sub{
+
+  margin: -2px 0 0;
+
+  padding: 0;
+
+}
+
+
+ul.sidebar-menu {
+
+  margin-top: 60px;
+
+}
+
+ul.sidebar-menu li{
+
+  line-height: 20px !important;
+}
+
+
+ul li {
+
+  list-style: none;
+
+}
+
+ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
+
+  /* background: rgb(61, 73, 82); */
+  color: #fff;
+  display: block;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+ul.sidebar-menu li a{
+  color: #d0d8df;
+  text-decoration: none;
+  display: block;
+  padding: 15px 0 15px 10px;
+  font-size: 16px;
+  font-weight: 300;
+  outline: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+
+}
+
+/* Nav Bars CSS Ends */
+
+/* Label for Portal CSS */
+.logo {
+
+  font-size: 22px;
+  font-weight: 300%;
+  color: white;
+  float: left;
+  text-transform: uppercase;
+}
+
+.lite{
+
+  color:white !important;
+
+}
+
+/* Label for Portal CSS End */
+
+/* Profile Icon Start */
+.dropdown-menu.extended li p.red {
+
+  background-color: #00a0df;
+
+  color: #fff;
+
+}
+
+.dropdown-menu.extended li p.blue {
+
+  background-color: #688a7e;
+
+  color: #fff;
+
+}
+
+
+
+.dropdown-menu.extended li p.yellow {
+
+  background-color: #fcb322;
+
+  color: #fff;
+
+}
+
+
+
+.dropdown-menu.extended li a {
+
+  border-bottom: 1px solid #EBEBEB !important;
+
+  font-size: 12px;
+
+  list-style: none;
+
+}
+
+
+
+.dropdown-menu.extended li a {
+
+  padding: 15px 10px !important;
+
+  width: 100%;
+
+  display: inline-block;
+
+}
+
+
+
+.dropdown-menu.extended li a:hover {
+
+  background-color: #F7F8F9 !important;
+
+  color: #2E2E2E;
+
+  border-bottom: 1px solid #688a7e !important;
+
+}
+
+
+
+.dropdown-menu.tasks-bar .task-info .desc {
+
+  font-size: 13px;
+
+  font-weight: normal;
+
+}
+
+
+
+.dropdown-menu.tasks-bar .task-info .percent {
+
+  display: inline-block;
+
+  float: right;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  padding-left: 10px;
+
+  margin-top: -4px;
+
+}
+
+
+
+.dropdown-menu.extended .progress {
+
+  margin-bottom: 0 !important;
+
+  height: 10px;
+
+}
+
+
+
+.dropdown-menu.inbox li a .photo img {
+
+  border-radius: 2px 2px 2px 2px;
+
+  float: left;
+
+  height: 40px;
+
+  margin-right: 4px;
+
+  width: 40px;
+
+}
+
+
+
+.dropdown-menu.inbox li a .subject {
+
+  display: block;
+
+}
+
+
+
+.dropdown-menu.inbox li a .subject .from {
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+
+
+.dropdown-menu.inbox li a .subject .time {
+
+  font-size: 11px;
+
+  font-style: italic;
+
+  font-weight: bold;
+
+  position: absolute;
+
+  right: 5px;
+
+}
+
+
+
+.dropdown-menu.inbox li a .message {
+
+  display: block !important;
+
+  font-size: 11px;
+
+
+
+}
+
+
+
+.top-nav  {
+
+  margin-top: 7px;
+
+}
+
+.notification-row {
+
+  float: right;
+  margin-top: 15px;
+  margin-left: 65px;
+
+}
+
+
+
+.top-nav ul.top-menu > li .dropdown-menu.logout {
+
+  width: 200px !important;
+
+}
+
+
+
+.top-nav li.dropdown .dropdown-menu {
+
+  float: right;
+
+  right: 0;
+
+  left: auto;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li {
+
+  float: left;
+
+  text-align: left;
+
+  width: 100%;
+
+}
+
+.dropdown-menu.extended.logout > li.eborder-top {
+
+  border-top: 2px solid #688a7e !important;
+
+}
+
+.dropdown-menu.extended.logout > li:last-child {
+
+  float: left;
+
+  text-align: left;
+
+  width: 100%;
+
+  background: #688a7e;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li:last-child > a, .dropdown-menu.extended.logout > li:last-child > a:hover {
+
+  color: #fff;
+
+  border-bottom: none !important;
+
+  text-transform: uppercase;
+
+  background-color:#688a7e !important;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li:last-child > a:hover > i{
+
+  color: #fff;
+
+}
+
+.dropdown-menu > li > a{
+
+  color: #797979;
+
+}
+
+.dropdown-menu.extended.logout > li > a {
+
+  border-bottom: 1px solid #EBEBEB !important;
+
+  font-size: 14px;
+
+  list-style: none;
+
+  padding: 15px 10px !important;
+
+  width: 100%;
+
+  display: inline-block;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li > a:hover {
+
+  background-color: #F7F8F9 !important;
+
+  color: #2E2E2E;
+
+  border-bottom: 1px solid #688a7e !important;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li > a:hover i {
+
+  color: #688a7e;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li > a i {
+
+  font-size: 17px;
+
+}
+
+
+
+.dropdown-menu.extended.logout > li > a > i {
+
+  display: inline-block;
+
+  padding-right: 10px
+
+}
+
+
+
+.top-nav .username {
+
+  font-size: 13px;
+
+  color: #bdbdbd;
+
+}
+
+
+
+.top-nav ul.top-menu > li > a {
+
+  padding: 8px;
+
+  background: none;
+
+  margin-right: 0;
+
+}
+
+.top-nav ul.top-menu > li {
+
+  margin-left: 10px;
+
+}
+
+
+
+.top-nav ul.top-menu > li > a:hover, .top-nav ul.top-menu > li > a:focus {
+
+  background: #F1F2F7;
+
+
+
+}
+
+
+
+.top-nav .dropdown-menu.extended.logout {
+
+  top: 50px;
+
+}
+
+
+
+.top-nav .nav .caret {
+
+  border-bottom-color: #A4AABA;
+
+  border-top-color: #A4AABA;
+
+}
+
+.top-nav ul.top-menu > li > a:hover .caret {
+
+  border-bottom-color: #7498f1;
+
+  border-top-color: #7498f1;
+
+}
+
+
+
+.log-arrow-up {
+
+  background: url("../images/arrowup.png") no-repeat;
+
+  width: 20px;
+
+  height: 11px;
+
+  position: absolute;
+
+  right: 20px;
+
+  top: -10px;
+
+}
+
+
+/* Profile Icon CSS End */
+
+/* Header CSS */
+header {
+  min-height: 60px;
+  padding: 0 15px;
+  padding-top:15px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1002;
+}
+
+.common-header-bg {
+  color:white;
+  background: rgb(100, 179, 231);
+  
+
+}
+
+/* Header CSS Ends */
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    opacity: 0.5;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 45px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  .page-container {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    -webkit-transition: padding-left 0.3s ease 0s;
+    transition: padding-left 0.3s ease 0s;
+}
+
+
+.commonfontstyle {
+  font-family:'Arial';
+  font-size:14px;
+}
+
+.sidebarmenuitem :hover {
+  background: black;
+}
