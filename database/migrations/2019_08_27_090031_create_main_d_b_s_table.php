@@ -24,8 +24,6 @@ class CreateMainDBSTable extends Migration
         Schema::create('Notices', function (Blueprint $table) {
             $table->string('Notice_ID',20);
             $table->primary('Notice_ID');
-            $table->string('Auth_ID',20)->default('Null');
-            $table->foreign('Auth_ID')->references('Auth_ID')->on('Authority');
             $table->string('Notice_Subject')->default('BLANK');
             $table->string('Notice_Content',800)->default('BLANK');
             $table->timestamps();
@@ -35,7 +33,10 @@ class CreateMainDBSTable extends Migration
             $table->string('Activity_ID',20);
             $table->primary('Activity_ID');
             $table->string('Activity_Name')->default('BLANK');
-            $table->string('Activity_Description',800)->default('BLANK');
+            $table->string('Classes')->default('BLANK');
+            $table->string('Organization')->default('BLANK');
+            $table->string('Period')->default('BLANK');
+            $table->string('Activity_Description',2000)->default('BLANK');
             $table->integer('Activity_Fee')->default(0);
             $table->timestamps();
         });
@@ -46,9 +47,11 @@ class CreateMainDBSTable extends Migration
             $table->primary('Drive_ID');
             $table->string('Company_Name')->default('MGM');
             $table->string('Criteria',1500)->default('MGM');
-            $table->string('Placed_People')->default('yes');
             $table->string('Venue')->default("MGMs College of Engineering Nanded");
-            $table->string('Drive_Description',1400)->default('BLANK');
+            $table->string('Date')->default("TCS");
+            $table->string('Package')->default("3 LPA");
+            $table->string('Link',300)->default("NULL");
+            $table->string('Drive_Description',2000)->default('BLANK');
             $table->timestamps();
         });
 

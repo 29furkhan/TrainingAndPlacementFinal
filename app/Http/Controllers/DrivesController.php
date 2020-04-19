@@ -24,26 +24,32 @@ class DrivesController extends Controller
         }
         $description = $_GET['description'];
         $venue = $_GET['venue'];
-        $placed = $_GET['placed_select'];
+        $dt = $_GET['date'];
+        $package = $_GET['package'];
+        $link = $_GET['link'];
 
         if($criteria_select=='yes'){
             $data = Array(
                 'Drive_ID' => $drive_ID,
                 'Company_Name' =>$company_name,
+                'Drive_Description'=>$description,
                 'Criteria' =>$criteria_text,
-                'Placed_People'=>$placed,
+                'Date'=>$dt,
+                'Package'=>$package,
+                'Link' =>$link,
                 'Venue'=>$venue,
-                'Drive_Description'=>$description
             );
         }
         else{
             $data = Array(
                 'Drive_ID' => $drive_ID,
                 'Company_Name' =>$company_name,
+                'Drive_Description'=>$description,
                 'Criteria' =>$criteria_select,
-                'Placed_People'=>$placed,
-                'Venue'=>$venue,
-                'Drive_Description'=>$description
+                'Date'=>$dt,
+                'Package'=>$package,
+                'Link' =>$link,
+                'Venue'=>$venue                
             );
         }
         DB::table("drives")->insert($data);

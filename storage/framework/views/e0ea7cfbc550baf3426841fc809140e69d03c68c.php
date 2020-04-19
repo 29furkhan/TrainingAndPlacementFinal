@@ -1,5 +1,3 @@
-@extends('layouts.TPO.commonHeaderTPO')
-
 <?php
 header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -17,21 +15,21 @@ header('Pragma: no-cache');
   $detect = new Mobile_Detect;
 ?>
 
-@if($detect->isMobile())
+<?php if($detect->isMobile()): ?>
     <script>
       window.location='/notAllowedDevice';
     </script>
-@elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students')
+<?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
     <script>
       window.location='/errorUserPage';
     </script>
-@elseif(!isset(Auth::user()->email))
+<?php elseif(!isset(Auth::user()->email)): ?>
     <script>
       window.location='/main';
     </script>
-@endif
+<?php endif; ?>
 
-@section('mainContentTPO')
+<?php $__env->startSection('mainContentTPO'); ?>
 <!-- Modal for Create New Activity -->
 <div style="overflow-y:auto;" class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="create " aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -204,8 +202,8 @@ header('Pragma: no-cache');
 </div>
 <br>
 <!-- CARDS -->
-@foreach($drives as $ds)
-<div id="{{$ds->Drive_ID}}Main">
+<?php $__currentLoopData = $drives; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ds): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div id="<?php echo e($ds->Drive_ID); ?>Main">
   <hr class="row" style="border:1px solid black;">
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
                     <div>
@@ -226,53 +224,53 @@ header('Pragma: no-cache');
               <tbody>
               <!-- Company Name -->
                 <tr>
-                  <td style="display:none;">{{$ds->Drive_ID}}</td>
+                  <td style="display:none;"><?php echo e($ds->Drive_ID); ?></td>
                   <td style="text-align:left;border: 2px solid black;"><b>Company</b></td>
-                  <td style="text-align:left;border: 2px solid black;font-weight:600;">{{$ds->Company_Name}}</td>
+                  <td style="text-align:left;border: 2px solid black;font-weight:600;"><?php echo e($ds->Company_Name); ?></td>
                 </tr>
               
               <!-- Criteria -->
-                @if($ds->Criteria=="no")
+                <?php if($ds->Criteria=="no"): ?>
                   <tr>
                     <td style="text-align:left;border: 2px solid black;"><b>Criteria</b></td>
                     <td style="text-align:left;border: 2px solid black;"><b>No Criteria</b></td>
                   </tr>
-                @else
+                <?php else: ?>
                   <tr>
                       <td style="text-align:left;border: 2px solid black;"><b>Criteria</b></td>
-                      <td style="text-align:justify;border: 2px solid black;">{{$ds->Criteria}}</td>
+                      <td style="text-align:justify;border: 2px solid black;"><?php echo e($ds->Criteria); ?></td>
                   </tr>
-                @endif
+                <?php endif; ?>
               
             
                 <!-- Description -->
               <tr>
                   <td style="text-align:left;border: 2px solid black;"><b>Description</b></td>
-                  <td style="text-align:justify;border: 2px solid black;">{{$ds->Drive_Description}}</td>
+                  <td style="text-align:justify;border: 2px solid black;"><?php echo e($ds->Drive_Description); ?></td>
               </tr>
 
               <!-- Date -->
               <tr>
                   <td style="text-align:left;border: 2px solid black;"><b>Date</b></td>
-                  <td style="text-align:justify;border: 2px solid black;">{{$ds->Date}}</td>
+                  <td style="text-align:justify;border: 2px solid black;"><?php echo e($ds->Date); ?></td>
               </tr>
               
               <!-- package -->
               <tr>
                   <td style="text-align:left;border: 2px solid black;"><b>Package</b></td>
-                  <td style="text-align:justify;border: 2px solid black;">{{$ds->Package}}</td>
+                  <td style="text-align:justify;border: 2px solid black;"><?php echo e($ds->Package); ?></td>
               </tr>
 
               <!-- Link -->
               <tr>
                   <td style="text-align:left;border: 2px solid black;"><b>Apply Link</b></td>
-                  <td style="text-align:justify;border: 2px solid black;"><a  onclick="LinkFunction('{{$ds->Link}}');" style="text-decoration:underline;color:blue;cursor:pointer;">{{$ds->Link}}</a></td>
+                  <td style="text-align:justify;border: 2px solid black;"><a  onclick="LinkFunction('<?php echo e($ds->Link); ?>');" style="text-decoration:underline;color:blue;cursor:pointer;"><?php echo e($ds->Link); ?></a></td>
               </tr>
 
               <!-- Venue -->
               <tr>
                   <td style="text-align:left;border: 2px solid black;"><b>Venue</b></td>
-                  <td style="text-align:left;border: 2px solid black;"><b>{{$ds->Venue}}</b></td>
+                  <td style="text-align:left;border: 2px solid black;"><b><?php echo e($ds->Venue); ?></b></td>
               </tr>
 
               </tbody>
@@ -282,7 +280,7 @@ header('Pragma: no-cache');
   </div>
   <br>
 </div>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 <!-- Modal for Delete -->
@@ -435,4 +433,5 @@ function validateEdit(){
   }
   
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.TPO.commonHeaderTPO', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\admin\Downloads\Project\resources\views/pages/TPO/drivesTPO.blade.php ENDPATH**/ ?>
