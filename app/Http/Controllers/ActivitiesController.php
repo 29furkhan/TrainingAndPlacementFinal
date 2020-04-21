@@ -93,12 +93,14 @@ class ActivitiesController extends Controller
     }
 
     public function editActivity(Request $request){
-        $Activity_ID = $_GET['modal_activity_id'];
-        $Activity_Name = $_GET['modal_activity_name'];
-        $Description = $_GET['modal_activity_desc'];
-        $Fee = $_GET['modal_activity_fee'];
-        $res = DB::update("update activities set Activity_Name = '$Activity_Name',Activity_Fee = '$Fee',Activity_Description = '$Description'
-               where Activity_ID='$Activity_ID'");
+        $Activity_ID = $_GET['modal_activity_id_edit'];
+        $Activity_Name = $_GET['modal_activity_name_edit'];
+        $Description = $_GET['modal_activity_desc_edit'];
+        $Period = $_GET['modal_activity_period_edit'];
+        $Organisation = $_GET['modal_activity_organization_edit'];
+        $Fee = $_GET['modal_activity_fee_edit'];
+        $res = DB::update("update activities set Activity_Name = '$Activity_Name',Activity_Fee = '$Fee',Activity_Description = '$Description',
+               Organization = '$Organisation', Period = '$Period' where Activity_ID='$Activity_ID'");
         Debugbar::info($res);
         return redirect()->back();
     }

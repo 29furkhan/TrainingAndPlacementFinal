@@ -109,24 +109,40 @@ header('Pragma: no-cache');
         <div class="modal-body" style="height: 250px;overflow-y: auto;">
                 <div style="margin-bottom:20px;">
                 <b> ACTIVITY ID </b>
-                <input id="modal_activity_id" name='modal_activity_id' class="form-control" readonly required/>
+                <input id="modal_activity_id_edit" name='modal_activity_id_edit' class="form-control" readonly required/>
                 </div>
 
                 <div style="margin-bottom:20px;">
                 <b> ACTIVITY NAME </b>
-                <input id="modal_activity_name" placeholder="Enter the Activity Name" name='modal_activity_name'  class="form-control" type="text" required/>
+                <input id="modal_activity_name_edit" placeholder="Enter the Activity Name" name='modal_activity_name_edit'  class="form-control" type="text" required/>
                 </div>
 
                 <div style="margin-bottom:20px;">
                 <b> DESCRIPTION (<label style="color:red;font-weight:300;">*Maximum 800 Characters</label>) </b><br>
-                <textarea id="modal_activity_desc" type="textarea" name='modal_activity_desc' rows="6" maxlength="700" class="form-control" required="required">
+                <textarea id="modal_activity_desc_edit" type="textarea" name='modal_activity_desc_edit' rows="6" maxlength="700" class="form-control" required="required">
                 </textarea>
                 <label id="modal_activity_desc_err" style="display:none;color:red;font-weight:300;">*Description Required</label>
                 </div>
 
+                
+                <div style="margin-bottom:20px;">
+                <b> ALLOWED CLASSES </b>
+                <input id="modal_activity_classes_edit" name="modal_activity_classes_edit"  class="form-control" type="text" readonly/>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                <b> ORGANIZATION </b>
+                <input id="modal_activity_organization_edit" placeholder="Enter Name of Organization" name="modal_activity_organization_edit"  class="form-control" type="text" required/>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                <b> PERIOD </b>
+                <input id="modal_activity_period_edit" name="modal_activity_period_edit"  class="form-control" type="date" required/>
+                </div>
+
                 <div style="margin-bottom:20px;">
                 <b> FEE </b>
-                <input id="modal_activity_fee" placeholder="Enter Fee in Integer" name="modal_activity_fee"  class="form-control" type="number" required/>
+                <input id="modal_activity_fee_edit" placeholder="Enter Fee in Integer" name="modal_activity_fee_edit"  class="form-control" type="number" required/>
                 </div>
         </div>
 
@@ -298,16 +314,21 @@ $('#confirmmodal').on('hidden.bs.modal', function () {
   deleteFlag = 0;
 })
 
-function setter(activity_name,activity_desc,activity_fee){
-    document.getElementById('modal_activity_name').value = activity_name;
-    document.getElementById('modal_activity_desc').value = activity_desc;
-    document.getElementById('modal_activity_fee').value  = activity_fee;
+function setter(activity_name,activity_desc,activity_fee,allowed_classes,organization,period){
+  // alert(organization);  
+  document.getElementById('modal_activity_name_edit').value = activity_name;
+  document.getElementById('modal_activity_desc_edit').value = activity_desc;
+  document.getElementById('modal_activity_fee_edit').value  = activity_fee;
+  document.getElementById('modal_activity_classes_edit').value  = allowed_classes;
+  document.getElementById('modal_activity_organization_edit').value  = organization;
+  document.getElementById('modal_activity_period_edit').value  = period;   
 }
 
 $(document).on("click", ".edt", function() {
     btnid = $(this).attr("id");
     activity_id = btnid.substr(15);
     var activity_desc,activity_fee,activity_name;
+    var allowed_classes,organization,period;
     // Get Rest of The Data
     $.ajax({
         url:'/php/activity/edit/get',
@@ -317,10 +338,14 @@ $(document).on("click", ".edt", function() {
             activity_name = data.data[0].Activity_Name;
             activity_desc = data.data[0].Activity_Description;
             activity_fee  = data.data[0].Activity_Fee;
-            setter(activity_name,activity_desc,activity_fee);
+            allowed_classes = data.data[0].Classes;
+            organization = data.data[0].Organization;
+            period = data.data[0].Period;
+
+            setter(activity_name,activity_desc,activity_fee,allowed_classes,organization,period);
         }  
     });
-    document.getElementById('modal_activity_id').value = activity_id;
+    document.getElementById('modal_activity_id_edit').value = activity_id;
     $("#editModal").modal();
     // movefurther();
 });
