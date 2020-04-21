@@ -85,7 +85,7 @@ class ActivitiesController extends Controller
         $res  = DB::select("select * from activities where activity_id='$data'");
         Debugbar::info($res);
         if($res){
-            return response()->json(['sucess'=>'Success','data'=>$res]);;
+            return response()->json(['sucess'=>'Success','data'=>$res]);
         }
         else{
             return "Problem in Editing";
@@ -106,23 +106,32 @@ class ActivitiesController extends Controller
 
     public function index(){
         $activities = DB::select("select * from activities order by created_at desc");
+        $classes = DB::select("select class from branch group by class;");
         if(isset($activities))
-            return view('pages.TPO.activitiesTPO',compact('activities'));
+            return view('pages.TPO.activitiesTPO',compact('activities','classes'));
     }
 
-    public function createActivity(){
+    public function createActivity(Request $request){
         $Acitivity_ID = $_GET['activity_id_text'];
         $Activity_Name = $_GET['activity_name_text'];
         $Description = $_GET['description'];
         $Fee = $_GET['fee'];
+        $classes = $_GET['selectData'];
+        $period = $_GET['activity_date_text'];
+        $organisation = $_GET['activity_organisation_text'];
+        $classes = implode(",",$classes);
         $data = array(
             'activity_id' =>$Acitivity_ID,
             'Activity_Name' =>$Activity_Name,
             'Activity_Description' =>$Description,
             'Activity_Fee' =>$Fee,
+            'Classes'=>$classes,
+            'Organization'=>$organisation,
+            'Period'=>$period,
             'created_at' => date("Y-m-d h:i:s")
         );
         DB::table("activities")->insert($data);
         return redirect()->back();
+        
     }
 }

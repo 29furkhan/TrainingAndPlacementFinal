@@ -23,11 +23,6 @@ header('Pragma: no-cache');
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.js" integrity="sha256-JU2QMhOvXGZtWxxkQTEgpVjdPHMYMuVYbYzNqfsioNw=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.css" integrity="sha256-anbXVHwk7ydg+eebPilO8853eq2BLHapi0RjUwqWdpo=" crossorigin="anonymous" />
-  
   
   <!-- bootstrap theme -->
   <link href="css/bootstrap-theme.css" rel="stylesheet">
@@ -53,7 +48,7 @@ header('Pragma: no-cache');
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   
   <!-- Main.js -->
-  <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
+  <script type="text/javascript" src="<?php echo e(URL::asset('js/main.js')); ?>"></script>
   </head>
   
   <!-- parsley.js -->
@@ -66,14 +61,14 @@ header('Pragma: no-cache');
 
     <!-- Header Starts -->
     <header style="background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);border:2px solid #fff;" class="header common-header-bg">
-        @yield('commonHeaderStudent')
+        <?php echo $__env->yieldContent('commonHeaderStudent'); ?>
     </header> 
     <!--header end-->
 
     <!-- Sidebar Starts -->
     <aside id="sidebarTPO" style="background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);display:block;">
       <div style="overflow:auto;background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);" id="sidebar" class="nav-collapse ">
-        @yield('commonSidebarStudent')
+        <?php echo $__env->yieldContent('commonSidebarStudent'); ?>
       </div>
     </aside>
     <!-- sidebar menu end-->
@@ -82,7 +77,7 @@ header('Pragma: no-cache');
     <section id="main-content" style="margin-bottom:4%;margin-left:255px;margin-right:30px;">
         <section class="wrapper">
             <!--overview start-->
-            @yield('mainContentStudent')
+            <?php echo $__env->yieldContent('mainContentStudent'); ?>
         </section>
     </section>
     <!-- Main-Content Ends -->
@@ -91,7 +86,7 @@ header('Pragma: no-cache');
     <!-- Footer -->
 <!-- <footer id="commonfooter" class="footer" style="margin-left:240px;height:9%;">
     <div style="display:flex;justify-content:center;">
-        @yield('commonFooterTPO')
+        <?php echo $__env->yieldContent('commonFooterTPO'); ?>
     </div>
 </footer> -->
 <!-- Footer Ends-->
@@ -121,3 +116,4 @@ header('Pragma: no-cache');
 </body>
 
 </html>
+<?php /**PATH C:\Users\admin\Downloads\Project\resources\views/layouts/Student/commonLayoutStudent.blade.php ENDPATH**/ ?>

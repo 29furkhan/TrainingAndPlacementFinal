@@ -50,7 +50,10 @@ header("Expires: 0");
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
-  
+
+ 
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <!-- Chart.js -->
@@ -63,6 +66,11 @@ header("Expires: 0");
 
   <!-- Modal CSS -->
   <link href="css/modal.css" rel=" stylesheet">
+
+ <!-- CSS and JS for Multiselect -->
+ <!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script> -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 <body style = "background:#F0F0F0;overflow:auto;overflow-x:hidden;">
   <!-- container section start -->

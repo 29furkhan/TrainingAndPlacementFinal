@@ -34,7 +34,7 @@ header('Pragma: no-cache');
 @section('mainContentTPO')
 <!-- Modal for Create New Activity -->
 <div style="overflow-y:auto;" class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="create " aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" style="overflow-y: initial !important;" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="exampleModalLabel">CREATE NEW DRIVE</h4>
@@ -43,7 +43,7 @@ header('Pragma: no-cache');
         </button>
       </div>
       <form onsubmit="return validate();" action="/php/create/drive" method="GET">
-        <div class="modal-body" style="height:25em;">
+        <div class="modal-body" style="height: 250px;overflow-y: auto;">
                 <div style="margin-bottom:20px;">
                 <b> Drive ID (<label style="color:red;font-weight:300;">*</label>) </b>
                 <input  name='drive_id_text' id='drive_id_text' class="form-control" value="<?php echo uniqid();?>" readonly required/>
@@ -111,38 +111,72 @@ header('Pragma: no-cache');
 <!-- End of Create Modal -->
 
 <!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="create " aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">EDIT ACTIVITY</h4>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog"  aria-labelledby="create " aria-hidden="true">
+  <div  class="modal-dialog" style="overflow-y: initial !important;" role="document">
+    <div  class="modal-content">
+      <div class="modal-header" id="modal_header">
+        <h4 class="modal-title" id="exampleModalLabel">EDIT Drive</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form onsubmit = "return validateEdit();" action="/php/edit/activity" method="GET">
-        <div class="modal-body">
+      <form onsubmit = "return validateEdit();" action="/php/edit/drive" method="GET">
+        <div class="modal-body" style="height: 250px;overflow-y: auto;">
+                
                 <div style="margin-bottom:20px;">
-                <b> ACTIVITY ID </b>
-                <input id="modal_activity_id" name='modal_activity_id' class="form-control" readonly required/>
+                <b> Drive ID </b>
+                <input id="modal_drive_id"  name='modal_drive_id' class="form-control" readonly required/>
                 </div>
 
                 <div style="margin-bottom:20px;">
-                <b> ACTIVITY NAME </b>
-                <input id="modal_activity_name" placeholder="Enter the Activity Name" name='modal_activity_name'  class="form-control" type="text" required/>
+                <b> Company Name(<label style="color:red;font-weight:300;">*</label>)  </b>
+                <input id="modal_company_name" placeholder="Enter the Company Name" name='modal_company_name'  class="form-control" type="text" required/>
                 </div>
 
                 <div style="margin-bottom:20px;">
                 <b> DESCRIPTION (<label style="color:red;font-weight:300;">*Maximum 800 Characters</label>) </b><br>
-                <textarea id="modal_activity_desc" type="textarea" name='modal_activity_desc' rows="6" maxlength="700" class="form-control" required="required">
+                <textarea id="modal_drive_desc" type="textarea" name='modal_drive_desc' rows="6" maxlength="700" class="form-control" required="required">
                 </textarea>
                 <label id="modal_activity_desc_err" style="display:none;color:red;font-weight:300;">*Description Required</label>
                 </div>
 
                 <div style="margin-bottom:20px;">
-                <b> FEE </b>
-                <input id="modal_activity_fee" placeholder="Enter Fee in Integer" name="modal_activity_fee"  class="form-control" type="number" required/>
+                <b> Any Criteria?(<label style="color:red;font-weight:300;">*</label>)</b><br>
+                <select class="form-control" onchange="getCriteria(id,'criteria_div_edt');" onblur="getCriteria(id,'criteria_div_edt');" name="criteria_select_edt" id="criteria_select_edt" required>
+                  <option value="">Select Criteria</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
                 </div>
+
+                <div id="criteria_div_edt" style="display:none;margin-bottom:20px;">
+                  <b> Criteria (<label style="color:red;font-weight:300;">*Maximum 1000 Characters</label>) </b><br>
+                  <textarea type="textarea" name='modal_criteria' id='modal_criteria' rows="6" maxlength="1500" class="form-control" required="required">
+                  </textarea>
+                  <label id="criteria_text_error_edt" style="display:none;color:red;font-weight:300;">*Criteria Required</label>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                  <b> Date (<label style="color:red;font-weight:300;">*</label>) </b><br>
+                  <input id="modal_date" placeholder="Enter the Drive Date" name='modal_date'  class="form-control" type="date" required/>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                  <b> Package (<label style="color:red;font-weight:300;">*</label>) </b><br>
+                  <input id="modal_pack" placeholder="Enter the Package" name='modal_pack'  class="form-control" type="text" required/>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                  <b> Venue (<label style="color:red;font-weight:300;">*</label>) </b><br>
+                  <input id="modal_venue" placeholder="Enter the Venue" name='modal_venue'  class="form-control" type="text" required/>
+                </div>
+
+                <div style="margin-bottom:20px;">
+                  <b> Apply Link (<label style="color:red;font-weight:300;">*</label>) </b><br>
+                  <input id="modal_link" placeholder="Enter the Link" name='modal_link'  class="form-control" type="text" required/>
+                </div>
+
+
         </div>
 
         <div class="modal-footer">
@@ -184,6 +218,7 @@ header('Pragma: no-cache');
     <button data-target="#createModal" data-toggle="modal" title="Create a Fresh Drive" style="border-radius:0;"class='btn btn-primary'>
     CREATE
     </button>
+    
   </div>
   <div class="col-md-9">
     <!-- Search Box Start -->
@@ -209,10 +244,10 @@ header('Pragma: no-cache');
   <hr class="row" style="border:1px solid black;">
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;">
                     <div>
-                        <button type="button"  id="" title="Edit the Activity!" style="border-radius:0;margin-right:15px;" class="edt btn btn-primary">
+                        <button type="button"  id="editDrive{{$ds->Drive_ID}}" title="Edit the Drive!" style="border-radius:0;margin-right:15px;" class="edt btn btn-primary">
                             Edit Drive<i style="margin-left:15px;font-size:17px;" class="fa fa-pencil"> </i>
                         </button>
-                        <button id="" type="button" data-toggle="modal" title="Delete Activity!" style="border-radius:0;margin-right:15px;"  class="dlt btn btn-primary">
+                        <button id="deleteDrive{{$ds->Drive_ID}}" type="button" data-toggle="modal" title="Delete Drive!" style="border-radius:0;margin-right:15px;"  class="dlt btn btn-primary">
                             Delete Drive <i style="margin-left:15px;font-size:17px;" class="fa fa-trash"> </i>
                         </button>
                     </div>
@@ -294,11 +329,11 @@ header('Pragma: no-cache');
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <b style="font-size:16px;color:rgb(100,179,231);">Are You Sure You Want To Delete This Activity?</b>
+          <b style="font-size:16px;color:rgb(100,179,231);">Are You Sure You Want To Delete This Drive?</b>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-          <button onclick="setDeleteFlag();" id="deleteActivityBtn" type="button" class="btn btn-primary" >Delete</button>
+          <button onclick="setDeleteFlag();" id="deleteDriveBtn" type="button" class="btn btn-primary" >Delete</button>
         </div>
       </div>
     </div>
@@ -344,7 +379,7 @@ function validate(){
 <script>
 var deleteFlag=0;
 var btnid;
-var activity_id;
+var drive_id;
 
 function setDeleteFlag(){
     deleteFlag=1;
@@ -352,9 +387,9 @@ function setDeleteFlag(){
 }
 
 function moveFurther(){
-    $.ajax({
-        url:'/php/activity/delete',
-        data:{'activity_id':activity_id},
+  $.ajax({
+        url:'/php/drive/delete',
+        data:{'drive_id':drive_id},
         success:function(data){
             alert(data);
             location.reload();
@@ -366,29 +401,39 @@ $('#confirmmodal').on('hidden.bs.modal', function () {
   deleteFlag = 0;
 })
 
-function setter(activity_name,activity_desc,activity_fee){
-    document.getElementById('modal_activity_name').value = activity_name;
-    document.getElementById('modal_activity_desc').value = activity_desc;
-    document.getElementById('modal_activity_fee').value  = activity_fee;
+function setter(company_name,drive_desc,criteria,venue,date,pack,link){
+    document.getElementById('modal_company_name').value = company_name;
+    document.getElementById('modal_drive_desc').value = drive_desc;
+    document.getElementById('modal_criteria').value  = criteria;
+    document.getElementById('modal_venue').value  = venue;
+    document.getElementById('modal_date').value  = date;
+    document.getElementById('modal_pack').value  = pack;
+    document.getElementById('modal_link').value  = link;
+    
 }
 
 $(document).on("click", ".edt", function() {
     btnid = $(this).attr("id");
-    activity_id = btnid.substr(15);
-    var activity_desc,activity_fee,activity_name;
+    drive_id = btnid.substr(9);
+    var drive_desc,company_name,criteria,date,package,link,venue;
     // Get Rest of The Data
     $.ajax({
-        url:'/php/activity/edit/get',
-        data:{'activity_id':activity_id},
+        url:'/php/drive/edit/get',
+        data:{'drive_id':drive_id},
         success:function(data){
-            // console.log(data.data[0].Activity_Fee);
-            activity_name = data.data[0].Activity_Name;
-            activity_desc = data.data[0].Activity_Description;
-            activity_fee  = data.data[0].Activity_Fee;
-            setter(activity_name,activity_desc,activity_fee);
+            console.log(data);
+            company_name = data.data[0].Company_Name;
+            drive_desc = data.data[0].Drive_Description;
+            criteria  = data.data[0].Criteria;
+            venue  = data.data[0].Venue;
+            date  = data.data[0].Date;
+            pack  = data.data[0].Package;
+            link = data.data[0].Link;
+            // alert(date);
+            setter(company_name,drive_desc,criteria,venue,date,pack,link);
         }  
     });
-    document.getElementById('modal_activity_id').value = activity_id;
+    document.getElementById('modal_drive_id').value = drive_id;
     $("#editModal").modal();
     // movefurther();
 });
@@ -396,8 +441,8 @@ $(document).on("click", ".edt", function() {
 
 $(document).on("click", ".dlt", function() {
     btnid = $(this).attr("id");
-    activity_id = btnid.substr(17);
-    $("#confirmmodal").modal();
+    drive_id = btnid.substr(11);
+    window.$("#confirmmodal").modal();
     // movefurther();
 });
 
@@ -435,4 +480,6 @@ function validateEdit(){
   }
   
 </script>
+
+
 @endsection

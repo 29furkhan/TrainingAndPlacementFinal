@@ -17,6 +17,14 @@ use Maatwebsite\Excel\Facades\Excel;
 // Route::resource('/activityStudent','PaymentsController');
 
 
+
+// Routes for Drives
+Route::GET('/php/drive/edit/get','DrivesController@edit');
+Route::GET('/php/edit/drive','DrivesController@editData');
+Route::GET('/php/drive/delete','DrivesController@dltData');
+
+// End of Drives ROutes
+
 // Routes For Counselling Portal Added By Prashant
 Route::get('/counselling','ProcessController@Couns');
 

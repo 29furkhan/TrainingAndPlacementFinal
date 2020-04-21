@@ -67,6 +67,31 @@ function searchCompany(ip) {
   });
 }
 
+function searchActivity(ip) {
+  var input, filter, table, tr, td, i,alltables;
+  alltables = document.querySelectorAll("table[data-name=activitytable]");
+  input = document.getElementById(ip);
+  filter = input.value.toUpperCase();
+  alltables.forEach(function(table){
+    tr = table.getElementsByTagName("tr");
+      for (i = 0; i < 1; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+        dd = tr[i].getElementsByTagName("td")[0];
+        dd = dd.innerHTML+"Main";
+        element = document.getElementById(dd);
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            // alert(td.innerHTML +"Visible");
+            element.style.display="block";
+          } else {
+            // alert(td.innerHTML);
+            element.style.display = "none";
+          }
+        } 
+      }      
+  });
+}
+
 
 function readCriteria(){
   var criteria = [];
