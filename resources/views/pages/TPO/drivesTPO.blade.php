@@ -257,7 +257,7 @@ header('Pragma: no-cache');
       <div id='actualcard' class="card" style="width:100%;height:auto;max-height:50vh;overflow-y:auto;">
           
           <div class="card-body">
-            <table style="border-collapse: collapse;border-spacing: 0;width: 100%;border: 2px solid black;" id="table_schedule" class="table table-hover table-striped table.active justify-content: space-evenly;" data-name="companytable" >
+            <table style="text-transform: uppercase;border-collapse: collapse;border-spacing: 0;width: 100%;border: 2px solid black;" id="table_schedule" class="table table-hover table-striped table.active justify-content: space-evenly;" data-name="companytable" >
               <tbody>
               <!-- Company Name -->
                 <tr>

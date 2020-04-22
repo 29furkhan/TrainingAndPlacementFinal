@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use App\Payments;
 use Session;
@@ -13,9 +14,27 @@ use Session;
 class StudentActivityController extends Controller
 {
     public function index(){
-        $activities = DB::select("select * from activities order by created_at desc");
-        if(isset($activities))
-            return view('pages.Student.activities',compact('activities'));
+		$logged_in_user_email = Auth::user()->email;
+		$class = DB::select("select class from Student_Profile where email = '$logged_in_user_email'");
+		$class = $class[0]->class;
+		
+		$activities = DB::select("select * from activities order by created_at desc");
+		
+		$allowed_classes = DB::select("select classes from activities order by created_at desc ");
+		$allowed_classes_array = [];
+		$allowed_classes_array = explode(",",$allowed_classes[0]->classes);
+		
+		for($i=0;$i<count($allowed_classes);$i++)
+		{
+			$allowed_classes_array = explode(',',$allowed_classes[$i]->classes);
+			$main_classes_array[$i] = $allowed_classes_array;
+			$allowed_classes_array = [];
+		}
+		Debugbar::info($main_classes_array[0]);
+		if(isset($activities))
+			return view('pages.Student.activities')->with('activities',$activities)
+												   ->with('class',$class)
+												   ->with('main',$main_classes_array);
     }
 
     public function paytmCallback( Request $request ) {

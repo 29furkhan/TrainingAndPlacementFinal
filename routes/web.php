@@ -23,6 +23,10 @@ Route::GET('/php/drive/edit/get','DrivesController@edit');
 Route::GET('/php/edit/drive','DrivesController@editData');
 Route::GET('/php/drive/delete','DrivesController@dltData');
 
+// Student Drives Routes
+
+Route::GET('/driveStudent','DrivesController@indexStudent');
+
 // End of Drives ROutes
 
 // Routes For Counselling Portal Added By Prashant

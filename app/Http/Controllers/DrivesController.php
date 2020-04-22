@@ -15,6 +15,13 @@ class DrivesController extends Controller
             return view('pages.TPO.drivesTPO',compact('drives'));
     }
 
+    public function indexStudent(){
+        $drives = DB::select("select * from drives order by created_at desc");
+        if(isset($drives))
+            return view('pages.Student.drivesStudents',compact('drives'));
+    }
+    
+
     public function create(){
         $drive_ID = $_GET['drive_id_text'];  
         $company_name = $_GET['company_name_text'];
