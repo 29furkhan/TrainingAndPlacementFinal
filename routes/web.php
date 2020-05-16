@@ -18,6 +18,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 
 
+
+Route::GET('/php/activity/getDataForAttendance','ActivitiesController@sendDataForAttendance');
+Route::GET('/php/record/attendance','ActivitiesController@RecordAttendance');
+
+
+// ROutes for PhotoGallery
+Route::GET('/photogalleryTPO','PhotoGalleryController@index');
+// End of Photo Gallery Routes
+
 // Routes for Drives
 Route::GET('/php/drive/edit/get','DrivesController@edit');
 Route::GET('/php/edit/drive','DrivesController@editData');

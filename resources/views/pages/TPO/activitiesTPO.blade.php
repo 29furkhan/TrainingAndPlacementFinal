@@ -11,6 +11,7 @@ header('Pragma: no-cache');
 <script>
   var globalstatus = 0;
   var globalsearchactive = 0;
+  var globalactivity_id="";
 </script>
 
 <?php
@@ -158,6 +159,57 @@ header('Pragma: no-cache');
   </div>
 </div>
 
+<!-- Attendance Modal Starts-->
+<div class="modal fade" id="attendanceModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="AttendanceModalLabel">TAKE ATTENDANCE</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="GET">
+        <br>
+        <div id="searchstudent" style="margin-left:4%;width:92%;">
+              <div class="">
+                <div class="search" style="box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;">
+                  <input id="studentSearch" onkeyup="searchStudent(id);" style="border-radius:5px 0 0 5px;" type="text"   class="searchTerm"   placeholder="Search By Name or CASERP_ID">
+                    <a href="javascript:void(0);" id="btnToSearchStudent" class="fa fa-search" style="background:white;cursor:pointer;text-decoration:none;padding:5px;border-radius:0 5px 5px 0;font-size:20px;color: rgb(100,179,231);">
+                    </a>
+                </div>
+              </div>
+        </div>
+        
+        <div  onscroll="fixedHeader(id);" id="modalbodydiv" class="modal-body" style="height: 250px;overflow-y: unset;">
+          
+          <table  style="font-size:14px;"> 
+            <thead>
+              <tr id="" style="background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);color:white;text-transform:uppercase;">
+              <th style="width:7%;"></th>
+              <th style="width:25%;">CASID</th>
+              <th style="width:63%;">Name</th>
+              <th style="width:10%;">Class</th>
+              </tr>
+            </thead>
+            
+          </table>
+
+          <table style="font-size:14px;display:block;overflow-y:auto;height:200px;text-transform:uppercase;" name="attendancetable" id='attendancetable'>
+
+          </table>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            <button type="button" id="recordattendance" class="btn btn-primary">RECORD</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Attendance Modal Ends -->
 
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
@@ -211,23 +263,29 @@ header('Pragma: no-cache');
 @foreach($activities as $as)
 <div id="{{$as->Activity_ID}}Main" style="">
   <hr class="" style="border:1px solid black;"><!-- <br><br> -->
-  <div style="display:flex;width:45%;justify-content:space-between;flex-wrap:wrap;">
+  <div style="display:flex;width:50%;justify-content:space-between;flex-wrap:wrap;">
                   <div>
                       <form action='/php/activity/download'>
                           <input type="text" id="activity_id" name="activity_id" value="{{$as->Activity_ID}}" style="display:none;"/>
-                          <button type="submit" id="exportactivity{{$as->Activity_ID}}" data-toggle="tooltip" title="Download Excel Sheet!" style="border-radius:0;"  class="dwnld btn btn-primary">
-                              Download<i style="margin-left:15px;font-size:17px;" class="fa fa-download"> </i>
+                          <button type="submit" id="exportactivity{{$as->Activity_ID}}" data-toggle="tooltip" title="Download Excel Sheet!" style="border-radius:0;font-size:12px;"  class="dwnld btn btn-primary">
+                              DOWNLOAD<i style="margin-left:15px;font-size:13px;" class="fa fa-download"> </i>
                           </button>
                       </form>
                   </div>
                   <div>
-                      <button type="button"  id="editActivityBtn{{$as->Activity_ID}}" title="Edit the Activity!" style="border-radius:0;" class="edt btn btn-primary">
-                          Edit Activity<i style="margin-left:15px;font-size:17px;" class="fa fa-pencil"> </i>
+                      <button type="button"  id="editActivityBtn{{$as->Activity_ID}}" title="Edit the Activity!" style="border-radius:0;font-size:12px;" class="edt btn btn-primary">
+                          EDIT<i style="margin-left:15px;font-size:13px;" class="fa fa-pencil"> </i>
                       </button>
                   </div>
                   <div>
-                      <button id="deleteActivityBtn{{$as->Activity_ID}}" type="button" data-toggle="modal" title="Delete Activity!" style="border-radius:0;"  class="dlt btn btn-primary">
-                        Delete Activity<i style="margin-left:15px;font-size:17px;" class="fa fa-trash"> </i>
+                      <button id="deleteActivityBtn{{$as->Activity_ID}}" type="button" data-toggle="modal" title="Delete Activity!" style="border-radius:0;font-size:12px;"  class="dlt btn btn-primary">
+                        DELETE<i style="margin-left:15px;font-size:13px;" class="fa fa-trash"> </i>
+                      </button>
+                  </div>
+
+                  <div>
+                      <button id="attendanceTake{{$as->Activity_ID}}" type="button" data-toggle="modal" title="Attendance!" style="border-radius:0;font-size:12px;"  class="att btn btn-primary">
+                        ATTENDANCE<i style="margin-left:15px;font-size:13px;" class="fa fa-users"> </i>
                       </button>
                   </div>
   </div>
@@ -361,8 +419,125 @@ $(document).on("click", ".dlt", function() {
     // movefurther();
 });
 
+$(document).on("click", ".att", function() {
+    btnid = $(this).attr("id");
+    activity_id = btnid.substr(14);
+    globalactivity_id = activity_id;
+
+    $.ajax({
+        url:'/php/activity/getDataForAttendance',
+        data:{'activity_id':activity_id},
+        success:function(result){
+          res = JSON.parse(result);
+          setDataForAttendance(res);
+        }  
+    });
+    $("#attendanceModal").modal();
+});
+
+
+// Record Attendance
+$(document).on('click','#recordattendance',function(event){
+  event.preventDefault();
+  var table = document.getElementById("attendancetable");
+  var dataobject={};
+  var dataobjectchild={};
+  var checked;
+  var setter = 0;
+  for (var i = 0, row; row = table.rows[i]; i++)
+  {
+    col = row.cells[0];
+    checked = $(col).find("input").is(":checked");
+    
+    if(checked)
+    {
+      setter=1;
+      dataobjectchild['ID'] = globalactivity_id
+      dataobjectchild['CASERP_ID'] = row.cells[1].innerHTML;
+      dataobject[i] = dataobjectchild;
+      dataobjectchild = {};
+    }
+    else{
+      continue;
+    }
+  }
+
+  dataobject = JSON.stringify(dataobject);
+  // JSON has been created now its tym to send the data to PHP
+  if(setter==1){
+    $.ajax({
+      url:"/php/record/attendance",
+      method:"GET",
+      dataType: 'json',
+      contentType: 'application/json',
+      data:{data:dataobject},
+      success:function()
+      {
+        
+      }
+  });
+
+  alert("Attendance Stored Successfully");
+  $('#attendanceModal').modal('hide');
+
+  }
+  else{
+    alert("Please Select Something");
+  }
+  
+});
+
 </script>
+
 <script>
+
+function setDataForAttendance(result){
+    var index = 0,x;
+    var table;
+    var result = result;
+    $("#attendancetable").empty();
+    table = document.getElementById('attendancetable');                                           
+    var cell = [];
+    color = ['white','#f2f2f2'];
+    
+    for(var i=0;i<result.length;i++){
+      // alert('andr');
+      row = table.insertRow(i);
+      col = color[index];
+      row.style.backgroundColor = col;
+
+      if(index){
+        index=0;
+      }
+      else{
+        index=1;
+      }
+
+      for(var j=0;j<4;j++){                                       
+        cell[j] = row.insertCell(j);
+      }
+
+      x = document.createElement("INPUT");
+      x.type = "checkbox"; 
+      x.name = "markerattendance"; 
+      x.value="value";
+      x.id = "markerattendance"+result[i].CASERP_ID; 
+
+
+      cell[0].style.width="5%";
+      cell[0].id = "markattendance";
+      cell[1].style.width="25%";
+      cell[2].style.width="60%";
+      cell[3].style.width="10%";
+      
+      cell[0].appendChild(x);
+      cell[1].innerHTML = result[i].CASERP_ID;
+      cell[2].innerHTML = result[i].First_Name +" "+ result[i].Middle_Name + " " + result[i].Last_Name;
+      cell[3].innerHTML = result[i].Class;
+      cell = [];                                          
+    }
+}
+
 function validate(){
     var data = $('#description').val();
     data = data.trim();

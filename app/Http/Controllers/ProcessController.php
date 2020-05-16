@@ -56,7 +56,7 @@ class ProcessController extends Controller
         Debugbar::info($caserp_id);
         DB::table('users')->insert($users);
         DB::table('password_resets')->insert(['Email' => $authdata['Email']]);
-        DB::table('Login_Details')->insert($authdata);
+        DB::table('login_details')->insert($authdata);
         DB::table('student_profile')->insert(['Email' => $authdata['Email']]);
         DB::table('student_profile')->where('Email', $authdata['Email'])->update(['First_Name' => $names['First_Name']]);
         DB::table('student_profile')->where('Email', $authdata['Email'])->update(['Last_Name' => $names['Last_Name']]);

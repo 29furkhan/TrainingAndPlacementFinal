@@ -20,6 +20,13 @@ class CreateMainDBSTable extends Migration
             $table->string('Dept_Name',40); 
         });
 
+        Schema::create('Attendance',function(Blueprint $table){
+            $table->bigIncrements('PRIMARY');
+            $table->string('ID',20);
+            $table->string('CASERP_ID',11);
+            $table->timestamps();           
+        });
+
         
         Schema::create('Notices', function (Blueprint $table) {
             $table->string('Notice_ID',20);

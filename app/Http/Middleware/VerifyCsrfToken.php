@@ -19,6 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'https://testmgmcen.000webhostapp.com/paytm-callback'
+        'http://tpo.mgmcen.com/paytm-callback'
     ];
 }

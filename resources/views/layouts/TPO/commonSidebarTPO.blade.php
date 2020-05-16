@@ -86,7 +86,7 @@
           </li>
 
           <li class="active">
-            <a style="padding-left:20px;" class="" href="/underConstructionPage">
+            <a style="padding-left:20px;" class="" href="/photogalleryTPO">
                 <i style="font-size:20px;" class="fa fa-picture-o"></i>
                           &nbsp&nbsp
                           <span style="font-size:20px;">Gallery</span>
@@ -125,24 +125,13 @@
 
           
         <li class="active">
-            <a style="color:white;cursor:pointer;padding-left:20px;" class="" onclick="openChart();">
+            <a href="/dashboard" style="color:white;cursor:pointer;padding-left:20px;" class="" >
                 <i style="font-size:20px;" class="fa fa-pie-chart"></i>
                           &nbsp&nbsp
                           <span style="font-size:20px;">Charts</span>
-                <i id="chartmenucaret" style="margin-right:20px;float:right;font-size:20px;" class="fa fa-caret-down"></i>
                 
-            </a>
-
-            <ul id="chartmenu" class="sub" style="overflow:hidden;display:none;">
-                <li>
-                    <a style="padding-left:60px;" class="" href="/underConstructionPage">Drives Charts</a>
-                </li>
-
-                <li>
-                    <a style="padding-left:60px;" class="" href="/underConstructionPage">Student Charts</a>
-                </li>
-            </ul>
-            
+                
+            </a>            
         </li>
 
         </ul>

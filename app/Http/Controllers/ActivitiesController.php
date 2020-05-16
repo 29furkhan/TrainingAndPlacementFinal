@@ -136,4 +136,29 @@ class ActivitiesController extends Controller
         return redirect()->back();
         
     }
+
+    // Function to Take Attendance:
+    public function sendDataForAttendance(Request $request){
+        $Activity_ID = $request->get('activity_id');
+        $Allowed_Classes = DB::select("select classes from activities where activity_id = '$Activity_ID'");
+        $Allowed_Classes = $Allowed_Classes[0]->classes;
+        $Allowed_Classes = explode(",",$Allowed_Classes);
+        $Allowed_Classes = "'".implode("','",$Allowed_Classes)."'";
+        $Students = DB::select("select sa.CASERP_ID,sp.First_Name, sp.Middle_Name, sp.Last_Name, sp.Class from student_profile sp
+        inner join student_academics sa where sa.email=sp.email and sp.class in ($Allowed_Classes)");
+        $Students = json_encode($Students);
+        return $Students;
+    }
+
+    public function RecordAttendance(Request $request){
+        $data = json_decode($request->get('data'));
+        $data = (array) $data; 
+        $tmp = [];
+        foreach($data as $ds){
+            $ds = (array) $ds;
+            array_push($tmp,$ds);
+        }
+        $data = $tmp;
+        DB::table('attendance')->insert($data);
+    }
 }
