@@ -16,11 +16,9 @@ class ActivitiesController extends Controller
                   INNER JOIN student_profile sp INNER JOIN student_academics sa
                   where a.Activity_ID = p.Activity_ID and p.Activity_ID = '$activity_id'
                   and sp.Email = sa.Email and p.CASERP_ID = sa.CASERP_ID and p.status = 'complete'";
-        $activity_data = DB::select($query);
-        Debugbar::info($activity_name[0]->Activity_name);
+        $data = DB::select($query);
         $output = '';
-        Debugbar::info($activity_data);
-        if($activity_data){
+        if($data){
             $output.= '
                     <table style="border:2px solid">
                     <tr>
@@ -37,7 +35,7 @@ class ActivitiesController extends Controller
                     </tr>
                     ';
             // print_r($activity_data);
-            foreach($activity_data as $activity)
+            foreach($data as $activity)
             {
                 
                 $output.='
@@ -161,4 +159,184 @@ class ActivitiesController extends Controller
         $data = $tmp;
         DB::table('attendance')->insert($data);
     }
+
+    public function switchBetweenAttendance(Request $request){
+        $activity_id = $request->get('activity_id');
+        $count = DB::table('attendance')->where('id',$activity_id)->count();
+        return $count;
+    }
+
+    public function presentExcelSheet(Request $request){
+        $activity_id = $_GET['activity_id'];
+        $activity_name = DB::select("select activity_name from activities where activity_id='$activity_id'");
+        $activity_name = $activity_name[0]->activity_name;
+        $output = '';
+
+        $query = "SELECT sp.First_Name,sp.Middle_Name,sp.Last_Name,sa.CASERP_ID,sp.Class,sp.Branch from student_profile sp
+        INNER JOIN 
+        student_academics sa
+        INNER JOIN attendance att
+        WHERE sp.Email = sa.Email and 
+        sa.CASERP_ID = att.CASERP_ID and 
+        att.ID = '$activity_id' ";
+
+        $data = DB::select($query);
+        // We can Use PHPExcel Library to Store Data in .xlsx
+        
+        if($data){
+            $output.= '
+                    <b><caption> '.$activity_name.' Present Students </caption></b>
+                    <table style="border:2px solid;">
+                    <tr>
+                        <th style="border:2px solid" >CASERP_ID</th>	
+                        <th style="border:2px solid" >Name</th>	
+                        <th style="border:2px solid" >Class</th>
+                        <th style="border:2px solid" >Branch</th>
+                        		
+                    </tr>
+                    ';
+                    foreach($data as $ds)
+                    {
+                       
+                        $output.='
+                            <tr>
+                                <td style="border:2px solid">'.$ds->CASERP_ID.'</td>
+                                <td style="border:2px solid">'.$ds->First_Name.' '.$ds->Middle_Name.' '.$ds->Last_Name.'</td>
+                                <td style="border:2px solid">'.$ds->Class.'</td>  
+                                <td style="border:2px solid">'.$ds->Branch.'</td>  
+                                                             
+                            </tr>
+                            ';
+                    }
+                    $output.='</table>';
+                    header('Content-Type:  application/xls');
+                    header('Content-Disposition: attachment; filename='.$activity_name.' Attendance'.'.xls'); 
+                    echo $output;    
+        }
+        else{
+            echo "No Records Found";
+        }
+
+    }
+
+    public function absentExcelSheet(Request $request){
+        $activity_id = $_GET['activity_id_absent'];
+        $activity_name = DB::select("select activity_name from activities where activity_id='$activity_id'");
+        $activity_name = $activity_name[0]->activity_name;
+
+        $Allowed_Classes = DB::select("select classes from activities where activity_id = '$activity_id'");
+        $Allowed_Classes = $Allowed_Classes[0]->classes;
+        $Allowed_Classes = explode(",",$Allowed_Classes);
+        $Allowed_Classes = "'".implode("','",$Allowed_Classes)."'";
+        
+
+        $output = '';
+
+        $query = "SELECT sp.First_Name,sp.Middle_Name,sp.Last_Name,sa.CASERP_ID,sp.Class,sp.Branch 
+        FROM student_profile sp 
+        INNER JOIN 
+        student_academics sa 
+        where sa.CASERP_ID NOT IN (select CASERP_ID from attendance where id='$activity_id') 
+        and sp.Email = sa.Email and sp.Class IN($Allowed_Classes)";
+
+
+        $data = DB::select($query);
+        // We can Use PHPExcel Library to Store Data in .xlsx
+        
+        if($data){
+            $output.= '
+                    <b><caption> '.$activity_name.' Absent Students </caption></b>
+                    <table style="border:2px solid;">
+                    <tr>
+                        <th style="border:2px solid" >CASERP_ID</th>	
+                        <th style="border:2px solid" >Name</th>	
+                        <th style="border:2px solid" >Class</th>
+                        <th style="border:2px solid" >Branch</th>
+                        		
+                    </tr>
+                    ';
+                    foreach($data as $ds)
+                    {
+                       
+                        $output.='
+                            <tr>
+                                <td style="border:2px solid">'.$ds->CASERP_ID.'</td>
+                                <td style="border:2px solid">'.$ds->First_Name.' '.$ds->Middle_Name.' '.$ds->Last_Name.'</td>
+                                <td style="border:2px solid">'.$ds->Class.'</td>  
+                                <td style="border:2px solid">'.$ds->Branch.'</td>  
+                                                             
+                            </tr>
+                            ';
+                    }
+                    $output.='</table>';
+                    header('Content-Type:  application/xls');
+                    header('Content-Disposition: attachment; filename='.$activity_name.' Attendance'.'.xls'); 
+                    echo $output;    
+        }
+        else{
+            echo "No Records Found";
+        }
+
+    }
+
+    public function allExcelSheet(Request $request){
+        $activity_id = $_GET['activity_id_all'];
+        $activity_name = DB::select("select activity_name from activities where activity_id='$activity_id'");
+        $activity_name = $activity_name[0]->activity_name;
+        $output = '';
+
+        $Allowed_Classes = DB::select("select classes from activities where activity_id = '$activity_id'");
+        $Allowed_Classes = $Allowed_Classes[0]->classes;
+        $Allowed_Classes = explode(",",$Allowed_Classes);
+        $Allowed_Classes = "'".implode("','",$Allowed_Classes)."'";
+
+
+
+        
+        $query = "SELECT sp.First_Name,sp.Middle_Name,sp.Last_Name,sa.CASERP_ID,sp.Class,sp.Branch
+        from student_profile sp 
+        INNER JOIN student_academics sa 
+        where sp.Email = sa.Email 
+        and sp.Class IN($Allowed_Classes)";
+
+        $data = DB::select($query);
+        // We can Use PHPExcel Library to Store Data in .xlsx
+        
+        if($data){
+            $output.= '
+                    <b><caption> '.$activity_name.' All Students </caption></b>
+                    <table style="border:2px solid;">
+                    <tr>
+                        <th style="border:2px solid" >CASERP_ID</th>	
+                        <th style="border:2px solid" >Name</th>	
+                        <th style="border:2px solid" >Class</th>
+                        <th style="border:2px solid" >Branch</th>
+                        		
+                    </tr>
+                    ';
+                    foreach($data as $ds)
+                    {
+                       
+                        $output.='
+                            <tr>
+                                <td style="border:2px solid">'.$ds->CASERP_ID.'</td>
+                                <td style="border:2px solid">'.$ds->First_Name.' '.$ds->Middle_Name.' '.$ds->Last_Name.'</td>
+                                <td style="border:2px solid">'.$ds->Class.'</td>  
+                                <td style="border:2px solid">'.$ds->Branch.'</td>  
+                                                             
+                            </tr>
+                            ';
+                    }
+                    $output.='</table>';
+                    header('Content-Type:  application/xls');
+                    header('Content-Disposition: attachment; filename='.$activity_name.' Attendance'.'.xls'); 
+                    echo $output;    
+        }
+        else{
+            echo "No Records Found";
+        }
+
+    }
+
+    
 }

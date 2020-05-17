@@ -2,6 +2,9 @@
 
 /* End of Responsive Cards */
 
+:root{
+  --commoncolor:rgb(100,179,231);
+}
 
 /* CSS for FIxed Header */
 .sticky {

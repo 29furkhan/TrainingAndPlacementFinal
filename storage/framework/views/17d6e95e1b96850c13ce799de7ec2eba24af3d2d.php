@@ -565,12 +565,13 @@ var query="select * from student_profile sp INNER JOIN student_academics sa INNE
                                             document.getElementById('downloadbutton').style.display="flex";
                                             document.getElementById('innerfilter').style.display="flex";
                                             
-                                            $("#exportstudentstable").find("tr:gt(0)").remove();
+                                            // It removes all rows of table except 0th row
+                                            $("#exportstudentstable").find("tr:gt(0)").remove(); 
                                             table = document.getElementById('exportstudentstable');
                                             
-                                            cell = []
+                                            cell = [];
                                             color = ['white','#f2f2f2'];
-                                            var index = 0
+                                            var index = 0;
                                             
                                             var datajson = JSON.parse(data.studentsjson);
                                             

@@ -26,6 +26,9 @@ header("Expires: 0");
 <!-- Bootstrap Watch -->
   <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cerulean/bootstrap.min.css">
 
+  <!-- Animation CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  
@@ -63,6 +66,11 @@ header("Expires: 0");
   
   <!-- Main.js -->
   <script type="text/javascript" src="{{URL::asset('js/main.js')}}"></script>
+
+
+  <!-- bs-init.js -->
+  <script type="text/javascript" src="{{URL::asset('js/bs-init.js')}}"></script>
+  
   </head>
 
   <!-- Modal CSS -->

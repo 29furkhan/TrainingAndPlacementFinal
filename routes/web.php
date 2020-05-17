@@ -21,6 +21,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 Route::GET('/php/activity/getDataForAttendance','ActivitiesController@sendDataForAttendance');
 Route::GET('/php/record/attendance','ActivitiesController@RecordAttendance');
+Route::GET('/php/activity/attendance/switch','ActivitiesController@switchBetweenAttendance');
+Route::GET('/php/activity/present','ActivitiesController@presentExcelSheet');
+Route::GET('/php/activity/absent','ActivitiesController@absentExcelSheet');
+Route::GET('/php/activity/all','ActivitiesController@allExcelSheet');
+
+
 
 
 // ROutes for PhotoGallery

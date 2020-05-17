@@ -208,6 +208,80 @@ header('Pragma: no-cache');
 
 <!-- Attendance Modal Ends -->
 
+
+<!-- Modal for Download Attendance -->
+
+ <!-- The Modal -->
+ <div class="modal fade" id="downloadAttendanceModal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">DOWNLOAD ATTENDANCE</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="height:40vh;">
+          <table  style="font-size:14px;border:2px solid var(--commoncolor);" class="table-hover table-striped table.active"> 
+              
+              <thead>
+                <tr id="" style="background:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);color:white;text-transform:uppercase;">
+                  <th style="width:70%;">FILE</th>
+                  <th style="width:30%;">DOWNLOAD</th>
+                </tr>
+              </thead>
+              <tbody>
+                <form id="presentform" action="/php/activity/present" method="get">
+                <tr>
+                      <input type="text" name="activity_id" id="presentinput" style="display:none;">
+                      <td style="border:2px solid var(--commoncolor);"> DOWNLOAD DATA OF PRESENT STUDENTS</td>
+                      <td style="width:50%;border:2px solid var(--commoncolor);">
+                        <button  id="present" style="border:1px solid black;" class="btn btn-success btn-sm text-nowrap text-uppercase"
+                        data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" 
+                        data-bs-hover-animate="tada" type="button" title="Download Excel Sheet">Download
+                        </button>
+                    </td>
+                </tr>
+                </form>
+
+                <form id="absentform" action="/php/activity/absent" method="get">
+                  <tr>
+                    <input type="text" name="activity_id_absent" id="absentinput" style="display:none;">  
+                    <td style="border:2px solid var(--commoncolor);"> DOWNLOAD DATA OF ABSENT STUDENTS</td>
+                    <td style="width:50%;border:2px solid var(--commoncolor);">
+                      <button id="absent" style="border:1px solid black;" class="btn btn-success btn-sm text-nowrap text-uppercase"
+                      data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" 
+                      data-bs-hover-animate="tada" type="button" title="Download Excel Sheet">Download
+                      </button>
+                    </td>
+                  </tr>
+                </form>
+
+                <form id="allform" action="/php/activity/all" method="get">
+                  <tr>
+                    <input type="text" name="activity_id_all" id="allinput" style="display:none;">                      
+                    <td style="border:2px solid var(--commoncolor);"> DOWNLOAD DATA OF ALL STUDENTS</td>
+                    <td style="width:50%;border:2px solid var(--commoncolor);">
+                      <button id="all" style="border:1px solid black;" class="btn btn-success btn-sm text-nowrap text-uppercase"
+                      data-toggle="tooltip" data-bs-tooltip="" data-placement="bottom" 
+                      data-bs-hover-animate="tada" type="button" title="Download Excel Sheet">Download
+                      </button>
+                    </td>
+                  </tr>
+                </form>
+
+              </tbody>
+            </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<!-- End of Modal -->
+
 <div class="row">
                 <div class="col-lg-12" style="margin-top:65px;">
                     <h3 class="page-header" style="opacity:0.2;">
@@ -238,6 +312,7 @@ header('Pragma: no-cache');
     <button data-target="#createModal" data-toggle="modal" title="Create a Fresh Activity" style="border-radius:0;"class='btn btn-primary'>
       CREATE
     </button>
+
   </div>
   <div class="col-md-9">
     <div class="row" style="justify-content:flex-end;margin-right:3px;">
@@ -416,12 +491,8 @@ $(document).on("click", ".dlt", function() {
     // movefurther();
 });
 
-$(document).on("click", ".att", function() {
-    btnid = $(this).attr("id");
-    activity_id = btnid.substr(14);
-    globalactivity_id = activity_id;
-
-    $.ajax({
+function attendanceTake(activity_id){
+  $.ajax({
         url:'/php/activity/getDataForAttendance',
         data:{'activity_id':activity_id},
         success:function(result){
@@ -429,7 +500,33 @@ $(document).on("click", ".att", function() {
           setDataForAttendance(res);
         }  
     });
-    $("#attendanceModal").modal();
+  $("#attendanceModal").modal();
+}
+
+function attendanceDownload(activity_id){
+  $("#downloadAttendanceModal").modal();
+}
+
+function switchBetweenFunctions(activity_id){
+  $.ajax({
+        url:'/php/activity/attendance/switch',
+        data:{'activity_id':activity_id},
+        success:function(result){
+          if(result > 0){
+            attendanceDownload(activity_id);
+          }
+          else{
+            attendanceTake(activity_id);
+          }
+        }  
+    });
+}
+
+$(document).on("click", ".att", function() {
+    btnid = $(this).attr("id");
+    activity_id = btnid.substr(14);
+    globalactivity_id = activity_id;
+    switchBetweenFunctions(activity_id);
 });
 
 
@@ -608,6 +705,36 @@ function validateEdit(){
     });
   });
 
+ </script>
+
+<!-- Download Attendance Script -->
+ <script>
+
+// Present Students
+ $(document).on("click", "#present", function() {
+    var activity_id;
+    activity_id = globalactivity_id;
+    document.getElementById('presentinput').value = activity_id;
+    $("#presentform").submit();    
+ });
+
+//  Absent Students
+$(document).on("click", "#absent", function() {
+    var activity_id;
+    activity_id = globalactivity_id;
+    document.getElementById('absentinput').value = activity_id;
+    $("#absentform").submit();    
+ });
+
+// All Students
+$(document).on("click", "#all", function() {
+    var activity_id;
+    activity_id = globalactivity_id;
+    document.getElementById('allinput').value = activity_id;
+    $("#allform").submit();    
+ });
+
+ 
  </script>
 
 <?php $__env->stopSection(); ?>
