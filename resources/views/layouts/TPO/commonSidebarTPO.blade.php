@@ -125,10 +125,10 @@
 
           
         <li class="active">
-            <a href="/dashboard" style="color:white;cursor:pointer;padding-left:20px;" class="" >
-                <i style="font-size:20px;" class="fa fa-pie-chart"></i>
+            <a href="/signUp" style="color:white;cursor:pointer;padding-left:20px;" class="" >
+                <i style="font-size:20px;" class="fa fa-users"></i>
                           &nbsp&nbsp
-                          <span style="font-size:20px;">Charts</span>
+                          <span style="font-size:20px;">Create Account</span>
                 
                 
             </a>            

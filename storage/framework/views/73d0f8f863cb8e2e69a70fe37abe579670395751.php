@@ -656,9 +656,7 @@ function validate(){
 function validateEdit(){
     var data = $('#modal_activity_desc').val();
     data = data.trim();
-    // alert(data);
     if(data!=""){
-        // alert(data.length);
         if(data.length>700)
         {
             document.getElementById('modal_activity_desc_err').innerHTML="*Data Too Long";
@@ -671,13 +669,14 @@ function validateEdit(){
         document.getElementById('modal_activity_desc_err').innerHTML="*Description Required";
         document.getElementById('modal_activity_desc_err').style.display="block";
         return false;
-    }
-    
+    } 
 }
 
 </script>
+
 <script type="text/javascript">
- 	$(document).ready(function(){
+ 	
+   $(document).ready(function(){
  		var leng = document.getElementById("selectData").options.length;
  		var x = "";
  		var names = [];
@@ -688,9 +687,9 @@ function validateEdit(){
  		$("#selectData").select2({
  			data:names
  		});
-   });	
-   
-   $('#create_activity_form').on('submit', function(event){
+  });	
+     
+  $('#create_activity_form').on('submit', function(event){
     event.preventDefault();
     var form_data = $(this).serialize();
     $.ajax({
@@ -704,7 +703,6 @@ function validateEdit(){
       }
     });
   });
-
  </script>
 
 <!-- Download Attendance Script -->
@@ -734,7 +732,6 @@ $(document).on("click", "#all", function() {
     $("#allform").submit();    
  });
 
- 
  </script>
 
 <?php $__env->stopSection(); ?>

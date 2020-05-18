@@ -4,6 +4,10 @@
 
 :root{
   --commoncolor:rgb(100,179,231);
+  --linearcolor:linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);
+  --linearcolor2:linear-gradient(to right top, #6b6cd1, #028ce7, #00a7ec, #00bde4, #00d1d5, #00d3d8, #00d4db, #00d6de, #00c4f8, #00adff, #008eff, #855ffb);
+  --linearcolor3:linear-gradient(to right top, #d16bae, #c677c0, #b882cf, #a98eda, #9998e2, #7ea4eb, #61afef, #45b9ec, #1cc6df, #3fcfc8, #72d5ad, #a2d895);
+  --linearcolor4:linear-gradient(to right top, #6c4ae6, #7d46e8, #8c41ea, #9c3beb, #ab33ec);
 }
 
 /* CSS for FIxed Header */

@@ -51,11 +51,12 @@ header('Pragma: no-cache');
 </div>
 
 <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+        <div class="card" style="height:24vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: var(--linearcolor);">
             <div class="card-body">
                 <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">TOTAL STUDENTS</b>
                 <hr>
+                <br>
                 <div style="display:flex;justify-content:space-between;">
                     <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
                     <p style="color:#ffffff;font-size:18px;">{{$total}}</p>
@@ -64,11 +65,11 @@ header('Pragma: no-cache');
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+        <div class="card" style="height:24vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: var(--linearcolor3);">
             <div class="card-body">
                 <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">PLACED STUDENTS</b>
-                <hr>
+                <hr><br>
                 <div style="display:flex;justify-content:space-between;">
                     <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
                     <p style="color:#ffffff;font-size:18px;">{{$placed}}</p>
@@ -77,11 +78,11 @@ header('Pragma: no-cache');
         </div>
     </div>
 
-    <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+        <div class="card" style="height:24vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: var(--linearcolor2);">
             <div class="card-body">
                 <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">NOT PLACED</b>
-                <hr>
+                <hr><br>
                 <div style="display:flex;justify-content:space-between;">
                     <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
                     <p style="color:#ffffff;font-size:18px;">{{$not_placed}}</p>
@@ -89,24 +90,193 @@ header('Pragma: no-cache');
             </div>
         </div>
     </div>
+</div>
 
-    <div class="col-lg-3 col-md-3 col-sm-12 col-sm-12">
-        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
-            <div class="card-body">
-                <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">ENTREPRENEURS</b>
-                <hr>
-                <div style="display:flex;justify-content:space-between;">
-                    <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
-                    <p style="color:#ffffff;font-size:18px;">{{$entrepreneur}}</p>
+<br><br>
+
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+            <div class="card" style="height:24vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: var(--linearcolor2);">
+                <div class="card-body">
+                    <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">ENTREPRENEURS</b>
+                    <hr><br>
+                    <div style="display:flex;justify-content:space-between;">
+                        <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
+                        <p style="color:#ffffff;font-size:18px;">{{$entrepreneur}}</p>
+                    </div>
                 </div>
+            </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+            <div class="card" style="height:24vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: var(--linearcolor3);">
+                <div class="card-body">
+                    <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">TOTAL ACTIVITIES</b>
+                    <hr><br>
+                    <div style="display:flex;justify-content:space-between;">
+                        <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
+                        <p style="color:#ffffff;font-size:18px;">{{$total_activities}}</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-sm-12">
+            <div class="card" style="height:24vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;background: linear-gradient(to right top, #726bd1, #5087e3, #2f9fec, #2db5ed, #4fc8eb, #41c9f0, #2dcbf4, #00ccf9, #00baff, #00a4ff, #4587ff, #935ffb);">
+                <div class="card-body">
+                    <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">TOTAL DRIVES</b>
+                    <hr><br>
+                    <div style="display:flex;justify-content:space-between;">
+                        <i style="color:#ffffff;font-size:24px;" class="fa fa-bar-chart" aria-hidden="true"></i>
+                        <p style="color:#ffffff;font-size:18px;">{{$total_drives}}</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>
+    
+<br>
+<br>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-sm-6">
+        <div class="card" style="background:var(--linearcolor3);height:50vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;">
+            <div class="card-body">
+                <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">COMPANY-WISE PLACEMENTS</b>
+                <hr style="border: 0.5px solid lightgrey;">
+                <canvas id="companygraph"></canvas>
             </div>
         </div>
     </div>
 
+    <div class="col-lg-6 col-md-6 col-sm-6 col-sm-6">
+        <div class="card" style="background:var(--linearcolor3);height:50vh;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;">
+            <div class="card-body">
+                <b style="color:#ffffff;font-weight:500%;font-size:17px;" class="card-title">COMPANIES WE HAVE</b>
+                <hr style="border: 0.5px solid lightgrey;">
+                <table style="border:1px;color:#ffffff;height:34vh;overflow-y:auto;display:block;text-transform:uppercase;" >
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;border:1.5px solid black;width:100%;" src="/images/companies/byjus.png" alt="BYJU's" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                BYJU's The Learning App
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/tata.jpg" alt="TCS" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                TATA consultancy Services
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/infosys.png" alt="infosys" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                INFOSYS Information technology
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/wipro.png" alt="wipro" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                WIRPO Information technology
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/accenture.png" alt="accenture" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                Accenture Information technology
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/atos.png" alt="atos" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                Atos Syntel
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/capgemini.jpg" alt="capgemini" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                                CAPgemini Information technology
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/ibm.jpg" alt="ibm" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                               IBM technology
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/sankey.png" alt="ibm" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                               SANKEY solutions
+                            </span> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="width:9%;">
+                            <img style="border-radius:50%;background:white;height:6vh;border:1.5px solid black;width:100%;" src="/images/companies/L&T.png" alt="L&T" srcset="">
+                        </td>
+                        <td style="width:60%;">
+                            <span style="font-weight:800;font-size:13px;">
+                            Larsen & Toubro
+                            </span> 
+                        </td>
+                    </tr>
+
+                    
+
+
+                </table>
+            </div>
+        </div>
+    </div>
 
 </div>
-<br>
-<br>
+<br><br>
+
 <div class="row">
     <div class="col-lg-12 col-md-12 ">
         <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border:2px solid #fff;border-radius:10px;">
@@ -117,6 +287,8 @@ header('Pragma: no-cache');
         </div>
     </div>
 </div>
+
+
 
 <script>
 
@@ -158,5 +330,49 @@ header('Pragma: no-cache');
         console.log(chart);
     });
     
+
+    $(document).ready(function(){
+        var cnt = [];
+        var lab = [];
+
+        <?php
+        foreach($complanywisecount as $cnt){
+            ?>
+            cnt.push(<?php echo $cnt; ?>);
+        <?php
+        }
+        ?>
+
+        <?php
+        foreach($company_name as $cn){
+            ?>
+            lab.push("<?php echo $cn; ?>");
+        <?php
+        }
+        ?>
+        var data = {
+            
+            labels: lab,
+            datasets: [
+                {
+                    label : "PLACED",
+                    data  : cnt,
+
+                    borderColor:'#EB2880',
+                    backgroundColor:'rgb(10,14,211,0.4)',
+                    opacity:0.4
+                }
+            ]
+        };
+
+        var ctx = $('#companygraph');
+        // console.log(ctx);
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data : data,
+            options : {}
+        });
+        console.log(chart);
+    });
 </script>
 @endsection

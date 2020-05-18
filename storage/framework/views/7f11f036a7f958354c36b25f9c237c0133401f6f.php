@@ -21,7 +21,11 @@ header('Pragma: no-cache');
     </script>
 <?php elseif(isset(Auth::user()->email) && Auth::user()->user_type=='students'): ?>
     <script>
-      window.location='/student';
+      window.location='/errorUserPage';
+    </script>
+<?php elseif(!isset(Auth::user()->email)): ?>
+    <script>
+      window.location='/main';
     </script>
 <?php endif; ?>
 
@@ -168,7 +172,7 @@ function resetEmail(){
 }
 
 function redirectToLogin(){
-  location.replace("/main");
+  location.replace("/dashboard");
 }
 
 $(document).ready(function(){
@@ -208,7 +212,7 @@ $(document).ready(function(){
 </script>
 
 
-<body class="login-img3-body bodycolor">
+<body class="login-img3-body" style="background:url('/images/mgm.jpg');background-repeat:no-repeat;background-size:cover;">
 
   <div class="container"> 
 

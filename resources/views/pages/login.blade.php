@@ -84,7 +84,7 @@ header('Pragma: no-cache');
 
 
 <!--  Main Content Starts -->
-<body class="login-img3-body">
+<body class="login-img3-body" style="background:url('/images/mgm.jpg');background-repeat:no-repeat;background-size:cover;">
 
 <div class="loader">
     <div class="lds-facebook"><div></div><div></div><div></div></div>
@@ -132,8 +132,6 @@ header('Pragma: no-cache');
                 <span class="pull-right"> <a href="#" onclick="document.location.href='reset'"> Forgot Password?</a></span>
             </label>
         <input type='submit' id="loginbutton" class="btn btn-primary btn-lg btn-block" value='Login'/>
-
-        <button class="btn btn-info btn-lg btn-block" type="button" onclick="document.location.href='signUp'">Sign Up</button>
       </div>
     </form>
   </div>

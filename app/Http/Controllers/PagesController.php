@@ -38,8 +38,39 @@ class PagesController extends Controller
         $not_placed = DB::table("placement_details")->where("placement_status",'Not Placed')->count();
         $entrepreneur = DB::table("placement_details")->where("placement_status",'Entrepreneur')->count();
         
+        $query = 'select Company_Name , COUNT(*) as cnt from placement_details
+        where Placement_Status="Placed" GROUP by Company_Name';
+        $companywiseplacement = DB::select($query);
+        $company_name = [];
+        $complanywisecount=[];
+        $count = 0;
+
+        for($i=0;$i<count($companywiseplacement);$i+=1){
+            if($companywiseplacement[$i]->Company_Name=='INFOSYS' || $companywiseplacement[$i]->Company_Name=='TCS'
+            || $companywiseplacement[$i]->Company_Name=='CAPGEMINI' || $companywiseplacement[$i]->Company_Name=='WIPRO' 
+            || $companywiseplacement[$i]->Company_Name=='BYJUS')
+            {
+                $company_name[$i] = $companywiseplacement[$i]->Company_Name;
+                $complanywisecount[$i] = $companywiseplacement[$i]->cnt;
+            }
+            else{
+                $count+= $companywiseplacement[$i]->cnt;
+            }
+        }
+        $company_name[$i] = "OTHER";
+        $complanywisecount[$i] = $count;
+        Debugbar::info(gettype($count));
+
+        $total_activities = DB::table('activities')->count();
+        $total_drives = DB::table('drives')->count();
         
-        return view('pages.TPO.dashboardTPO',compact('placed','total','not_placed','entrepreneur','mech_placed','mech_not_placed','cse_placed','cse_not_placed','it_placed','it_not_placed','etc_placed','etc_not_placed','civil_placed','civil_not_placed','mech_entrepreneurs','civil_entrepreneurs','etc_entrepreneurs','it_entrepreneurs','cse_entrepreneurs'));
+        
+        return view('pages.TPO.dashboardTPO',
+        compact('total_activities','total_drives','placed','total','not_placed','entrepreneur',
+        'mech_placed','mech_not_placed','cse_placed','cse_not_placed',
+        'it_placed','it_not_placed','etc_placed','etc_not_placed',
+        'civil_placed','civil_not_placed','mech_entrepreneurs','civil_entrepreneurs',
+        'etc_entrepreneurs','it_entrepreneurs','cse_entrepreneurs','company_name','complanywisecount'));
     }
 
     public function exportStudentsData()

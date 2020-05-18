@@ -35,7 +35,7 @@ class StudentsController extends Controller
             $value = DB::select("select sp.Email,sp.First_Name,sp.Middle_Name,sp.Last_Name,sp.Branch,sp.Class
             ,pd.Placement_Status,pd.Company_Name,pd.Package from student_profile sp inner join placement_details pd where sp.Email = pd.Email and
             sp.First_Name like '$data%'");
-
+            
             if(empty($value))
                 return response()->json(['success' => 'Data Not Found For'.' '.$data,'bit'=>'0']);
 
